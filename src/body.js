@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Profile } from './profile.js'
 import { Navigation } from './navigation-list.js'
-import { Feed } from './feed.js'
+import { FeedList } from './feed-list.js'
 
 class Body extends PureComponent {
   #defaultMessage;
@@ -60,12 +60,12 @@ class Body extends PureComponent {
             <form className = 'page-main__news'>
               <label className = 'news__label'>
                 Share news with your friends!
-                <textarea className = 'news__message' value = {this.state.message} id = 'newsMessage' onChange = {this.onChange} onBlur = {this.onBlur} onFocus = {this.onFocus}/>
+                <textarea className = 'news__message' value = { this.state.message } id = 'newsMessage' onChange = { this.onChange } onBlur = { this.onBlur } onFocus = { this.onFocus }/>
               </label>
               <input className = 'news__submit' type="submit" value="Отправить" />
             </form>
             <div className = 'page-feed'>
-              <Feed feed = {this.props.feed}/>
+              <FeedList feed = { this.props.feed }/>
             </div>
           </section>
         </main>
