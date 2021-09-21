@@ -3,7 +3,7 @@ import { Profile } from './profile.js'
 import { Navigation } from './navigation-list.js'
 import { FeedList } from './feed-list.js'
 
-class Body extends PureComponent {
+class Main extends PureComponent {
   #defaultMessage;
 
   constructor (props) {
@@ -74,4 +74,4 @@ class Body extends PureComponent {
   }
 }
 
-export { Body }
+export { Main }
