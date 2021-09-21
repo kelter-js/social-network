@@ -15,8 +15,14 @@ class Constants {
   ];
 
   static #defaultFeed = [
-    'Hey, is there anybody?',
-    'Sup guize, is something really happening here?',
+    {
+      'post': 'Hey, is there anybody?',
+      'likes': 15,
+    },
+    {
+      'post': 'Sup guize, is something really happening here?',
+      'likes': 20,
+    },
   ];
 
   static #defaultMainAvatar = '/img/default-background.jpg';
