@@ -32,7 +32,7 @@ const Main = (props) => {
         <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
         <nav className='page-main__navigation'>
           <Navigation navigation={navigationPaths} />
-          <NavLink className='navigation__link' to='/settings'>Settings</NavLink>
+          <NavLink activeClassName = 'navigation__link--current' className='navigation__link' to='/settings'>Settings</NavLink>
         </nav>
         <section className='page-main__content-wrapper'>
           <h2 className='visually-hidden'>Профиль пользователя</h2>
