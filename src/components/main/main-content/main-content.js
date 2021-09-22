@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
-import { Profile } from './profile.js'
-import { FeedList } from './feed-list.js'
+import { Profile } from './profile/profile.js'
+import { FeedList } from './feed/feed-list.js'
 
 class MainPageContent extends PureComponent {
   #defaultMessage;
@@ -47,7 +47,7 @@ class MainPageContent extends PureComponent {
   render() {
     return (
       <>
-        <Profile data={this.props.data.user} />
+        <Profile data={this.props.user} />
         <form className='page-main__news'>
           <label className='news__label'>
             Share news with your friends!
@@ -56,7 +56,7 @@ class MainPageContent extends PureComponent {
           <input className='news__submit' type="submit" value="Отправить" />
         </form>
         <div className='page-feed'>
-          <FeedList feed={this.props.data.feed} />
+          <FeedList feed={this.props.feed} />
         </div>
       </>
     );
