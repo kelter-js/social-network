@@ -1,10 +1,10 @@
 class Constants {
 
   static #defaultMenu = [
-    'Profile',
-    'Messages',
-    'News',
-    'Music',
+    'profile',
+    'messages',
+    'news',
+    'music',
   ];
 
   static #defaultProfile = [

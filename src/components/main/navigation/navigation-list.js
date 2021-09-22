@@ -7,8 +7,8 @@ const Navigation = (props) => {
         props.navigation.map((elem, index) => {
           return (
             <li key = { index }>
-              <a className = 'navigation__link' href = '#'>
-                { elem }
+              <a className = 'navigation__link' href = {`/${elem}`}>
+                { elem[0].toUpperCase() + elem.slice(1) }
               </a>
             </li>
           );
