@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Navigation = (props) => {
   return (
@@ -7,9 +8,9 @@ const Navigation = (props) => {
         props.navigation.map((elem, index) => {
           return (
             <li key = { index }>
-              <a className = 'navigation__link' href = {`/${elem}`}>
+              <NavLink className = 'navigation__link' to = {`/${elem}`}>
                 { elem[0].toUpperCase() + elem.slice(1) }
-              </a>
+              </NavLink>
             </li>
           );
         })

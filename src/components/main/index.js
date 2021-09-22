@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
 import { Navigation } from './navigation/navigation-list.js'
 import { MainPageContent } from './main-content/main-content.js'
 import { Dialogs } from './dialogs/dialogs.js'
@@ -27,16 +27,16 @@ const Main = (props) => {
   }
 
   return (
-    <main className='page-main container'>
-      <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
-      <nav className='page-main__navigation'>
-        <Navigation navigation={navigationPaths} />
-        <a className='navigation__link' href='/settings'>Settings</a>
-      </nav>
-      <section className='page-main__content-wrapper'>
-        <h2 className='visually-hidden'>Профиль пользователя</h2>
-        <div>
-          <BrowserRouter>
+    <BrowserRouter>
+      <main className='page-main container'>
+        <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
+        <nav className='page-main__navigation'>
+          <Navigation navigation={navigationPaths} />
+          <NavLink className='navigation__link' to='/settings'>Settings</NavLink>
+        </nav>
+        <section className='page-main__content-wrapper'>
+          <h2 className='visually-hidden'>Профиль пользователя</h2>
+          <div>
             <Switch>
               <Route path={paths.profile} component={() => <MainPageContent user={userData} feed={Constants.defaultFeed} />} />
               <Route path={paths.dialogs} component={() => <Dialogs />} />
@@ -44,10 +44,10 @@ const Main = (props) => {
               <Route path={paths.music} component={() => <Music />} />
               <Route path={paths.settings} component={() => <Settings />} />
             </Switch>
-          </BrowserRouter>
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+      </main>
+    </BrowserRouter>
   );
 }
 
