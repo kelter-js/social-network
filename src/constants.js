@@ -11,7 +11,15 @@ class Constants {
     '2 january',
     'Minsk',
     'BSU 11',
-    'smth-else.com'
+    'smth-else.com',
+  ];
+
+  static #defaultDialogs = [
+    'Kalashnikov Sergey',
+    'Predelnaya Visota',
+    'Some Guy',
+    'Another One',
+    'Russian Caliber',
   ];
 
   static #defaultFeed = [
@@ -35,6 +43,10 @@ class Constants {
 
   static get defaultFeed () {
     return this.#defaultFeed;
+  }
+
+  static get defaultDialogs () {
+    return this.#defaultDialogs;
   }
 
   static get defaultProfile () {

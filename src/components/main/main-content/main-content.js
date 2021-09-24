@@ -46,7 +46,7 @@ class MainPageContent extends PureComponent {
 
   render() {
     return (
-      <>
+      <div>
         <Profile data={this.props.user} />
         <form className='page-main__news'>
           <label className='news__label'>
@@ -58,7 +58,7 @@ class MainPageContent extends PureComponent {
         <div className='page-feed'>
           <FeedList feed={this.props.feed} />
         </div>
-      </>
+      </div>
     );
   }
 }

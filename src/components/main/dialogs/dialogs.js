@@ -1,12 +1,11 @@
 import React from 'react'
+import { DialogList } from './dialog-list.js'
 
 const Dialogs = (props) => {
   return (
-    <>
-      <p>
-        Заглушка под будущие диалоги.
-      </p>
-    </>
+    <div className='page-main__dialogs-wrapper dialogs'>
+      <DialogList dialogs = {props.dialogs}/>
+    </div>
   );
 }
 

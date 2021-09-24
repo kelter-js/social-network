@@ -1,0 +1,26 @@
+.page-main__dialogs-wrapper
+  display: flex
+
+.dialogs__dialog-list
+  position: relative
+  margin: 0
+  margin-top: 20px
+  margin-left: 20px
+  padding: 0
+  list-style: none
+
+  &::before
+    content: ''
+    position: absolute
+    top: -20px
+    right: -100px
+    width: 5px
+    height: 500px
+    background-color: $blue
+
+.dialogs__dialog
+  text-decoration: none
+  color: $black
+
+.dialogs__dialog-item
+  margin-bottom: 15px
