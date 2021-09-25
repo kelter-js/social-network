@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { BrowserRouter, Route, Switch, NavLink, Redirect } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Route, Switch, NavLink, Redirect, useHistory } from 'react-router-dom'
 import { Navigation } from './navigation/navigation-list.js'
 import { MainPageContent } from './main-content/main-content.js'
 import { Dialogs } from './dialogs/dialogs.js'
@@ -29,52 +29,43 @@ const Main = (props) => {
     'settings': `/settings`,
   }
 
-  const headers = {
-    'profile': 'Профиль пользователя',
-    'dialogs': 'Диалоги пользователя',
-    'news': 'Новостная лента',
-    'music': 'Музыка пользователя',
-    'settings': 'Настройки профиля',
-  }
+  const history = useHistory();
+
+  useEffect(() => {
+    const headers = {
+      'profile': 'Профиль пользователя',
+      'messages': 'Диалоги пользователя',
+      'news': 'Новостная лента',
+      'music': 'Музыка пользователя',
+      'settings': 'Настройки профиля',
+    }
+
+    return history.listen((location) => {
+      headerUpdater(headers[location.pathname.slice(1)])
+    })
+ },[history]);
 
   return (
-    <BrowserRouter>
-      <main className='page-main container'>
-        <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
-        <nav className='page-main__navigation'>
-          <Navigation navigation={navigationPaths} />
-          <NavLink activeClassName='navigation__link--current' className='navigation__link' to='/settings'>Settings</NavLink>
-        </nav>
-        <section className='page-main__content-wrapper'>
-          <h2 className='visually-hidden'>{currentPageHeader}</h2>
-          <Switch>
-            <Route path={paths.profile} component={() => {
-              headerUpdater(headers.profile);
-              return (<MainPageContent user={userData} feed={Constants.defaultFeed} />);
-            }} />
-            <Route path={paths.dialogs} component={() => {
-              headerUpdater(headers.dialogs);
-              return (<Dialogs dialogs={Constants.defaultDialogs} />);
-            }} />
-            <Route path={paths.news} component={() => {
-              headerUpdater(headers.news);
-              return (<News />);
-            }} />
-            <Route path={paths.music} component={() => {
-              headerUpdater(headers.music);
-              return (<Music />);
-            }} />
-            <Route path={paths.settings} component={() => {
-              headerUpdater(headers.settings);
-              return (<Settings />);
-            }} />
-            <Route path='/'>
-              <Redirect to={paths.profile} />
-            </Route>
-          </Switch>
-        </section>
-      </main>
-    </BrowserRouter>
+    <main className='page-main container'>
+      <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
+      <nav className='page-main__navigation'>
+        <Navigation navigation={navigationPaths} />
+        <NavLink activeClassName='navigation__link--current' className='navigation__link' to='/settings'>Settings</NavLink>
+      </nav>
+      <section className='page-main__content-wrapper'>
+        <h2 className='visually-hidden'>{currentPageHeader}</h2>
+        <Switch>
+          <Route path={paths.profile} render={() => <MainPageContent user={userData} feed={Constants.defaultFeed} key = {document.location.href}/>} />
+          <Route path={paths.dialogs} render={() => <Dialogs dialogs={Constants.defaultDialogs} messages={Constants.defaultMessages} key = {document.location.href}/>} />
+          <Route path={paths.news} render={() => <News />} key = {document.location.href}/>
+          <Route path={paths.music} render={() => <Music />} key = {document.location.href}/>
+          <Route path={paths.settings} render={() => <Settings />} key = {document.location.href}/>
+          <Route path='/'>
+            <Redirect to={paths.profile} />
+          </Route>
+        </Switch>
+      </section>
+    </main>
   );
 }
 
