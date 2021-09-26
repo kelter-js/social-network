@@ -24,53 +24,406 @@ class Constants {
 
   static #defaultMessages = {
     [this.#defaultDialogs[0]]: [
-      'Hi, how are you?',
-      'Hi, im fine, thank you, so what about you?',
-      'Me too, what do you think about to spend the rest of this evening together?',
-      'That`s cool, lets meet each other 21:30 at my house',
-      'K, bye',
+      {
+        'text': 'Hi, how are you?',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Hi, im fine, thank you, so what about you?',
+        'author': 'Kalashnikov Sergey',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Me too, what do you think about to spend the rest of this evening together?',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'That`s cool, lets meet each other 21:30 at my house',
+        'author': 'Kalashnikov Sergey',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'K, bye',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
     ],
     [this.#defaultDialogs[1]]: [
-      'Template message example 1',
-      'Template message example 1',
-      'Template message example 1',
-      'Template message example 1',
-      'Template message example 1',
+      {
+        'text': 'Template message example 1',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 1',
+        'author': 'Predelnaya Visota',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 1',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 1',
+        'author': 'Predelnaya Visota',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 1',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 1',
+        'author': 'Predelnaya Visota',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
     ],
     [this.#defaultDialogs[2]]: [
-      'Template message example 2',
-      'Template message example 2',
-      'Template message example 2',
-      'Template message example 2',
-      'Template message example 2',
-      'Template message example 2',
-      'Template message example 2',
-      'Template message example 2',
-      'Template message example 2',
+      {
+        'text': 'Template message example 2',
+        'author': 'Some Guy',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'Some Guy',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'Some Guy',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'Some Guy',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'Some Guy',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'Some Guy',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 2',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
     ],
     [this.#defaultDialogs[3]]: [
-      'Template message example 3',
-      'Template message example 3',
-      'Template message example 3',
-      'Template message example 3',
-      'Template message example 3',
-      'Template message example 3',
-      'Template message example 3',
-      'Template message example 3',
-      'Template message example 3',
+      {
+        'text': 'Template message example 3',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'Another One',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'Another One',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'Another One',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'Another One',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'Another One',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'Another One',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 3',
+        'author': 'Another One',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
     ],
     [this.#defaultDialogs[4]]: [
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
-      'Template message example 4',
+      {
+        'text': 'Template message example 4',
+        'author': 'Russian Caliber',
+        'style': {
+          'author': 'dialogs__author--user',
+          'messtexage': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'Russian Caliber',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'Russian Caliber',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'Russian Caliber',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'Russian Caliber',
+        'style': {
+          'author': 'dialogs__author--user',
+          'message': 'dialogs__phrase--user',
+        },
+      },
+      {
+        'text': 'Template message example 4',
+        'author': 'You',
+        'style': {
+          'author': 'dialogs__author--responder',
+          'message': 'dialogs__phrase--responder',
+        },
+      },
     ],
   }
 

@@ -43,7 +43,7 @@ const Main = (props) => {
     return history.listen((location) => {
       headerUpdater(headers[location.pathname.slice(1)])
     })
- },[history]);
+ },[history, currentPageHeader]);
 
   return (
     <main className='page-main container'>
