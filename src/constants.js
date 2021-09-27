@@ -7,6 +7,14 @@ class Constants {
     'music',
   ];
 
+  static #defaultMenuPaths = {
+    [this.#defaultMenu[0]]: `/${this.#defaultMenu[0]}`,
+    [this.#defaultMenu[1]]: `/${this.#defaultMenu[1]}`,
+    [this.#defaultMenu[2]]: `/${this.#defaultMenu[2]}`,
+    [this.#defaultMenu[3]]: `/${this.#defaultMenu[3]}`,
+    'settings': `/settings`,
+  };
+
   static #defaultProfile = [
     '2 january',
     'Minsk',
@@ -454,6 +462,10 @@ class Constants {
 
   static get defaultMenu() {
     return this.#defaultMenu;
+  }
+
+  static get defaultMenuPaths() {
+    return this.#defaultMenuPaths;
   }
 
   static get defaultMessage() {

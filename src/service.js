@@ -15,7 +15,7 @@ const createProfileData = (data) => {
   return defaultProfile;
 }
 
-const getCurrentHeader = (header = false) => {
+const getCurrentHeader = () => {
   const location = window.location.href;
 
   if (location.split('/').includes('messages')) {

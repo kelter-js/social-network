@@ -33,7 +33,7 @@ const Main = (props) => {
         <h2 className='visually-hidden'>{currentPageHeader}</h2>
         <Switch>
           <Route path={props.paths.profile} render={() => <MainPageContent message = {props.defaultMessage} user={props.userData} feed={props.feed} />} />
-          <Route path={props.paths.dialogs} render={() => <Dialogs dialogs={props.dialogs} messages={props.messages} />} />
+          <Route path={props.paths.messages} render={() => <Dialogs dialogs={props.dialogs} messages={props.messages} />} />
           <Route path={props.paths.news} render={() => <News />}/>
           <Route path={props.paths.music} render={() => <Music />}/>
           <Route path={props.paths.settings} render={() => <Settings />}/>

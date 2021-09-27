@@ -13,23 +13,12 @@ const App = () => {
     'userData': createProfileData(Constants.defaultProfile),
     'userName': Constants.defaultProfileName,
   };
-
-  const navigationPaths = Constants.defaultMenu;
-
-  const paths = {
-    'profile': `/${navigationPaths[0]}`,
-    'dialogs': `/${navigationPaths[1]}`,
-    'news': `/${navigationPaths[2]}`,
-    'music': `/${navigationPaths[3]}`,
-    'settings': `/settings`,
-  };
-
   return (
     <>
       <Header />
       <BrowserRouter>
         <Main
-        defaultMessage = {Constants.defaultMessage} messages = {Constants.defaultMessages} dialogs = {Constants.defaultDialogs} feed = {Constants.defaultFeed} menu = {Constants.defaultMenu} userData = {userData} paths={paths} headers = {Constants.headers}/>
+        defaultMessage = {Constants.defaultMessage} messages = {Constants.defaultMessages} dialogs = {Constants.defaultDialogs} feed = {Constants.defaultFeed} menu = {Constants.defaultMenu} userData = {userData} paths={Constants.defaultMenuPaths} headers = {Constants.headers}/>
       </BrowserRouter>
       <Footer />
     </>
