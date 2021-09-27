@@ -15,4 +15,17 @@ const createProfileData = (data) => {
   return defaultProfile;
 }
 
-export { createProfileData }
+const getCurrentHeader = (header = false) => {
+  const location = window.location.href;
+
+  if (location.split('/').includes('messages')) {
+    return 'messages';
+  }
+
+  return location.split('/')[location.split('/').length - 1];
+}
+
+export {
+  createProfileData,
+  getCurrentHeader
+}

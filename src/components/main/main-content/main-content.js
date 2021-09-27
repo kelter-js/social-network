@@ -3,14 +3,12 @@ import { Profile } from './profile/profile.js'
 import { FeedList } from './feed/feed-list.js'
 
 class MainPageContent extends PureComponent {
-  #defaultMessage;
 
   constructor(props) {
     super(props);
-    this.#defaultMessage = '...start your message here.';
 
     this.state = {
-      'message': this.#defaultMessage,
+      'message': this.props.message,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -25,7 +23,7 @@ class MainPageContent extends PureComponent {
   }
 
   onFocus() {
-    if (this.state.message !== this.#defaultMessage) {
+    if (this.state.message !== this.props.message) {
       return;
     }
 
@@ -35,12 +33,19 @@ class MainPageContent extends PureComponent {
   }
 
   onBlur() {
-    if (this.state.message) {
+    if (!this.state.message) {
+      this.setState({
+        'message': this.props.message,
+      });
+      return;
+    }
+
+    if (this.state.message !== this.props.message) {
       return;
     }
 
     this.setState({
-      'message': this.#defaultMessage,
+      'message': this.props.message,
     });
   }
 

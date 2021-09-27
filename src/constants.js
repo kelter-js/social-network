@@ -22,6 +22,14 @@ class Constants {
     'Russian Caliber',
   ];
 
+  static #headers = {
+    'profile': 'Профиль пользователя',
+    'messages': 'Диалоги пользователя',
+    'news': 'Новостная лента',
+    'music': 'Музыка пользователя',
+    'settings': 'Настройки профиля',
+  }
+
   static #defaultMessages = {
     [this.#defaultDialogs[0]]: [
       {
@@ -34,7 +42,7 @@ class Constants {
       },
       {
         'text': 'Hi, im fine, thank you, so what about you?',
-        'author': 'Kalashnikov Sergey',
+        'author': this.#defaultDialogs[0],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -50,7 +58,7 @@ class Constants {
       },
       {
         'text': 'That`s cool, lets meet each other 21:30 at my house',
-        'author': 'Kalashnikov Sergey',
+        'author': this.#defaultDialogs[0],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -76,7 +84,7 @@ class Constants {
       },
       {
         'text': 'Template message example 1',
-        'author': 'Predelnaya Visota',
+        'author': this.#defaultDialogs[1],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -92,7 +100,7 @@ class Constants {
       },
       {
         'text': 'Template message example 1',
-        'author': 'Predelnaya Visota',
+        'author': this.#defaultDialogs[1],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -108,7 +116,7 @@ class Constants {
       },
       {
         'text': 'Template message example 1',
-        'author': 'Predelnaya Visota',
+        'author': this.#defaultDialogs[1],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -118,7 +126,7 @@ class Constants {
     [this.#defaultDialogs[2]]: [
       {
         'text': 'Template message example 2',
-        'author': 'Some Guy',
+        'author': this.#defaultDialogs[2],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -134,7 +142,7 @@ class Constants {
       },
       {
         'text': 'Template message example 2',
-        'author': 'Some Guy',
+        'author': this.#defaultDialogs[2],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -150,7 +158,7 @@ class Constants {
       },
       {
         'text': 'Template message example 2',
-        'author': 'Some Guy',
+        'author': this.#defaultDialogs[2],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -166,7 +174,7 @@ class Constants {
       },
       {
         'text': 'Template message example 2',
-        'author': 'Some Guy',
+        'author': this.#defaultDialogs[2],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -198,7 +206,7 @@ class Constants {
       },
       {
         'text': 'Template message example 2',
-        'author': 'Some Guy',
+        'author': this.#defaultDialogs[2],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -214,7 +222,7 @@ class Constants {
       },
       {
         'text': 'Template message example 2',
-        'author': 'Some Guy',
+        'author': this.#defaultDialogs[2],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -240,7 +248,7 @@ class Constants {
       },
       {
         'text': 'Template message example 3',
-        'author': 'Another One',
+        'author': this.#defaultDialogs[3],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -256,7 +264,7 @@ class Constants {
       },
       {
         'text': 'Template message example 3',
-        'author': 'Another One',
+        'author': this.#defaultDialogs[3],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -272,7 +280,7 @@ class Constants {
       },
       {
         'text': 'Template message example 3',
-        'author': 'Another One',
+        'author': this.#defaultDialogs[3],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -288,7 +296,7 @@ class Constants {
       },
       {
         'text': 'Template message example 3',
-        'author': 'Another One',
+        'author': this.#defaultDialogs[3],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -304,7 +312,7 @@ class Constants {
       },
       {
         'text': 'Template message example 3',
-        'author': 'Another One',
+        'author': this.#defaultDialogs[3],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -320,7 +328,7 @@ class Constants {
       },
       {
         'text': 'Template message example 3',
-        'author': 'Another One',
+        'author': this.#defaultDialogs[3],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -336,7 +344,7 @@ class Constants {
       },
       {
         'text': 'Template message example 3',
-        'author': 'Another One',
+        'author': this.#defaultDialogs[3],
         'style': {
           'author': 'dialogs__author--responder',
           'message': 'dialogs__phrase--responder',
@@ -346,7 +354,7 @@ class Constants {
     [this.#defaultDialogs[4]]: [
       {
         'text': 'Template message example 4',
-        'author': 'Russian Caliber',
+        'author': this.#defaultDialogs[4],
         'style': {
           'author': 'dialogs__author--user',
           'messtexage': 'dialogs__phrase--user',
@@ -362,7 +370,7 @@ class Constants {
       },
       {
         'text': 'Template message example 4',
-        'author': 'Russian Caliber',
+        'author': this.#defaultDialogs[4],
         'style': {
           'author': 'dialogs__author--user',
           'message': 'dialogs__phrase--user',
@@ -378,7 +386,7 @@ class Constants {
       },
       {
         'text': 'Template message example 4',
-        'author': 'Russian Caliber',
+        'author': this.#defaultDialogs[4],
         'style': {
           'author': 'dialogs__author--user',
           'message': 'dialogs__phrase--user',
@@ -394,7 +402,7 @@ class Constants {
       },
       {
         'text': 'Template message example 4',
-        'author': 'Russian Caliber',
+        'author': this.#defaultDialogs[4],
         'style': {
           'author': 'dialogs__author--user',
           'message': 'dialogs__phrase--user',
@@ -410,7 +418,7 @@ class Constants {
       },
       {
         'text': 'Template message example 4',
-        'author': 'Russian Caliber',
+        'author': this.#defaultDialogs[4],
         'style': {
           'author': 'dialogs__author--user',
           'message': 'dialogs__phrase--user',
@@ -440,11 +448,20 @@ class Constants {
 
   static #defaultMainAvatar = '/img/default-background.jpg';
   static #defaultProfileAvatar = '/img/default-profile.jpg';
+  static #defaultMessage = '...start your message here.';
 
   static #defaultProfileName = 'John Doe';
 
   static get defaultMenu() {
     return this.#defaultMenu;
+  }
+
+  static get defaultMessage() {
+    return this.#defaultMessage;
+  }
+
+  static get headers() {
+    return this.#headers;
   }
 
   static get defaultMessages() {
