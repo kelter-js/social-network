@@ -1,10 +1,22 @@
 import React from 'react'
-import { Dialog } from './dialog.js'
+import { NavLink } from 'react-router-dom'
 
 const DialogList = (props) => {
+
   return (
     <ul className='dialogs__dialog-list'>
-      <Dialog dialogs = {props.dialogs}/>
+      {
+        props.dialogs.map((dialog, index) => {
+          const path = `/messages/${dialog.split(' ').join('')}`;
+          return (
+            <li className = 'dialogs__dialog-item' key={index}>
+              <NavLink activeClassName='dialogs__dialog--current' className='dialogs__dialog' to={path}>
+                {dialog}
+              </NavLink>
+            </li>
+          );
+        })
+      }
     </ul>
   );
 }

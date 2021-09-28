@@ -3,14 +3,14 @@ import { Profile } from './profile/profile.js'
 import { FeedList } from './feed/feed-list.js'
 
 const MainPageContent = (props) => {
-  let [currentValue, valueUpdater] = useState(props.message);
+  let [currentValue, valueUpdater] = useState(props.defaultText);
 
   const onChange = (e) => {
     valueUpdater(e.target.value);
   }
 
   const onFocus = () => {
-    if (currentValue !== props.message) {
+    if (currentValue !== props.defaultText) {
       return;
     }
     valueUpdater('');
@@ -18,15 +18,15 @@ const MainPageContent = (props) => {
 
   const onBlur = () => {
     if (!currentValue) {
-      valueUpdater(props.message);
+      valueUpdater(props.defaultText);
       return;
     }
 
-    if (currentValue !== props.message) {
+    if (currentValue !== props.defaultText) {
       return;
     }
 
-    valueUpdater(props.message)
+    valueUpdater(props.defaultText);
   }
 
   return (
@@ -35,7 +35,14 @@ const MainPageContent = (props) => {
       <form className='page-main__news'>
         <label className='news__label'>
           Share news with your friends!
-          <textarea className='news__message' value={currentValue} id='newsMessage' onChange={onChange} onBlur={onBlur} onFocus={onFocus} />
+          <textarea
+            className='news__message'
+            value={currentValue}
+            name='newsMessage'
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
         </label>
         <input className='news__submit' type="submit" value="Отправить" />
       </form>
