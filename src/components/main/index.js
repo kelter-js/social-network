@@ -39,7 +39,9 @@ const Main = (props) => {
             path={props.paths.profile}
             render={() => <MainPageContent defaultText={props.pageContent.defaultText} user={props.pageContent.userData} feed={props.pageContent.feed} />}
           />
-          <Route path={props.paths.messages} render={() => <Dialogs dialogs={props.chat.dialogs} messages={props.chat.messages} />} />
+          <Route
+            path={props.paths.messages}
+            render={() => <Dialogs dialogs={props.chat.dialogs} messages={props.chat.messages} defaultText = {props.chat.defaultText}/>} />
           <Route path={props.paths.news} render={() => <News />} />
           <Route path={props.paths.music} render={() => <Music />} />
           <Route path={props.paths.settings} render={() => <Settings />} />

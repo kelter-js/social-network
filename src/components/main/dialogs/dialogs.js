@@ -9,16 +9,16 @@ const Dialogs = (props) => {
     .map((message, index) => {
       return (
         <Route
-          key = { index }
+          key={index}
           path={`/messages/${message[0].split(' ').join('')}`}
-          render={() => {<Message messages={message[1]} />}}
+          render={() => <Message messages={message[1]} defaultText = {props.defaultText}/>}
         />
       );
     });
 
   return (
     <div className='page-main__dialogs-wrapper dialogs'>
-      <DialogList dialogs={props.dialogs}/>
+      <DialogList dialogs={props.dialogs} />
       <Switch>
         {messagesList}
       </Switch>

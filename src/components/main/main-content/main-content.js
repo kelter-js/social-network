@@ -1,33 +1,10 @@
 import React, { useState } from 'react'
 import { Profile } from './profile/profile.js'
 import { FeedList } from './feed/feed-list.js'
+import { InputHandlers } from '../../../service.js'
 
 const MainPageContent = (props) => {
   let [currentValue, valueUpdater] = useState(props.defaultText);
-
-  const onChange = (e) => {
-    valueUpdater(e.target.value);
-  }
-
-  const onFocus = () => {
-    if (currentValue !== props.defaultText) {
-      return;
-    }
-    valueUpdater('');
-  }
-
-  const onBlur = () => {
-    if (!currentValue) {
-      valueUpdater(props.defaultText);
-      return;
-    }
-
-    if (currentValue !== props.defaultText) {
-      return;
-    }
-
-    valueUpdater(props.defaultText);
-  }
 
   return (
     <div>
@@ -39,9 +16,9 @@ const MainPageContent = (props) => {
             className='news__message'
             value={currentValue}
             name='newsMessage'
-            onChange={onChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
+            onChange={InputHandlers.onChange(valueUpdater)}
+            onBlur={InputHandlers.onBlur(valueUpdater, props.defaultText, currentValue)}
+            onFocus={InputHandlers.onFocus(valueUpdater, props.defaultText, currentValue)}
           />
         </label>
         <input className='news__submit' type="submit" value="Отправить" />

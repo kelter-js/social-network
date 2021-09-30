@@ -444,6 +444,7 @@ class Constants {
       'Another One',
       'Russian Caliber',
     ],
+    'defaultText': '...Start your message here!'
   }
 
   static #pageContent = {

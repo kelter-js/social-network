@@ -25,7 +25,39 @@ const getCurrentHeader = () => {
   return location.split('/')[location.split('/').length - 1];
 }
 
+class InputHandlers {
+  static onChange (updater) {
+    return (e) => updater(e.target.value);
+  }
+
+  static onFocus (updater, defaultValue, currentValue) {
+    return () => {
+      if (currentValue !== defaultValue) {
+        return;
+      }
+
+      updater('');
+    }
+  }
+
+  static onBlur (updater, defaultValue, currentValue) {
+    return () => {
+      if (!currentValue) {
+        updater(defaultValue);
+        return;
+      }
+
+      if (currentValue !== defaultValue) {
+        return;
+      }
+
+      updater(defaultValue);
+    }
+  }
+}
+
 export {
   createProfileData,
-  getCurrentHeader
+  getCurrentHeader,
+  InputHandlers
 }
