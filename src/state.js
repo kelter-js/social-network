@@ -1,15 +1,20 @@
 import { createProfileData } from './service.js'
 
-class Constants {
+class State {
 
-  static #defaultMenu = [
+  constructor () {
+    this._createPost = this._createPost.bind(this);
+    this.addPost = this.addPost.bind(this);
+  }
+
+  #defaultMenu = [
     'profile',
     'messages',
     'news',
     'music',
   ];
 
-  static #defaultMenuPaths = {
+  #defaultMenuPaths = {
     [this.#defaultMenu[0]]: `/${this.#defaultMenu[0]}`,
     [this.#defaultMenu[1]]: `/${this.#defaultMenu[1]}`,
     [this.#defaultMenu[2]]: `/${this.#defaultMenu[2]}`,
@@ -17,14 +22,14 @@ class Constants {
     'settings': `/settings`,
   };
 
-  static #defaultProfile = [
+  #defaultProfile = [
     '2 january',
     'Minsk',
     'BSU 11',
     'smth-else.com',
   ];
 
-  static #headers = {
+  #headers = {
     'profile': 'Профиль пользователя',
     'messages': 'Диалоги пользователя',
     'news': 'Новостная лента',
@@ -32,7 +37,7 @@ class Constants {
     'settings': 'Настройки профиля',
   }
 
-  static #chat = {
+  #chat = {
     'messages': {
       'Kalashnikov Sergey': [
         {
@@ -447,7 +452,7 @@ class Constants {
     'defaultText': '...Start your message here!'
   }
 
-  static #pageContent = {
+  #pageContent = {
     'defaultText': '...start your message here.',
     'feed': [
       {
@@ -467,29 +472,40 @@ class Constants {
     },
   }
 
-  static get defaultMenu() {
+  _createPost (text) {
+    return {
+      'post': text,
+      'likes': 35,
+    }
+  }
+
+  addPost (text) {
+    this.#pageContent.feed.push(this._createPost(text));
+  }
+
+  get defaultMenu() {
     return this.#defaultMenu;
   }
 
-  static get pageContent() {
+  get pageContent() {
     return this.#pageContent;
   }
 
-  static get defaultMenuPaths() {
+  get defaultMenuPaths() {
     return this.#defaultMenuPaths;
   }
 
-  static get headers() {
+  get headers() {
     return this.#headers;
   }
 
-  static get chat() {
+  get chat() {
     return this.#chat;
   }
 
-  static get defaultProfile() {
+  get defaultProfile() {
     return this.#defaultProfile;
   }
 }
 
-export { Constants }
+export { State }

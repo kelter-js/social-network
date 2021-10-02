@@ -2,17 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './app.js';
 import { ErrorCatcher } from './error.js'
-import { Constants } from './constants.js'
+import { State } from './state.js'
 import './sass/style.sass';
+
+const currentState = new State();
 
 ReactDOM.render(
   <ErrorCatcher>
     <App
-      pageContent = {Constants.pageContent}
-      chat = {Constants.chat}
-      menu = {Constants.defaultMenu}
-      paths={Constants.defaultMenuPaths}
-      headers = {Constants.headers}
+      pageContent = {currentState.pageContent}
+      addPost = {currentState.addPost}
+      chat = {currentState.chat}
+      menu = {currentState.defaultMenu}
+      paths={currentState.defaultMenuPaths}
+      headers = {currentState.headers}
     />
   </ErrorCatcher>,
   document.querySelector('.root')

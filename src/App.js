@@ -11,6 +11,7 @@ const App = (props) => {
       <BrowserRouter>
         <Main
           pageContent = {props.pageContent}
+          addPost = {props.addPost}
           chat = {props.chat}
           menu = {props.menu}
           paths={props.paths}

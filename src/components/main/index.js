@@ -37,7 +37,7 @@ const Main = (props) => {
         <Switch>
           <Route
             path={props.paths.profile}
-            render={() => <MainPageContent defaultText={props.pageContent.defaultText} user={props.pageContent.userData} feed={props.pageContent.feed} />}
+            render={() => <MainPageContent defaultText={props.pageContent.defaultText} user={props.pageContent.userData} feed={props.pageContent.feed} addPost = {props.addPost}/>}
           />
           <Route
             path={props.paths.messages}

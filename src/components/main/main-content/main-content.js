@@ -21,7 +21,11 @@ const MainPageContent = (props) => {
             onFocus={InputHandlers.onFocus(valueUpdater, props.defaultText, currentValue)}
           />
         </label>
-        <input className='news__submit' type="submit" value="Отправить" />
+        <input className='news__submit' type="submit" value="Отправить" onClick = {(e) => {
+          e.preventDefault();
+          props.addPost(currentValue);
+          valueUpdater()
+        }}/>
       </form>
       <div className='page-feed'>
         <FeedList feed={props.feed} />
