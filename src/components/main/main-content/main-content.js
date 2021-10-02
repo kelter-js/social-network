@@ -24,7 +24,7 @@ const MainPageContent = (props) => {
         <input className='news__submit' type="submit" value="Отправить" onClick = {(e) => {
           e.preventDefault();
           props.addPost(currentValue);
-          valueUpdater()
+          valueUpdater(props.defaultText);
         }}/>
       </form>
       <div className='page-feed'>
