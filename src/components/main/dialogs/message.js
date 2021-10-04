@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
-import { InputHandlers } from '../../../service.js'
 
 const Message = (props) => {
   const [currentText, textUpdater] = useState(props.defaultText);
+
+  const textArea = React.createRef();
+
+  const addMessage = () => {
+    props.addMessage(currentText, props.currentDialog, textUpdater);
+  }
 
   return (
     <div className='dialogs__message'>
@@ -21,16 +26,18 @@ const Message = (props) => {
         })
       }
 
-      <form className='page-main__dialogs-form'>
+      <form onSubmit = {props.handlers.onSubmit(addMessage)} className='page-main__dialogs-form'>
         <label className='page-main__dialogs-label'>
           New message text...
           <textarea
             className='page-main__dialogs-text'
+            ref={textArea}
             value={currentText}
             name='messageText'
-            onChange={InputHandlers.onChange(textUpdater)}
-            onBlur={InputHandlers.onBlur(textUpdater, props.defaultText, currentText)}
-            onFocus={InputHandlers.onFocus(textUpdater, props.defaultText, currentText)}
+            onChange={props.handlers.onChange(textUpdater)}
+            onBlur={props.handlers.onBlur(textUpdater, props.defaultText, currentText)}
+            onFocus={props.handlers.onFocus(textUpdater, props.defaultText, currentText)}
+            onKeyDown={props.handlers.onEnter(addMessage, textArea)}
           />
         </label>
         <input className='page-main__send-message' type="submit" value="" />

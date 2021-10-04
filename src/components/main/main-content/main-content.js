@@ -1,31 +1,33 @@
 import React, { useState } from 'react'
 import { Profile } from './profile/profile.js'
 import { FeedList } from './feed/feed-list.js'
-import { InputHandlers } from '../../../service.js'
 
 const MainPageContent = (props) => {
   let [currentValue, valueUpdater] = useState(props.defaultText);
 
+  const textArea = React.createRef();
+
+  const addPost = () => {
+    props.addPost(currentValue, valueUpdater);
+  }
   return (
     <div>
       <Profile data={props.user} />
-      <form className='page-main__news'>
+      <form onSubmit = {props.handlers.onSubmit(addPost)} className='page-main__news'>
         <label className='news__label'>
           Share news with your friends!
           <textarea
             className='news__message'
+            ref={textArea}
             value={currentValue}
             name='newsMessage'
-            onChange={InputHandlers.onChange(valueUpdater)}
-            onBlur={InputHandlers.onBlur(valueUpdater, props.defaultText, currentValue)}
-            onFocus={InputHandlers.onFocus(valueUpdater, props.defaultText, currentValue)}
+            onChange={props.handlers.onChange(valueUpdater)}
+            onBlur={props.handlers.onBlur(valueUpdater, props.defaultText, currentValue)}
+            onFocus={props.handlers.onFocus(valueUpdater, props.defaultText, currentValue)}
+            onKeyDown={props.handlers.onEnter(addPost, textArea)}
           />
         </label>
-        <input className='news__submit' type="submit" value="Отправить" onClick = {(e) => {
-          e.preventDefault();
-          props.addPost(currentValue);
-          valueUpdater(props.defaultText);
-        }}/>
+        <input className='news__submit' type="submit" value="Отправить"/>
       </form>
       <div className='page-feed'>
         <FeedList feed={props.feed} />

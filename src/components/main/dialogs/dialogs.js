@@ -11,7 +11,14 @@ const Dialogs = (props) => {
         <Route
           key={index}
           path={`/messages/${message[0].split(' ').join('')}`}
-          render={() => <Message messages={message[1]} defaultText = {props.defaultText}/>}
+          render={() =>
+          <Message
+            handlers = {props.handlers}
+            messages={message[1]}
+            defaultText = {props.defaultText}
+            addMessage = {props.addMessage}
+            currentDialog = {message[0]}
+          />}
         />
       );
     });

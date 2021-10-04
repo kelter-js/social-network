@@ -37,11 +37,26 @@ const Main = (props) => {
         <Switch>
           <Route
             path={props.paths.profile}
-            render={() => <MainPageContent defaultText={props.pageContent.defaultText} user={props.pageContent.userData} feed={props.pageContent.feed} addPost = {props.addPost}/>}
+            render={() =>
+            <MainPageContent
+              handlers = {props.handlers}
+              defaultText={props.pageContent.defaultText}
+              user={props.pageContent.userData}
+              feed={props.pageContent.feed}
+              addPost = {props.addPost}
+            />}
           />
           <Route
             path={props.paths.messages}
-            render={() => <Dialogs dialogs={props.chat.dialogs} messages={props.chat.messages} defaultText = {props.chat.defaultText}/>} />
+            render={() =>
+            <Dialogs
+              handlers = {props.handlers}
+              dialogs={props.chat.dialogs}
+              messages={props.chat.messages}
+              defaultText = {props.chat.defaultText}
+              addMessage = {props.addMessage}
+            />}
+          />
           <Route path={props.paths.news} render={() => <News />} />
           <Route path={props.paths.music} render={() => <Music />} />
           <Route path={props.paths.settings} render={() => <Settings />} />

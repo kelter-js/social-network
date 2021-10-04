@@ -40,6 +40,22 @@ class InputHandlers {
     }
   }
 
+  static onSubmit (submit) {
+    return (e) => {
+      e.preventDefault();
+      submit();
+    }
+  }
+
+  static onEnter (submit, inputElement) {
+    return (e) => {
+      if (e.key === 'Enter') {
+        submit();
+        inputElement.current.blur();
+      }
+    }
+  }
+
   static onBlur (updater, defaultValue, currentValue) {
     return () => {
       if (!currentValue) {

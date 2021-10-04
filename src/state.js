@@ -3,8 +3,8 @@ import { createProfileData } from './service.js'
 class State {
 
   constructor () {
-    this._createPost = this._createPost.bind(this);
     this.addPost = this.addPost.bind(this);
+    this.addMessage = this.addMessage.bind(this);
   }
 
   #defaultMenu = [
@@ -479,8 +479,25 @@ class State {
     }
   }
 
-  addPost (text) {
+  addPost (text, updateText) {
     this.#pageContent.feed.push(this._createPost(text));
+    updateText(this.#pageContent.defaultText);
+  }
+
+  _createMessage (text) {
+    return {
+      'text': text,
+      'author': 'You',
+      'style': {
+        'author': 'dialogs__author--user',
+        'message': 'dialogs__phrase--user',
+      },
+    }
+  }
+
+  addMessage (text, user, updateText) {
+    this.#chat.messages[user].push(this._createMessage(text));
+    updateText(this.#chat.defaultText);
   }
 
   get defaultMenu() {
