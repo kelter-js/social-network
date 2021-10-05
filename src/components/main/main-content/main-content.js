@@ -10,6 +10,7 @@ const MainPageContent = (props) => {
   const addPost = () => {
     props.addPost(currentValue, valueUpdater);
   }
+  console.log(props)
   return (
     <div>
       <Profile data={props.user} />

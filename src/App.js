@@ -9,16 +9,7 @@ const App = (props) => {
     <>
       <Header />
       <BrowserRouter>
-        <Main
-          handlers = {props.handlers}
-          pageContent = {props.pageContent}
-          addPost = {props.addPost}
-          addMessage = {props.addMessage}
-          chat = {props.chat}
-          menu = {props.menu}
-          paths={props.paths}
-          headers = {props.headers}
-        />
+        <Main store = {props.store}/>
       </BrowserRouter>
       <Footer />
     </>

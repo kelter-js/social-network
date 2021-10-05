@@ -12,56 +12,56 @@ const Main = (props) => {
   const history = useHistory();
 
   const [currentPageHeader, headerUpdater] = useState(
-    props.headers[getCurrentHeader()]
+    props.store.headers[getCurrentHeader()]
   );
 
   useEffect(() => {
     return history.listen((location) => {
       let path = location.pathname.split('/');
 
-      path.includes('messages') ? headerUpdater(props.headers.messages) : headerUpdater(props.headers[path[1]])
+      path.includes('messages') ? headerUpdater(props.store.headers.messages) : headerUpdater(props.store.headers[path[1]])
     })
   },
-    [history, currentPageHeader, props.headers]
+    [history, currentPageHeader, props.store.headers]
   );
 
   return (
     <main className='page-main container'>
       <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
       <nav className='page-main__navigation'>
-        <Navigation navigation={props.menu} />
-        <NavLink activeClassName='navigation__link--current' className='navigation__link' to={props.paths.settings}>Settings</NavLink>
+        <Navigation navigation={props.store.defaultMenu} />
+        <NavLink activeClassName='navigation__link--current' className='navigation__link' to={props.store.defaultMenuPaths.settings}>Settings</NavLink>
       </nav>
       <section className='page-main__content-wrapper'>
         <h2 className='visually-hidden'>{currentPageHeader}</h2>
         <Switch>
           <Route
-            path={props.paths.profile}
+            path={props.store.defaultMenuPaths.profile}
             render={() =>
             <MainPageContent
-              handlers = {props.handlers}
-              defaultText={props.pageContent.defaultText}
-              user={props.pageContent.userData}
-              feed={props.pageContent.feed}
-              addPost = {props.addPost}
+              handlers = {props.store.handlers}
+              defaultText={props.store.pageContent.defaultText}
+              user={props.store.pageContent.userData}
+              feed={props.store.pageContent.feed}
+              addPost = {props.store.addPost}
             />}
           />
           <Route
-            path={props.paths.messages}
+            path={props.store.defaultMenuPaths.messages}
             render={() =>
             <Dialogs
-              handlers = {props.handlers}
-              dialogs={props.chat.dialogs}
-              messages={props.chat.messages}
-              defaultText = {props.chat.defaultText}
-              addMessage = {props.addMessage}
+              handlers = {props.store.handlers}
+              dialogs={props.store.chat.dialogs}
+              messages={props.store.chat.messages}
+              defaultText = {props.store.chat.defaultText}
+              addMessage = {props.store.addMessage}
             />}
           />
-          <Route path={props.paths.news} render={() => <News />} />
-          <Route path={props.paths.music} render={() => <Music />} />
-          <Route path={props.paths.settings} render={() => <Settings />} />
+          <Route path={props.store.defaultMenuPaths.news} render={() => <News />} />
+          <Route path={props.store.defaultMenuPaths.music} render={() => <Music />} />
+          <Route path={props.store.defaultMenuPaths.settings} render={() => <Settings />} />
           <Route path='/'>
-            <Redirect to={props.paths.profile} />
+            <Redirect to={props.store.defaultMenuPaths.profile} />
           </Route>
         </Switch>
       </section>
