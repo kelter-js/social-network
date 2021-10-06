@@ -7,7 +7,7 @@ const FeedList = (props) => {
       {
         props.feed.map((feed, index) => {
           return (
-            <Feed key = { index } data = { feed }/>
+            <Feed key={index} postId={index} data={feed} dispatch={props.dispatch}/>
           );
         })
       }

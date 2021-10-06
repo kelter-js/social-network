@@ -16,7 +16,8 @@ const Dialogs = (props) => {
             handlers = {props.handlers}
             messages={message[1]}
             defaultText = {props.defaultText}
-            addMessage = {props.addMessage}
+            currentText = {props.currentText}
+            dispatch = {props.dispatch}
             currentDialog = {message[0]}
           />}
         />

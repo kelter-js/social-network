@@ -9,7 +9,10 @@ const App = (props) => {
     <>
       <Header />
       <BrowserRouter>
-        <Main store = {props.store}/>
+        <Main
+          store = {props.store}
+          dispatch = {props.dispatch}
+        />
       </BrowserRouter>
       <Footer />
     </>

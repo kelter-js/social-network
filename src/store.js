@@ -3,10 +3,10 @@ import { createProfileData, InputHandlers } from './service.js'
 class Store {
   #state;
   #defaultProfile;
+  #actions;
 
   constructor () {
-    this.addPost = this.addPost.bind(this);
-    this.addMessage = this.addMessage.bind(this);
+    this.dispatch = this.dispatch.bind(this);
 
     this.#defaultProfile = [
       '2 january',
@@ -448,10 +448,12 @@ class Store {
           'Another One',
           'Russian Caliber',
         ],
-        'defaultText': '...Start your message here!'
+        'defaultText': '...Start your message here!',
+        'currentText': undefined,
       },
       'pageContent': {
         'defaultText': '...start your message here.',
+        'currentText': undefined,
         'feed': [
           {
             'post': 'Hey, is there anybody?',
@@ -470,8 +472,35 @@ class Store {
         },
       },
       'handlers': InputHandlers,
-      'addPost': this.addPost,
-      'addMessage': this.addMessage,
+    }
+
+    this.#actions = {
+      'addPost': () => {
+        this.#state.pageContent.feed.push(this._createPost(this.#state.pageContent.currentText));
+        this.#state.pageContent.currentText = undefined;
+        this._callSubscriber(this);
+      },
+      'changeText': (newText) => {
+        const receivers = {
+          'post': (text) => this.#state.pageContent.currentText = text,
+          'message': (text) => this.#state.chat.currentText = text,
+        }
+        receivers[newText.receiver](newText.text);
+        this._callSubscriber(this);
+      },
+      'addMessage': (messageInfo) => {
+        this.#state.chat.messages[messageInfo.user].push(this._createMessage(this.#state.chat.currentText));
+        this.#state.chat.currentText = undefined;
+        this._callSubscriber(this);
+      },
+      'like': (post) => {
+        ++this.#state.pageContent.feed[post.postId].likes;
+        this._callSubscriber(this);
+      },
+      'dislike': (post) => {
+        --this.#state.pageContent.feed[post.postId].likes;
+        this._callSubscriber(this);
+      },
     }
   }
 
@@ -493,14 +522,16 @@ class Store {
     }
   }
 
-  addPost (text, updateText) {
-    this.#state.pageContent.feed.push(this._createPost(text));
-    updateText(this.#state.pageContent.defaultText);
+  dispatch (action) {
+    this.#actions[action.type](action);
   }
 
-  addMessage (text, user, updateText) {
-    this.#state.chat.messages[user].push(this._createMessage(text));
-    updateText(this.#state.chat.defaultText);
+  _callSubscriber () {
+    console.log('There`s no current subscribers');
+  }
+
+  observer (subscriber) {
+    this._callSubscriber = subscriber;
   }
 
   get store () {

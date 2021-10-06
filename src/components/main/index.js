@@ -10,7 +10,6 @@ import { getCurrentHeader } from '../../service.js'
 
 const Main = (props) => {
   const history = useHistory();
-
   const [currentPageHeader, headerUpdater] = useState(
     props.store.headers[getCurrentHeader()]
   );
@@ -41,9 +40,10 @@ const Main = (props) => {
             <MainPageContent
               handlers = {props.store.handlers}
               defaultText={props.store.pageContent.defaultText}
+              currentText={props.store.pageContent.currentText}
               user={props.store.pageContent.userData}
               feed={props.store.pageContent.feed}
-              addPost = {props.store.addPost}
+              dispatch = {props.dispatch}
             />}
           />
           <Route
@@ -54,7 +54,8 @@ const Main = (props) => {
               dialogs={props.store.chat.dialogs}
               messages={props.store.chat.messages}
               defaultText = {props.store.chat.defaultText}
-              addMessage = {props.store.addMessage}
+              currentText = {props.store.chat.currentText}
+              dispatch = {props.dispatch}
             />}
           />
           <Route path={props.store.defaultMenuPaths.news} render={() => <News />} />

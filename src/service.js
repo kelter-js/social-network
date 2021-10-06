@@ -30,9 +30,9 @@ class InputHandlers {
     return (e) => updater(e.target.value);
   }
 
-  static onFocus (updater, defaultValue, currentValue) {
+  static onFocus (updater, currentValue) {
     return () => {
-      if (currentValue !== defaultValue) {
+      if (currentValue) {
         return;
       }
 
@@ -59,7 +59,7 @@ class InputHandlers {
   static onBlur (updater, defaultValue, currentValue) {
     return () => {
       if (!currentValue) {
-        updater(defaultValue);
+        updater(undefined);
         return;
       }
 

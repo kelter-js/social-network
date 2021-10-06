@@ -1,13 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { App } from './app.js';
-import { ErrorCatcher } from './error.js'
+import { render } from './render.js'
 import { store } from './store.js'
-import './sass/style.sass';
+import './sass/style.sass'
 
-ReactDOM.render(
-  <ErrorCatcher>
-    <App store = {store.store}/>
-  </ErrorCatcher>,
-  document.querySelector('.root')
-);
+render(store);
+
+store.observer(render);

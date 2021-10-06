@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const Message = (props) => {
-  const [currentText, textUpdater] = useState(props.defaultText);
-
   const textArea = React.createRef();
 
   const addMessage = () => {
-    props.addMessage(currentText, props.currentDialog, textUpdater);
+    props.dispatch({
+      'type': 'addMessage',
+      'user': props.currentDialog,
+    });
+  }
+
+  const changeText = (text) => {
+    props.dispatch({
+      'type': 'changeText',
+      'receiver': 'message',
+      'text': text,
+    });
   }
 
   return (
@@ -32,11 +41,11 @@ const Message = (props) => {
           <textarea
             className='page-main__dialogs-text'
             ref={textArea}
-            value={currentText}
+            value={(props.currentText === undefined) ? props.defaultText : props.currentText}
             name='messageText'
-            onChange={props.handlers.onChange(textUpdater)}
-            onBlur={props.handlers.onBlur(textUpdater, props.defaultText, currentText)}
-            onFocus={props.handlers.onFocus(textUpdater, props.defaultText, currentText)}
+            onChange={(e) => changeText(e.target.value)}
+            onBlur={props.handlers.onBlur(changeText, props.defaultText, props.currentText)}
+            onFocus={props.handlers.onFocus(changeText, props.currentText)}
             onKeyDown={props.handlers.onEnter(addMessage, textArea)}
           />
         </label>
