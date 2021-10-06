@@ -3,17 +3,13 @@ import React from 'react'
 const Feed = (props) => {
   const onClick = (e) => {
     const target = e.target;
-    if (target.classList.contains('feed__likes--pressed')) {
-      props.dispatch({
-        'type': 'dislike',
-        'postId': props.postId,
-      });
-    } else {
-      props.dispatch({
-        'type': 'like',
-        'postId': props.postId,
-      });
-    }
+    const postLiked = target.classList.contains('feed__likes--pressed');
+
+    props.dispatch({
+      'type': postLiked ? 'DISLIKE' : 'LIKE',
+      'postId': props.postId,
+    });
+
     target.classList.toggle('feed__likes--pressed');
   }
 

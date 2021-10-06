@@ -5,14 +5,14 @@ const Message = (props) => {
 
   const addMessage = () => {
     props.dispatch({
-      'type': 'addMessage',
+      'type': 'ADD-MESSAGE',
       'user': props.currentDialog,
     });
   }
 
   const changeText = (text) => {
     props.dispatch({
-      'type': 'changeText',
+      'type': 'CHANGE-TEXT',
       'receiver': 'message',
       'text': text,
     });

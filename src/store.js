@@ -4,9 +4,15 @@ class Store {
   #state;
   #defaultProfile;
   #actions;
+  #receivers;
 
   constructor () {
     this.dispatch = this.dispatch.bind(this);
+
+    this.#receivers = {
+      'post': (text) => this.#state.pageContent.currentText = text,
+      'message': (text) => this.#state.chat.currentText = text,
+    }
 
     this.#defaultProfile = [
       '2 january',
@@ -475,29 +481,25 @@ class Store {
     }
 
     this.#actions = {
-      'addPost': () => {
+      'ADD-POST': () => {
         this.#state.pageContent.feed.push(this._createPost(this.#state.pageContent.currentText));
         this.#state.pageContent.currentText = undefined;
         this._callSubscriber(this);
       },
-      'changeText': (newText) => {
-        const receivers = {
-          'post': (text) => this.#state.pageContent.currentText = text,
-          'message': (text) => this.#state.chat.currentText = text,
-        }
-        receivers[newText.receiver](newText.text);
+      'CHANGE-TEXT': (newText) => {
+        this.#receivers[newText.receiver](newText.text);
         this._callSubscriber(this);
       },
-      'addMessage': (messageInfo) => {
+      'ADD-MESSAGE': (messageInfo) => {
         this.#state.chat.messages[messageInfo.user].push(this._createMessage(this.#state.chat.currentText));
         this.#state.chat.currentText = undefined;
         this._callSubscriber(this);
       },
-      'like': (post) => {
+      'LIKE': (post) => {
         ++this.#state.pageContent.feed[post.postId].likes;
         this._callSubscriber(this);
       },
-      'dislike': (post) => {
+      'DISLIKE': (post) => {
         --this.#state.pageContent.feed[post.postId].likes;
         this._callSubscriber(this);
       },

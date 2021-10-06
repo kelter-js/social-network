@@ -7,13 +7,13 @@ const MainPageContent = (props) => {
 
   const addPost = () => {
     props.dispatch({
-      'type': 'addPost',
+      'type': 'ADD-POST',
     });
   }
 
   const changeText = (text) => {
     props.dispatch({
-      'type': 'changeText',
+      'type': 'CHANGE-TEXT',
       'receiver': 'post',
       'text': text,
     });
