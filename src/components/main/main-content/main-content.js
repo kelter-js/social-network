@@ -6,17 +6,11 @@ const MainPageContent = (props) => {
   const textArea = React.createRef();
 
   const addPost = () => {
-    props.dispatch({
-      'type': 'ADD-POST',
-    });
+    props.interaction.dispatch(props.interaction.createActionPost());
   }
 
   const changeText = (text) => {
-    props.dispatch({
-      'type': 'CHANGE-TEXT',
-      'receiver': 'post',
-      'text': text,
-    });
+    props.interaction.dispatch(props.interaction.createActionChangeText(text, 'post'));
   }
 
   return (
@@ -39,7 +33,7 @@ const MainPageContent = (props) => {
         <input className='news__submit' type="submit" value="Отправить"/>
       </form>
       <div className='page-feed'>
-        <FeedList feed={props.feed} dispatch={props.dispatch}/>
+        <FeedList feed={props.feed} interaction={props.interaction}/>
       </div>
     </div>
   );

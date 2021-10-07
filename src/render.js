@@ -8,7 +8,7 @@ const render = (store) => {
     <ErrorCatcher>
       <App
         store = {store.store}
-        dispatch = {store.dispatch}
+        interaction = {store.interaction}
       />
     </ErrorCatcher>,
     document.querySelector('.root')

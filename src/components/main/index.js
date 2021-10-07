@@ -43,7 +43,7 @@ const Main = (props) => {
               currentText={props.store.pageContent.currentText}
               user={props.store.pageContent.userData}
               feed={props.store.pageContent.feed}
-              dispatch = {props.dispatch}
+              interaction = {props.interaction}
             />}
           />
           <Route
@@ -55,7 +55,7 @@ const Main = (props) => {
               messages={props.store.chat.messages}
               defaultText = {props.store.chat.defaultText}
               currentText = {props.store.chat.currentText}
-              dispatch = {props.dispatch}
+              interaction = {props.interaction}
             />}
           />
           <Route path={props.store.defaultMenuPaths.news} render={() => <News />} />

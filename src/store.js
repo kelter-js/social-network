@@ -5,9 +5,14 @@ class Store {
   #defaultProfile;
   #actions;
   #receivers;
+  #actionTypes;
 
   constructor () {
     this.dispatch = this.dispatch.bind(this);
+    this.createActionPost = this.createActionPost.bind(this);
+    this.createActionChangeText = this.createActionChangeText.bind(this);
+    this.createActionChangeLike = this.createActionChangeLike.bind(this);
+    this.createActionMessage = this.createActionMessage.bind(this);
 
     this.#receivers = {
       'post': (text) => this.#state.pageContent.currentText = text,
@@ -480,6 +485,14 @@ class Store {
       'handlers': InputHandlers,
     }
 
+    this.#actionTypes = {
+      'post': 'ADD-POST',
+      'text': 'CHANGE-TEXT',
+      'message': 'ADD-MESSAGE',
+      'like': 'LIKE',
+      'dislike': 'DISLIKE',
+    }
+
     this.#actions = {
       'ADD-POST': () => {
         this.#state.pageContent.feed.push(this._createPost(this.#state.pageContent.currentText));
@@ -506,6 +519,34 @@ class Store {
     }
   }
 
+  createActionPost () {
+    return {
+      'type': this.#actionTypes.post,
+    }
+  }
+
+  createActionChangeText (text, receiver) {
+    return {
+      'type': this.#actionTypes.text,
+      'receiver': receiver,
+      'text': text,
+    }
+  }
+
+  createActionChangeLike (postLiked, postId) {
+    return {
+      'type': postLiked ? this.#actionTypes.dislike : this.#actionTypes.like,
+      'postId': postId,
+    }
+  }
+
+  createActionMessage (userId) {
+    return {
+      'type': this.#actionTypes.message,
+      'user': userId,
+    }
+  }
+
   _createPost (text) {
     return {
       'post': text,
@@ -529,7 +570,7 @@ class Store {
   }
 
   _callSubscriber () {
-    console.log('There`s no current subscribers');
+    console.log('There`s no currently available subscribers');
   }
 
   observer (subscriber) {
@@ -538,6 +579,16 @@ class Store {
 
   get store () {
     return this.#state;
+  }
+
+  get interaction () {
+    return {
+      'dispatch': this.dispatch,
+      'createActionPost': this.createActionPost,
+      'createActionChangeText': this.createActionChangeText,
+      'createActionChangeLike': this.createActionChangeLike,
+      'createActionMessage': this.createActionMessage,
+    }
   }
 }
 

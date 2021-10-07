@@ -11,7 +11,7 @@ const App = (props) => {
       <BrowserRouter>
         <Main
           store = {props.store}
-          dispatch = {props.dispatch}
+          interaction = {props.interaction}
         />
       </BrowserRouter>
       <Footer />

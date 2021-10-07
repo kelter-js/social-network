@@ -5,10 +5,7 @@ const Feed = (props) => {
     const target = e.target;
     const postLiked = target.classList.contains('feed__likes--pressed');
 
-    props.dispatch({
-      'type': postLiked ? 'DISLIKE' : 'LIKE',
-      'postId': props.postId,
-    });
+    props.interaction.dispatch(props.interaction.createActionChangeLike(postLiked, props.postId));
 
     target.classList.toggle('feed__likes--pressed');
   }

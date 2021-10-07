@@ -4,18 +4,11 @@ const Message = (props) => {
   const textArea = React.createRef();
 
   const addMessage = () => {
-    props.dispatch({
-      'type': 'ADD-MESSAGE',
-      'user': props.currentDialog,
-    });
+    props.interaction.dispatch(props.interaction.createActionMessage(props.currentDialog));
   }
 
   const changeText = (text) => {
-    props.dispatch({
-      'type': 'CHANGE-TEXT',
-      'receiver': 'message',
-      'text': text,
-    });
+    props.interaction.dispatch(props.interaction.createActionChangeText(text, 'message'));
   }
 
   return (
