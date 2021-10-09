@@ -10,19 +10,14 @@ import { getCurrentHeader } from '../../service.js'
 
 const Main = (props) => {
   const history = useHistory();
-  const [currentPageHeader, headerUpdater] = useState(
-    props.store.headers[getCurrentHeader()]
-  );
 
-  useEffect(() => {
-    return history.listen((location) => {
-      let path = location.pathname.split('/');
+  history.listen((location) => {
+    let path = location.pathname.split('/');
 
-      path.includes('messages') ? headerUpdater(props.store.headers.messages) : headerUpdater(props.store.headers[path[1]])
-    })
-  },
-    [history, currentPageHeader, props.store.headers]
-  );
+    path.includes('messages') ? (
+      props.interaction.dispatch(props.interaction.changeCurrentHeader('messages'))) : (
+      props.interaction.dispatch(props.interaction.changeCurrentHeader(path[1])));
+  })
 
   return (
     <main className='page-main container'>
@@ -32,7 +27,7 @@ const Main = (props) => {
         <NavLink activeClassName='navigation__link--current' className='navigation__link' to={props.store.defaultMenuPaths.settings}>Settings</NavLink>
       </nav>
       <section className='page-main__content-wrapper'>
-        <h2 className='visually-hidden'>{currentPageHeader}</h2>
+        <h2 className='visually-hidden'>{props.store.pageContent.currentHeader}</h2>
         <Switch>
           <Route
             path={props.store.defaultMenuPaths.profile}

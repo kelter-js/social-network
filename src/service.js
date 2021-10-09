@@ -15,16 +15,6 @@ const createProfileData = (data) => {
   return defaultProfile;
 }
 
-const getCurrentHeader = () => {
-  const location = window.location.href;
-
-  if (location.split('/').includes('messages')) {
-    return 'messages';
-  }
-
-  return location.split('/')[location.split('/').length - 1];
-}
-
 class InputHandlers {
   static onChange (updater) {
     return (e) => updater(e.target.value);
@@ -74,6 +64,5 @@ class InputHandlers {
 
 export {
   createProfileData,
-  getCurrentHeader,
   InputHandlers
 }

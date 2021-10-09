@@ -6,17 +6,27 @@ class Store {
   #actions;
   #receivers;
   #actionTypes;
+  #headers;
 
-  constructor () {
+  constructor() {
     this.dispatch = this.dispatch.bind(this);
     this.createActionPost = this.createActionPost.bind(this);
     this.createActionChangeText = this.createActionChangeText.bind(this);
     this.createActionChangeLike = this.createActionChangeLike.bind(this);
     this.createActionMessage = this.createActionMessage.bind(this);
+    this.changeCurrentHeader = this.changeCurrentHeader.bind(this);
 
     this.#receivers = {
       'post': (text) => this.#state.pageContent.currentText = text,
       'message': (text) => this.#state.chat.currentText = text,
+    }
+
+    this.#headers = {
+      'profile': 'Профиль пользователя',
+      'messages': 'Диалоги пользователя',
+      'news': 'Новостная лента',
+      'music': 'Музыка пользователя',
+      'settings': 'Настройки профиля',
     }
 
     this.#defaultProfile = [
@@ -39,13 +49,6 @@ class Store {
         'news': '/news',
         'music': '/music',
         'settings': '/settings',
-      },
-      'headers': {
-        'profile': 'Профиль пользователя',
-        'messages': 'Диалоги пользователя',
-        'news': 'Новостная лента',
-        'music': 'Музыка пользователя',
-        'settings': 'Настройки профиля',
       },
       'chat': {
         'messages': {
@@ -481,6 +484,7 @@ class Store {
           'userData': createProfileData(this.#defaultProfile),
           'userName': 'John Doe',
         },
+        'currentHeader': this._getCurrentHeader(),
       },
       'handlers': InputHandlers,
     }
@@ -491,12 +495,18 @@ class Store {
       'message': 'ADD-MESSAGE',
       'like': 'LIKE',
       'dislike': 'DISLIKE',
+      'header': 'CHANGE_HEADER',
     }
 
     this.#actions = {
       'ADD-POST': () => {
         this.#state.pageContent.feed.push(this._createPost(this.#state.pageContent.currentText));
         this.#state.pageContent.currentText = undefined;
+        this._callSubscriber(this);
+      },
+      'CHANGE_HEADER': (newHeader) => {
+        this.#state.pageContent.currentHeader = this.#headers[newHeader.text];
+        console.log(this.#state.pageContent.currentHeader)
         this._callSubscriber(this);
       },
       'CHANGE-TEXT': (newText) => {
@@ -519,13 +529,23 @@ class Store {
     }
   }
 
-  createActionPost () {
+  _getCurrentHeader() {
+    const location = window.location.href;
+
+    if (location.split('/').includes('messages')) {
+      return this.#headers.messages;
+    }
+
+    return this.#headers[location.split('/')[location.split('/').length - 1]];
+  }
+
+  createActionPost() {
     return {
       'type': this.#actionTypes.post,
     }
   }
 
-  createActionChangeText (text, receiver) {
+  createActionChangeText(text, receiver) {
     return {
       'type': this.#actionTypes.text,
       'receiver': receiver,
@@ -533,28 +553,35 @@ class Store {
     }
   }
 
-  createActionChangeLike (postLiked, postId) {
+  changeCurrentHeader(text) {
+    return {
+      'type': this.#actionTypes.header,
+      'text': text,
+    }
+  }
+
+  createActionChangeLike(postLiked, postId) {
     return {
       'type': postLiked ? this.#actionTypes.dislike : this.#actionTypes.like,
       'postId': postId,
     }
   }
 
-  createActionMessage (userId) {
+  createActionMessage(userId) {
     return {
       'type': this.#actionTypes.message,
       'user': userId,
     }
   }
 
-  _createPost (text) {
+  _createPost(text) {
     return {
       'post': text,
       'likes': 35,
     }
   }
 
-  _createMessage (text) {
+  _createMessage(text) {
     return {
       'text': text,
       'author': 'You',
@@ -565,29 +592,30 @@ class Store {
     }
   }
 
-  dispatch (action) {
+  dispatch(action) {
     this.#actions[action.type](action);
   }
 
-  _callSubscriber () {
+  _callSubscriber() {
     console.log('There`s no currently available subscribers');
   }
 
-  observer (subscriber) {
+  observer(subscriber) {
     this._callSubscriber = subscriber;
   }
 
-  get store () {
+  get store() {
     return this.#state;
   }
 
-  get interaction () {
+  get interaction() {
     return {
       'dispatch': this.dispatch,
       'createActionPost': this.createActionPost,
       'createActionChangeText': this.createActionChangeText,
       'createActionChangeLike': this.createActionChangeLike,
       'createActionMessage': this.createActionMessage,
+      'changeCurrentHeader': this.changeCurrentHeader,
     }
   }
 }
