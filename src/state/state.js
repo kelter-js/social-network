@@ -547,7 +547,7 @@ class Store {
   }
 
   dispatch(action) {
-    reduceHandler(this.#state, action, this.#headers);
+    this.#state = reduceHandler(this.#state, action, this.#headers);
     this._callSubscriber(this);
   }
 

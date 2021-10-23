@@ -28,7 +28,8 @@ const reduceHandler = (state, action, headers) => {
       state.pageContent.feed[action.postId] = changeLikeState(state.pageContent.feed[action.postId]);
     },
   }
-  state = actions[action.type](action, headers);
+
+  actions[action.type](action, headers);
   return state;
 }
 
