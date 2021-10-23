@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Route, Switch, NavLink, Redirect, useHistory } from 'react-router-dom'
 import { Navigation } from './navigation/navigation-list.js'
 import { MainPageContent } from './main-content/main-content.js'
@@ -6,7 +6,6 @@ import { Dialogs } from './dialogs/dialogs.js'
 import { Music } from './music/music.js'
 import { News } from './news/news.js'
 import { Settings } from './settings/settings.js'
-import { getCurrentHeader } from '../../service.js'
 
 const Main = (props) => {
   const history = useHistory();

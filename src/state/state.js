@@ -1,25 +1,20 @@
-import { createProfileData, InputHandlers } from './service.js'
+import { createProfileData, InputHandlers } from '../service.js';
+import { reduceHandler } from './reducers.js';
 
 class Store {
   #state;
   #defaultProfile;
-  #actions;
-  #receivers;
   #actionTypes;
   #headers;
 
   constructor() {
     this.dispatch = this.dispatch.bind(this);
     this.createActionPost = this.createActionPost.bind(this);
-    this.createActionChangeText = this.createActionChangeText.bind(this);
+    this.createActionChangeTextPost = this.createActionChangeTextPost.bind(this);
+    this.createActionChangeTextMessage = this.createActionChangeTextMessage.bind(this);
     this.createActionChangeLike = this.createActionChangeLike.bind(this);
     this.createActionMessage = this.createActionMessage.bind(this);
     this.changeCurrentHeader = this.changeCurrentHeader.bind(this);
-
-    this.#receivers = {
-      'post': (text) => this.#state.pageContent.currentText = text,
-      'message': (text) => this.#state.chat.currentText = text,
-    }
 
     this.#headers = {
       'profile': 'Профиль пользователя',
@@ -491,41 +486,12 @@ class Store {
 
     this.#actionTypes = {
       'post': 'ADD-POST',
-      'text': 'CHANGE-TEXT',
+      'messageText': 'CHANGE-TEXT-MESSAGE',
+      'postText': 'CHANGE-TEXT-POST',
       'message': 'ADD-MESSAGE',
       'like': 'LIKE',
       'dislike': 'DISLIKE',
       'header': 'CHANGE_HEADER',
-    }
-
-    this.#actions = {
-      'ADD-POST': () => {
-        this.#state.pageContent.feed.push(this._createPost(this.#state.pageContent.currentText));
-        this.#state.pageContent.currentText = undefined;
-        this._callSubscriber(this);
-      },
-      'CHANGE_HEADER': (newHeader) => {
-        this.#state.pageContent.currentHeader = this.#headers[newHeader.text];
-        console.log(this.#state.pageContent.currentHeader)
-        this._callSubscriber(this);
-      },
-      'CHANGE-TEXT': (newText) => {
-        this.#receivers[newText.receiver](newText.text);
-        this._callSubscriber(this);
-      },
-      'ADD-MESSAGE': (messageInfo) => {
-        this.#state.chat.messages[messageInfo.user].push(this._createMessage(this.#state.chat.currentText));
-        this.#state.chat.currentText = undefined;
-        this._callSubscriber(this);
-      },
-      'LIKE': (post) => {
-        ++this.#state.pageContent.feed[post.postId].likes;
-        this._callSubscriber(this);
-      },
-      'DISLIKE': (post) => {
-        --this.#state.pageContent.feed[post.postId].likes;
-        this._callSubscriber(this);
-      },
     }
   }
 
@@ -545,10 +511,16 @@ class Store {
     }
   }
 
-  createActionChangeText(text, receiver) {
+  createActionChangeTextPost(text) {
     return {
-      'type': this.#actionTypes.text,
-      'receiver': receiver,
+      'type': this.#actionTypes.postText,
+      'text': text,
+    }
+  }
+
+  createActionChangeTextMessage(text) {
+    return {
+      'type': this.#actionTypes.messageText,
       'text': text,
     }
   }
@@ -574,26 +546,9 @@ class Store {
     }
   }
 
-  _createPost(text) {
-    return {
-      'post': text,
-      'likes': 35,
-    }
-  }
-
-  _createMessage(text) {
-    return {
-      'text': text,
-      'author': 'You',
-      'style': {
-        'author': 'dialogs__author--user',
-        'message': 'dialogs__phrase--user',
-      },
-    }
-  }
-
   dispatch(action) {
-    this.#actions[action.type](action);
+    reduceHandler(this.#state, action, this.#headers);
+    this._callSubscriber(this);
   }
 
   _callSubscriber() {
@@ -612,7 +567,8 @@ class Store {
     return {
       'dispatch': this.dispatch,
       'createActionPost': this.createActionPost,
-      'createActionChangeText': this.createActionChangeText,
+      'createActionChangeTextMessage': this.createActionChangeTextMessage,
+      'createActionChangeTextPost': this.createActionChangeTextPost,
       'createActionChangeLike': this.createActionChangeLike,
       'createActionMessage': this.createActionMessage,
       'changeCurrentHeader': this.changeCurrentHeader,

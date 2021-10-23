@@ -10,7 +10,7 @@ const MainPageContent = (props) => {
   }
 
   const changeText = (text) => {
-    props.interaction.dispatch(props.interaction.createActionChangeText(text, 'post'));
+    props.interaction.dispatch(props.interaction.createActionChangeTextPost(text));
   }
 
   return (

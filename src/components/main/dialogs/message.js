@@ -8,7 +8,7 @@ const Message = (props) => {
   }
 
   const changeText = (text) => {
-    props.interaction.dispatch(props.interaction.createActionChangeText(text, 'message'));
+    props.interaction.dispatch(props.interaction.createActionChangeTextMessage(text));
   }
 
   return (
