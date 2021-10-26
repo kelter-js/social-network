@@ -1,16 +1,16 @@
-import React from 'react'
-import { Profile } from './profile/profile.js'
-import { FeedList } from './feed/feed-list.js'
+import React from 'react';
+import { Profile } from './profile/profile.js';
+import { FeedList } from './feed/feedList.js';
 
 const MainPageContent = (props) => {
   const textArea = React.createRef();
 
   const addPost = () => {
-    props.interaction.dispatch(props.interaction.createActionPost());
+    props.dispatch(props.actionManager.createActionPost());
   }
 
   const changeText = (text) => {
-    props.interaction.dispatch(props.interaction.createActionChangeTextPost(text));
+    props.dispatch(props.actionManager.createActionChangeTextPost(text));
   }
 
   return (
@@ -33,7 +33,11 @@ const MainPageContent = (props) => {
         <input className='news__submit' type="submit" value="Отправить"/>
       </form>
       <div className='page-feed'>
-        <FeedList feed={props.feed} interaction={props.interaction}/>
+        <FeedList
+          feed={props.feed}
+          actionManager={props.actionManager}
+          dispatch = {props.dispatch}
+          />
       </div>
     </div>
   );

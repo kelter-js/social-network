@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProfileData } from './profile-data.js'
+import { ProfileData } from './profileData.js'
 
 const Profile = (props) => {
   return (

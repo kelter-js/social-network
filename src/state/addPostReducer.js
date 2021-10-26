@@ -5,7 +5,6 @@ const addPost = (state) => {
       'likes': 35,
     }
   }
-
   state.feed.push(createPost(state.currentText));
   state.currentText = undefined;
 

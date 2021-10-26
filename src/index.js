@@ -1,7 +1,12 @@
 import { render } from './render.js';
-import { store } from './state/state.js';
-import './sass/style.sass'
+import { storeRedux } from './state/reduxStore.js';
+import './sass/style.sass';
 
-render(store);
+const currentState = storeRedux.getState();
 
-store.observer(render);
+render(currentState);
+
+storeRedux.subscribe(() => {
+  const updatedState = storeRedux.getState();
+  render(updatedState);
+})

@@ -1,5 +1,5 @@
 import React from 'react'
-import { DialogList } from './dialog-list.js'
+import { DialogList } from './dialogList.js'
 import { Message } from './message.js'
 import { Route, Switch } from 'react-router-dom'
 
@@ -13,11 +13,12 @@ const Dialogs = (props) => {
           path={`/messages/${message[0].split(' ').join('')}`}
           render={() =>
           <Message
+            dispatch = {props.dispatch}
             handlers = {props.handlers}
             messages={message[1]}
             defaultText = {props.defaultText}
             currentText = {props.currentText}
-            interaction = {props.interaction}
+            actionManager = {props.actionManager}
             currentDialog = {message[0]}
           />}
         />

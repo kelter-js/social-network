@@ -10,8 +10,7 @@ const App = (props) => {
       <Header />
       <BrowserRouter>
         <Main
-          store = {props.store}
-          interaction = {props.interaction}
+          {...props}
         />
       </BrowserRouter>
       <Footer />

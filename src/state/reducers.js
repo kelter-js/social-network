@@ -3,34 +3,33 @@ import { addPost } from './addPostReducer.js';
 import { changeHeader } from './changeHeaderReducer.js';
 import { changeLikeState } from './likeReducer.js';
 import { changeText } from './changeTextReducer.js';
+import { initialState, headers } from './initialState.js';
 
-const reduceHandler = (state, action, headers) => {
+const reducers = (headers, state, action) => {
   const actions = {
-    'ADD-POST': () => {
-      state.pageContent = addPost(state.pageContent);
-    },
-    'CHANGE_HEADER': (action) => {
-      state.pageContent = changeHeader(state.pageContent, action, headers);
-    },
+    'ADD-POST': () => addPost(state.pageContent),
+    'CHANGE_HEADER': (action) => changeHeader(state.pageContent, action, headers),
     'CHANGE-TEXT-MESSAGE': (action) => {
       state.chat.currentText = changeText(state.chat.currentText, action);
     },
     'CHANGE-TEXT-POST': (action) => {
       state.pageContent.currentText = changeText(state.pageContent.currentText, action);
     },
-    'ADD-MESSAGE': (action) => {
-      state.chat = addMessage(state.chat, action);
-    },
-    'LIKE': (action) => {
-      state.pageContent.feed[action.postId] = changeLikeState(state.pageContent.feed[action.postId], true);
-    },
-    'DISLIKE': (action) => {
-      state.pageContent.feed[action.postId] = changeLikeState(state.pageContent.feed[action.postId]);
-    },
+    'ADD-MESSAGE': (action) => addMessage(state.chat, action),
+    'LIKE': (action) => changeLikeState(state.pageContent.feed[action.postId], true),
+    'DISLIKE': (action) => changeLikeState(state.pageContent.feed[action.postId]),
   }
 
-  actions[action.type](action, headers);
-  return state;
+  const currentAction = actions[action.type];
+
+  if (currentAction) {
+    currentAction(action, headers);
+    return state;
+  }
+
+  return initialState;
 }
 
-export {reduceHandler}
+const reduceHandlers = reducers.bind(null, headers);
+
+export {reduceHandlers}

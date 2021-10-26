@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch, NavLink, Redirect, useHistory } from 'react-router-dom'
-import { Navigation } from './navigation/navigation-list.js'
-import { MainPageContent } from './main-content/main-content.js'
+import { Navigation } from './navigation/navigationList.js'
+import { MainPageContent } from './main-content/mainContent.js'
 import { Dialogs } from './dialogs/dialogs.js'
 import { Music } from './music/music.js'
 import { News } from './news/news.js'
@@ -14,8 +14,8 @@ const Main = (props) => {
     let path = location.pathname.split('/');
 
     path.includes('messages') ? (
-      props.interaction.dispatch(props.interaction.changeCurrentHeader('messages'))) : (
-      props.interaction.dispatch(props.interaction.changeCurrentHeader(path[1])));
+      props.dispatch(props.store.actionManager.createActionChangeCurrentHeader('messages'))) : (
+      props.dispatch(props.store.actionManager.createActionChangeCurrentHeader(path[1])));
   })
 
   return (
@@ -23,7 +23,9 @@ const Main = (props) => {
       <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
       <nav className='page-main__navigation'>
         <Navigation navigation={props.store.defaultMenu} />
-        <NavLink activeClassName='navigation__link--current' className='navigation__link' to={props.store.defaultMenuPaths.settings}>Settings</NavLink>
+        <NavLink activeClassName='navigation__link--current' className='navigation__link' to={props.store.defaultMenuPaths.settings}>
+          Settings
+        </NavLink>
       </nav>
       <section className='page-main__content-wrapper'>
         <h2 className='visually-hidden'>{props.store.pageContent.currentHeader}</h2>
@@ -33,11 +35,12 @@ const Main = (props) => {
             render={() =>
             <MainPageContent
               handlers = {props.store.handlers}
+              dispatch = {props.dispatch}
               defaultText={props.store.pageContent.defaultText}
               currentText={props.store.pageContent.currentText}
               user={props.store.pageContent.userData}
               feed={props.store.pageContent.feed}
-              interaction = {props.interaction}
+              actionManager = {props.store.actionManager}
             />}
           />
           <Route
@@ -49,7 +52,8 @@ const Main = (props) => {
               messages={props.store.chat.messages}
               defaultText = {props.store.chat.defaultText}
               currentText = {props.store.chat.currentText}
-              interaction = {props.interaction}
+              actionManager = {props.store.actionManager}
+              dispatch = {props.dispatch}
             />}
           />
           <Route path={props.store.defaultMenuPaths.news} render={() => <News />} />

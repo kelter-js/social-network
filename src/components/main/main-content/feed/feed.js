@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
 
 const Feed = (props) => {
   const currentButton = useRef();
@@ -6,7 +6,7 @@ const Feed = (props) => {
   const onClick = (e) => {
     const postLiked = currentButton.current.classList.contains('feed__likes--pressed');
 
-    props.interaction.dispatch(props.interaction.createActionChangeLike(postLiked, props.postId));
+    props.dispatch(props.actionManager.createActionChangeLike(postLiked, props.postId));
 
     currentButton.current.classList.toggle('feed__likes--pressed');
   }

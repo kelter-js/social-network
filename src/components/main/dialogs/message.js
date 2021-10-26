@@ -4,11 +4,11 @@ const Message = (props) => {
   const textArea = React.createRef();
 
   const addMessage = () => {
-    props.interaction.dispatch(props.interaction.createActionMessage(props.currentDialog));
+    props.dispatch(props.actionManager.createActionMessage(props.currentDialog));
   }
 
   const changeText = (text) => {
-    props.interaction.dispatch(props.interaction.createActionChangeTextMessage(text));
+    props.dispatch(props.actionManager.createActionChangeTextMessage(text));
   }
 
   return (

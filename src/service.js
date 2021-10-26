@@ -62,7 +62,18 @@ class InputHandlers {
   }
 }
 
+const getCurrentHeader = (headers) => {
+  const location = window.location.href;
+
+  if (location.split('/').includes('messages')) {
+    return headers.messages;
+  }
+
+  return headers[location.split('/')[location.split('/').length - 1]];
+}
+
 export {
   createProfileData,
-  InputHandlers
+  InputHandlers,
+  getCurrentHeader
 }

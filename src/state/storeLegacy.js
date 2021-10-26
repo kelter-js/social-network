@@ -1,20 +1,14 @@
 import { createProfileData, InputHandlers } from '../service.js';
 import { reduceHandler } from './reducers.js';
+import { actionManager } from './actionManager.js';
 
 class Store {
   #state;
   #defaultProfile;
-  #actionTypes;
   #headers;
 
   constructor() {
     this.dispatch = this.dispatch.bind(this);
-    this.createActionPost = this.createActionPost.bind(this);
-    this.createActionChangeTextPost = this.createActionChangeTextPost.bind(this);
-    this.createActionChangeTextMessage = this.createActionChangeTextMessage.bind(this);
-    this.createActionChangeLike = this.createActionChangeLike.bind(this);
-    this.createActionMessage = this.createActionMessage.bind(this);
-    this.changeCurrentHeader = this.changeCurrentHeader.bind(this);
 
     this.#headers = {
       'profile': 'Профиль пользователя',
@@ -482,16 +476,7 @@ class Store {
         'currentHeader': this._getCurrentHeader(),
       },
       'handlers': InputHandlers,
-    }
-
-    this.#actionTypes = {
-      'post': 'ADD-POST',
-      'messageText': 'CHANGE-TEXT-MESSAGE',
-      'postText': 'CHANGE-TEXT-POST',
-      'message': 'ADD-MESSAGE',
-      'like': 'LIKE',
-      'dislike': 'DISLIKE',
-      'header': 'CHANGE_HEADER',
+      'actionManager': actionManager,
     }
   }
 
@@ -503,47 +488,6 @@ class Store {
     }
 
     return this.#headers[location.split('/')[location.split('/').length - 1]];
-  }
-
-  createActionPost() {
-    return {
-      'type': this.#actionTypes.post,
-    }
-  }
-
-  createActionChangeTextPost(text) {
-    return {
-      'type': this.#actionTypes.postText,
-      'text': text,
-    }
-  }
-
-  createActionChangeTextMessage(text) {
-    return {
-      'type': this.#actionTypes.messageText,
-      'text': text,
-    }
-  }
-
-  changeCurrentHeader(text) {
-    return {
-      'type': this.#actionTypes.header,
-      'text': text,
-    }
-  }
-
-  createActionChangeLike(postLiked, postId) {
-    return {
-      'type': postLiked ? this.#actionTypes.dislike : this.#actionTypes.like,
-      'postId': postId,
-    }
-  }
-
-  createActionMessage(userId) {
-    return {
-      'type': this.#actionTypes.message,
-      'user': userId,
-    }
   }
 
   dispatch(action) {
@@ -559,20 +503,8 @@ class Store {
     this._callSubscriber = subscriber;
   }
 
-  get store() {
+  getState() {
     return this.#state;
-  }
-
-  get interaction() {
-    return {
-      'dispatch': this.dispatch,
-      'createActionPost': this.createActionPost,
-      'createActionChangeTextMessage': this.createActionChangeTextMessage,
-      'createActionChangeTextPost': this.createActionChangeTextPost,
-      'createActionChangeLike': this.createActionChangeLike,
-      'createActionMessage': this.createActionMessage,
-      'changeCurrentHeader': this.changeCurrentHeader,
-    }
   }
 }
 
