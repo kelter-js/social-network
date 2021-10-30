@@ -1,5 +1,6 @@
-const changeLikeState = (state, like) => {
-  like ? ++state.likes : --state.likes;
+const changeLikeState = (state) => {
+  state.liked ? --state.likes : ++state.likes;
+  state.liked = !state.liked;
   return state;
 }
 

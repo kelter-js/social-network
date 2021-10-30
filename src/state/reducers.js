@@ -16,8 +16,7 @@ const reducers = (headers, state, action) => {
       state.pageContent.currentText = changeText(state.pageContent.currentText, action);
     },
     'ADD-MESSAGE': (action) => addMessage(state.chat, action),
-    'LIKE': (action) => changeLikeState(state.pageContent.feed[action.postId], true),
-    'DISLIKE': (action) => changeLikeState(state.pageContent.feed[action.postId]),
+    'CHANGE_LIKE_STATE': (action) => changeLikeState(state.pageContent.feed[action.postId]),
   }
 
   const currentAction = actions[action.type];

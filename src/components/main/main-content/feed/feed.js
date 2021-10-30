@@ -1,16 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 const Feed = (props) => {
-  const currentButton = useRef();
-
-  const onClick = (e) => {
-    const postLiked = currentButton.current.classList.contains('feed__likes--pressed');
-
-    props.dispatch(props.actionManager.createActionChangeLike(postLiked, props.postId));
-
-    currentButton.current.classList.toggle('feed__likes--pressed');
-  }
-
   return (
     <div className='feed__element'>
       <p className='feed__text'>
@@ -18,9 +8,8 @@ const Feed = (props) => {
       </p>
       <button
         type='button'
-        className='feed__likes'
-        ref={currentButton}
-        onClick={onClick}>
+        className={props.buttonClass}
+        onClick={props.changeLikeStatus}>
         {props.data.likes}
       </button>
     </div>

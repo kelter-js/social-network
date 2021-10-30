@@ -446,10 +446,12 @@ const initialState = {
       {
         'post': 'Hey, is there anybody?',
         'likes': 15,
+        'liked': false,
       },
       {
         'post': 'Sup guize, is something really happening here?',
         'likes': 20,
+        'liked': false,
       },
     ],
     'userData': {

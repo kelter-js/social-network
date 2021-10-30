@@ -1,23 +1,13 @@
-import React from 'react'
-import { Route, Switch, NavLink, Redirect, useHistory } from 'react-router-dom'
-import { Navigation } from './navigation/navigationList.js'
-import { MainPageContent } from './main-content/mainContent.js'
-import { Dialogs } from './dialogs/dialogs.js'
-import { Music } from './music/music.js'
-import { News } from './news/news.js'
-import { Settings } from './settings/settings.js'
+import React from 'react';
+import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
+import { Navigation } from './navigation/navigationList.js';
+import { MainPageContentContainer } from './main-content/mainContentContainer.js';
+import { DialogsContainer } from './dialogs/dialogsContainer.js';
+import { Music } from './music/music.js';
+import { News } from './news/news.js';
+import { Settings } from './settings/settings.js';
 
 const Main = (props) => {
-  const history = useHistory();
-
-  history.listen((location) => {
-    let path = location.pathname.split('/');
-
-    path.includes('messages') ? (
-      props.dispatch(props.store.actionManager.createActionChangeCurrentHeader('messages'))) : (
-      props.dispatch(props.store.actionManager.createActionChangeCurrentHeader(path[1])));
-  })
-
   return (
     <main className='page-main container'>
       <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
@@ -33,7 +23,7 @@ const Main = (props) => {
           <Route
             path={props.store.defaultMenuPaths.profile}
             render={() =>
-            <MainPageContent
+            <MainPageContentContainer
               handlers = {props.store.handlers}
               dispatch = {props.dispatch}
               defaultText={props.store.pageContent.defaultText}
@@ -46,7 +36,7 @@ const Main = (props) => {
           <Route
             path={props.store.defaultMenuPaths.messages}
             render={() =>
-            <Dialogs
+            <DialogsContainer
               handlers = {props.store.handlers}
               dialogs={props.store.chat.dialogs}
               messages={props.store.chat.messages}

@@ -2,11 +2,11 @@ class Actions {
   #actionTypes;
 
   constructor() {
-    this.createActionPost = this.createActionPost.bind(this);
+    this.createActionAddPost = this.createActionAddPost.bind(this);
     this.createActionChangeTextPost = this.createActionChangeTextPost.bind(this);
     this.createActionChangeTextMessage = this.createActionChangeTextMessage.bind(this);
     this.createActionChangeCurrentHeader = this.createActionChangeCurrentHeader.bind(this);
-    this.createActionChangeLike = this.createActionChangeLike.bind(this);
+    this.createActionChangeLikeState = this.createActionChangeLikeState.bind(this);
     this.createActionMessage = this.createActionMessage.bind(this);
 
     this.#actionTypes = {
@@ -14,13 +14,12 @@ class Actions {
       'messageText': 'CHANGE-TEXT-MESSAGE',
       'postText': 'CHANGE-TEXT-POST',
       'message': 'ADD-MESSAGE',
-      'like': 'LIKE',
-      'dislike': 'DISLIKE',
+      'changeLikeState': 'CHANGE_LIKE_STATE',
       'header': 'CHANGE_HEADER',
     }
   }
 
-  createActionPost() {
+  createActionAddPost() {
     return {
       'type': this.#actionTypes.post,
     }
@@ -47,9 +46,9 @@ class Actions {
     }
   }
 
-  createActionChangeLike(postLiked, postId) {
+  createActionChangeLikeState(postId) {
     return {
-      'type': postLiked ? this.#actionTypes.dislike : this.#actionTypes.like,
+      'type': this.#actionTypes.changeLikeState,
       'postId': postId,
     }
   }

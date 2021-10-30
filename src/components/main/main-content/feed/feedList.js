@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed } from './feed.js';
+import { FeedContainer } from './feedContainer.js';
 
 const FeedList = (props) => {
   return (
@@ -7,7 +7,7 @@ const FeedList = (props) => {
       {
         props.feed.map((feed, index) => {
           return (
-            <Feed
+            <FeedContainer
               key={index}
               postId={index}
               data={feed}

@@ -3,6 +3,7 @@ const addPost = (state) => {
     return {
       'post': text,
       'likes': 35,
+      'liked': false,
     }
   }
   state.feed.push(createPost(state.currentText));

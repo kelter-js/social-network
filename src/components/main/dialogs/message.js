@@ -1,16 +1,6 @@
-import React from 'react'
+import React from 'react';
 
 const Message = (props) => {
-  const textArea = React.createRef();
-
-  const addMessage = () => {
-    props.dispatch(props.actionManager.createActionMessage(props.currentDialog));
-  }
-
-  const changeText = (text) => {
-    props.dispatch(props.actionManager.createActionChangeTextMessage(text));
-  }
-
   return (
     <div className='dialogs__message'>
       {
@@ -28,21 +18,21 @@ const Message = (props) => {
         })
       }
 
-      <form onSubmit = {props.handlers.onSubmit(addMessage)} className='page-main__dialogs-form'>
+      <form onSubmit = {props.handlers.onSubmit(props.addMessage)} className='page-main__dialogs-form'>
         <label className='page-main__dialogs-label'>
           New message text...
           <textarea
             className='page-main__dialogs-text'
-            ref={textArea}
+            ref={props.messageElement}
             value={(props.currentText === undefined) ? props.defaultText : props.currentText}
             name='messageText'
-            onChange={(e) => changeText(e.target.value)}
-            onBlur={props.handlers.onBlur(changeText, props.defaultText, props.currentText)}
-            onFocus={props.handlers.onFocus(changeText, props.currentText)}
-            onKeyDown={props.handlers.onEnter(addMessage, textArea)}
+            onChange={(e) => props.changeText(e.target.value)}
+            onBlur={props.handlers.onBlur(props.changeText, props.defaultText, props.currentText)}
+            onFocus={props.handlers.onFocus(props.changeText, props.currentText)}
+            onKeyDown={props.handlers.onEnter(props.addMessage, props.messageElement)}
           />
         </label>
-        <input className='page-main__send-message' type="submit" value="" />
+        <input className='page-main__send-message' type='submit' value='' />
       </form>
     </div>
   );
