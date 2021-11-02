@@ -2,20 +2,19 @@ import React from 'react';
 import { FeedContainer } from './feedContainer.js';
 
 const FeedList = (props) => {
+  const feeds = props.feed.map((feed, index) => {
+    return (
+      <FeedContainer
+        key={index}
+        postId={index}
+        data={feed}
+      />
+    );
+  });
+
   return (
     <>
-      {
-        props.feed.map((feed, index) => {
-          return (
-            <FeedContainer
-              key={index}
-              postId={index}
-              data={feed}
-              actionManager={props.actionManager}
-              dispatch = {props.dispatch}/>
-          );
-        })
-      }
+      {feeds}
     </>
   );
 }

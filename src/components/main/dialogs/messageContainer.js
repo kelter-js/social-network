@@ -1,25 +1,24 @@
-import React, { useRef } from 'react';
+import { connect } from 'react-redux';
 import { Message } from './message.js';
 
-const MessageContainer = (props) => {
-  const messageElement = useRef();
-
-  const addMessage = () => {
-    props.dispatch(props.actionManager.createActionMessage(props.currentDialog));
+const mapStateToProps = (state) => {
+  return {
+    'handlers': state.handlers,
+    'actionManager': state.actionManager,
   }
-
-  const changeText = (text) => {
-    props.dispatch(props.actionManager.createActionChangeTextMessage(text));
-  }
-
-  return (
-    <Message
-      {...props}
-      addMessage={addMessage}
-      changeText={changeText}
-      messageElement={messageElement}
-    />
-  );
 }
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps;
+
+  return {
+    ...stateProps,
+    ...ownProps,
+    addMessage: (dialogId) => dispatch(stateProps.actionManager.createActionMessage(dialogId)),
+    changeText: (text) => dispatch(stateProps.actionManager.createActionChangeText(text, 'chat')),
+  };
+}
+
+const MessageContainer = connect(mapStateToProps, null, mergeProps)(Message);
 
 export { MessageContainer }

@@ -6,9 +6,8 @@ const addPost = (state) => {
       'liked': false,
     }
   }
-  state.feed.push(createPost(state.currentText));
-  state.currentText = undefined;
-
+  state.pageContent.feed.push(createPost(state.pageContent.currentText));
+  state.pageContent.currentText = undefined;
   return state;
 }
 

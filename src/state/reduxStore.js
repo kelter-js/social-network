@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
-import { reduceHandlers } from './reducers.js';
+import { reducers } from './reducers.js';
 
-const storeRedux = createStore(reduceHandlers);
+const store = createStore(reducers);
 
-export { storeRedux }
+export { store }

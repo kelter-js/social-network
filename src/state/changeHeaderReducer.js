@@ -1,5 +1,6 @@
-const changeHeader = (state, action, headers) => {
-  state.currentHeader = headers[action.text];
+const changeHeader = (state, action) => {
+  state.pageContent = {...state.pageContent}
+  state.pageContent.currentHeader = state.pageContent.headers[action.text];
   return state;
 }
 

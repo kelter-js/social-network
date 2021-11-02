@@ -440,8 +440,11 @@ const initialState = {
     'currentText': undefined,
   },
   'pageContent': {
+    'settingsButton': 'settings',
+    'mainHeader': 'Социальная сеть ВРеакте',
     'defaultText': '...start your message here.',
     'currentText': undefined,
+    'headers': headers,
     'feed': [
       {
         'post': 'Hey, is there anybody?',
@@ -467,12 +470,8 @@ const initialState = {
     },
     'currentHeader': getCurrentHeader(headers),
   },
-  'headers': headers,
   'handlers': InputHandlers,
   'actionManager': actionManager,
 }
 
-export {
-  initialState,
-  headers
-}
+export { initialState }

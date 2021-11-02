@@ -1,6 +1,8 @@
 import React from 'react';
 
 const Feed = (props) => {
+  const buttonClass = props.data.liked ? 'feed__likes feed__likes--pressed' : 'feed__likes';
+
   return (
     <div className='feed__element'>
       <p className='feed__text'>
@@ -8,7 +10,7 @@ const Feed = (props) => {
       </p>
       <button
         type='button'
-        className={props.buttonClass}
+        className={buttonClass}
         onClick={props.changeLikeStatus}>
         {props.data.likes}
       </button>

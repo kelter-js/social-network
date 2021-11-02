@@ -1,20 +1,21 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import { Feed } from './feed.js';
 
-const FeedContainer = (props) => {
-  const buttonClass = props.data.liked ? 'feed__likes feed__likes--pressed' : 'feed__likes';
-
-  const changeLikeStatus = (e) => {
-    props.dispatch(props.actionManager.createActionChangeLikeState(props.postId));
+const mapStateToProps = (state) => {
+  return {
+    'actionManager': state.actionManager,
   }
-
-  return (
-    <Feed
-      {...props}
-      changeLikeStatus={changeLikeStatus}
-      buttonClass={buttonClass}
-    />
-  );
 }
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps;
+  return {
+    ...stateProps,
+    ...ownProps,
+    changeLikeStatus: () => dispatch(stateProps.actionManager.createActionChangeLikeState(ownProps.postId)),
+  };
+}
+
+const FeedContainer = connect(mapStateToProps, null, mergeProps)(Feed);
 
 export { FeedContainer }

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
-import { Navigation } from './navigation/navigationList.js';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { NavigationListContainer } from './navigation/navigationListContainer.js';
+import { NavigationItem } from './navigation/navigationItem.js';
 import { MainPageContentContainer } from './main-content/mainContentContainer.js';
 import { DialogsContainer } from './dialogs/dialogsContainer.js';
 import { Music } from './music/music.js';
@@ -8,49 +9,36 @@ import { News } from './news/news.js';
 import { Settings } from './settings/settings.js';
 
 const Main = (props) => {
+  const history = useHistory();
+
+  history.listen((location) => {
+    let path = location.pathname.split('/');
+    path.includes('messages') ? props.updateHeader('messages') : props.updateHeader(path[1]);
+  });
+
   return (
     <main className='page-main container'>
-      <h1 className='visually-hidden'>Социальная сеть ВРеакте</h1>
+      <h1 className='visually-hidden'>{props.pageContent.mainHeader}</h1>
       <nav className='page-main__navigation'>
-        <Navigation navigation={props.store.defaultMenu} />
-        <NavLink activeClassName='navigation__link--current' className='navigation__link' to={props.store.defaultMenuPaths.settings}>
-          Settings
-        </NavLink>
+        <NavigationListContainer />
+        <NavigationItem navItem={props.pageContent.settingsButton} />
       </nav>
       <section className='page-main__content-wrapper'>
-        <h2 className='visually-hidden'>{props.store.pageContent.currentHeader}</h2>
+        <h2 className='visually-hidden'>{props.pageContent.currentHeader}</h2>
         <Switch>
           <Route
-            path={props.store.defaultMenuPaths.profile}
-            render={() =>
-            <MainPageContentContainer
-              handlers = {props.store.handlers}
-              dispatch = {props.dispatch}
-              defaultText={props.store.pageContent.defaultText}
-              currentText={props.store.pageContent.currentText}
-              user={props.store.pageContent.userData}
-              feed={props.store.pageContent.feed}
-              actionManager = {props.store.actionManager}
-            />}
+            path={props.defaultMenuPaths.profile}
+            render={() => <MainPageContentContainer />}
           />
           <Route
-            path={props.store.defaultMenuPaths.messages}
-            render={() =>
-            <DialogsContainer
-              handlers = {props.store.handlers}
-              dialogs={props.store.chat.dialogs}
-              messages={props.store.chat.messages}
-              defaultText = {props.store.chat.defaultText}
-              currentText = {props.store.chat.currentText}
-              actionManager = {props.store.actionManager}
-              dispatch = {props.dispatch}
-            />}
+            path={props.defaultMenuPaths.messages}
+            render={() => <DialogsContainer />}
           />
-          <Route path={props.store.defaultMenuPaths.news} render={() => <News />} />
-          <Route path={props.store.defaultMenuPaths.music} render={() => <Music />} />
-          <Route path={props.store.defaultMenuPaths.settings} render={() => <Settings />} />
+          <Route path={props.defaultMenuPaths.news} render={() => <News />} />
+          <Route path={props.defaultMenuPaths.music} render={() => <Music />} />
+          <Route path={props.defaultMenuPaths.settings} render={() => <Settings />} />
           <Route path='/'>
-            <Redirect to={props.store.defaultMenuPaths.profile} />
+            <Redirect to={props.defaultMenuPaths.profile} />
           </Route>
         </Switch>
       </section>

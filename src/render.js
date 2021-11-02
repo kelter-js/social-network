@@ -2,15 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './app.js';
 import { ErrorCatcher } from './error.js';
-import { storeRedux } from './state/reduxStore.js';
+import { Provider } from 'react-redux';
 
 const render = (store) => {
   ReactDOM.render(
     <ErrorCatcher>
-      <App
-        store = {store}
-        dispatch = {storeRedux.dispatch.bind(storeRedux)}
-      />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ErrorCatcher>,
     document.querySelector('.root')
   );

@@ -1,23 +1,11 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
 
-const Navigation = (props) => {
-
+const NavigationList = (props) => {
   return (
     <ul className = 'navigation__list'>
-      {
-        props.navigation.map((elem, index) => {
-          return (
-            <li key = { index }>
-              <NavLink activeClassName = 'navigation__link--current' className = 'navigation__link' to = {`/${elem}`}>
-                { elem[0].toUpperCase() + elem.slice(1) }
-              </NavLink>
-            </li>
-          );
-        })
-      }
+      {props.navigationItems}
     </ul>
   );
 }
 
-export { Navigation }
+export { NavigationList }

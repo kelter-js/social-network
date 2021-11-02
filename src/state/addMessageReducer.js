@@ -9,10 +9,9 @@ const addMessage = (state, action) => {
       },
     }
   }
-
-  state.messages[action.user].push(createMessage(state.currentText));
-  state.currentText = undefined;
-
+  state.chat = {...state.chat}
+  state.chat.messages[action.user].push(createMessage(state.chat.currentText));
+  state.chat.currentText = undefined;
   return state;
 }
 

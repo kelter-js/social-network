@@ -4,14 +4,12 @@ import { MainContainer } from './components/main/indexContainer.js';
 import { Footer } from './components/footer/index.js';
 import { BrowserRouter } from 'react-router-dom';
 
-const App = (props) => {
+const App = () => {
   return (
     <>
       <Header />
       <BrowserRouter>
-        <MainContainer
-          {...props}
-        />
+        <MainContainer />
       </BrowserRouter>
       <Footer />
     </>

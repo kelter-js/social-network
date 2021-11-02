@@ -1,19 +1,27 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Main } from './index.js';
 
-const MainContainer = (props) => {
-  const history = useHistory();
-
-  history.listen((location) => {
-    let path = location.pathname.split('/');
-
-    path.includes('messages') ? (
-      props.dispatch(props.store.actionManager.createActionChangeCurrentHeader('messages'))) : (
-      props.dispatch(props.store.actionManager.createActionChangeCurrentHeader(path[1])));
-  })
-
-  return (<Main {...props}/>);
+const mapStateToProps = (state) => {
+  return {
+    'defaultMenuPaths': state.defaultMenuPaths,
+    'pageContent': state.pageContent,
+    'actionManager': state.actionManager,
+  }
 }
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps;
+
+  return {
+    ...stateProps,
+    ...ownProps,
+    updateHeader: (path) => {
+      dispatch(stateProps.actionManager.createActionChangeCurrentHeader(path));
+    },
+  };
+}
+
+
+const MainContainer = connect(mapStateToProps, null, mergeProps)(Main);
 
 export { MainContainer }

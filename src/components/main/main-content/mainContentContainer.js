@@ -1,25 +1,28 @@
-import React, { useRef } from 'react';
+import { connect } from 'react-redux';
 import { MainPageContent } from './mainContent.js';
 
-const MainPageContentContainer = (props) => {
-  const textAreaElement = useRef();
-
-  const addPost = () => {
-    props.dispatch(props.actionManager.createActionAddPost());
+const mapStateToProps = (state) => {
+  return {
+    'handlers': state.handlers,
+    'actionManager': state.actionManager,
+    'defaultText': state.pageContent.defaultText,
+    'currentText': state.pageContent.currentText,
+    'user': state.pageContent.userData,
+    'feed': state.pageContent.feed,
   }
-
-  const changeText = (text) => {
-    props.dispatch(props.actionManager.createActionChangeTextPost(text));
-  }
-
-  return (
-    <MainPageContent
-      {...props}
-      addPost={addPost}
-      changeText={changeText}
-      textAreaElement={textAreaElement}
-    />
-  );
 }
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps;
+
+  return {
+    ...stateProps,
+    ...ownProps,
+    addPost: () => dispatch(stateProps.actionManager.createActionAddPost()),
+    changeText: (text) => dispatch(stateProps.actionManager.createActionChangeText(text, 'pageContent')),
+  };
+}
+
+const MainPageContentContainer = connect(mapStateToProps, null, mergeProps)(MainPageContent);
 
 export { MainPageContentContainer }
