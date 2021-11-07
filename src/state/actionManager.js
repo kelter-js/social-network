@@ -7,6 +7,9 @@ class Actions {
     this.createActionChangeCurrentHeader = this.createActionChangeCurrentHeader.bind(this);
     this.createActionChangeLikeState = this.createActionChangeLikeState.bind(this);
     this.createActionMessage = this.createActionMessage.bind(this);
+    this.createActionSetUsers = this.createActionSetUsers.bind(this);
+    this.createActionToggleFollow = this.createActionToggleFollow.bind(this);
+    this.createActionShowMoreUsers = this.createActionShowMoreUsers.bind(this);
 
     this.#actionTypes = {
       'post': 'ADD-POST',
@@ -14,12 +17,35 @@ class Actions {
       'message': 'ADD-MESSAGE',
       'changeLikeState': 'CHANGE_LIKE_STATE',
       'header': 'CHANGE_HEADER',
+      'toggleFollow': 'TOGGLE_FOLLOW',
+      'setUsers': 'SET_USERS',
+      'showMoreUsers': 'SHOW_MORE_USERS',
     }
   }
 
   createActionAddPost() {
     return {
       'type': this.#actionTypes.post,
+    }
+  }
+
+  createActionShowMoreUsers() {
+    return {
+      'type': this.#actionTypes.showMoreUsers,
+    }
+  }
+
+  createActionSetUsers(userList) {
+    return {
+      'type': this.#actionTypes.setUsers,
+      'userList': userList,
+    }
+  }
+
+  createActionToggleFollow(id) {
+    return {
+      'type': this.#actionTypes.toggleFollow,
+      'id': id,
     }
   }
 

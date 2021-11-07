@@ -3,6 +3,7 @@ import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { NavigationListContainer } from './navigation/navigationListContainer.js';
 import { NavigationItem } from './navigation/navigationItem.js';
 import { MainPageContentContainer } from './main-content/mainContentContainer.js';
+import { UserListContainer } from './users/userListContainer.js';
 import { DialogsContainer } from './dialogs/dialogsContainer.js';
 import { Music } from './music/music.js';
 import { News } from './news/news.js';
@@ -37,6 +38,7 @@ const Main = (props) => {
           <Route path={props.defaultMenuPaths.news} render={() => <News />} />
           <Route path={props.defaultMenuPaths.music} render={() => <Music />} />
           <Route path={props.defaultMenuPaths.settings} render={() => <Settings />} />
+          <Route path={props.defaultMenuPaths.users} render={() => <UserListContainer />} />
           <Route path='/'>
             <Redirect to={props.defaultMenuPaths.profile} />
           </Route>

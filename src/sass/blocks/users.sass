@@ -1,0 +1,53 @@
+.users__text
+  margin: 0
+
+.users__header
+  margin-bottom: 15px
+
+.users__user-wrapper
+  display: grid
+  gap: 20px
+  grid-template-columns: 100px 1fr
+  grid-template-rows: 100px 30px
+  margin-bottom: 20px
+
+.users__profile-picture
+  grid-row: 1 / 2
+  grid-column: 1 / 2
+  height: 100px
+  width: 100px
+  border-radius: 50%
+
+.users__button
+  background: none
+  background: $green
+  border: none
+  padding: 0
+  border-radius: 10px
+  cursor: pointer
+  color: $white
+  font-family: inherit
+  font-size: 20px
+  grid-column: 1 / 2
+  grid-row: 2 / 3
+
+.users__button--show-more
+  min-height: 30px
+  width: 150px
+  border: 3px solid $green
+  background: none
+  color: $black
+
+.users__user-info
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+  padding: 15px
+  border: 2px solid $metallic
+  border-radius: 10px
+
+.users__user-name
+  margin-bottom: 26px
+
+.users__location
+  padding-top: 15px
