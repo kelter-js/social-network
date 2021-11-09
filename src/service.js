@@ -72,8 +72,13 @@ const getCurrentHeader = (headers) => {
   return headers[location.split('/')[location.split('/').length - 1]];
 }
 
+const randomInteger = (min, max) => {
+  return Math.floor(min + Math.random() * (max + 1 - min));
+}
+
 export {
   createProfileData,
   InputHandlers,
-  getCurrentHeader
+  getCurrentHeader,
+  randomInteger
 }

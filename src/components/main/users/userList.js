@@ -2,21 +2,16 @@ import React from 'react';
 import { UserContainer } from './userContainer.js';
 
 const UserList = (props) => {
-  if (props.users.userList.length === 0) {
-    props.setUsers(props.users.templateUserList);
-  }
-
   return (
     <div className='users'>
       <h3 className='users__header users__text'>
         {props.users.header}
       </h3>
-      {props.users.userList.slice(0, props.users.currentLoadingAmount).map((user, index) => {
+      {props.users.userList.slice(0, props.getCurrentLength()).map((user) => {
         return (
           <UserContainer
             user={user}
-            id={index}
-            key={index}
+            key={user.id}
           />
         );
       })}

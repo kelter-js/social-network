@@ -11,8 +11,6 @@ const headers = {
   'users': 'Пользователи сети',
 }
 
-//initialState.users.templateUserList временная заглушка, пока нет возможности тянуть данные с сервера
-
 const initialState = {
   'defaultMenu': [
     'profile',
@@ -448,81 +446,41 @@ const initialState = {
     'userList': [],
     'header': 'Пользователи',
     'showMoreButtonText': 'Показать больше',
-    'templateUserList': [
+    'defaultStatus': 'This user didn`t set any status.',
+    'defaultProfilePicture': 'https://source.unsplash.com/random',
+    'defaultLocations': [
       {
-        'isFollowed': false,
-        'name': 'Dmitriy K.',
-        'status': 'I am looking for a job now',
         'countryName': 'Belarus',
         'cityName': 'Minsk',
-        'profilePicture': 'https://source.unsplash.com/random',
-        'pictureAlt': 'Изображение пользователя',
       },
       {
-        'isFollowed': false,
-        'name': 'Svetlana D.',
-        'status': 'Im so pretty',
         'countryName': 'Belarus',
         'cityName': 'Minsk',
-        'profilePicture': 'https://source.unsplash.com/random',
-        'pictureAlt': 'Изображение пользователя',
       },
       {
-        'isFollowed': true,
-        'name': 'Sergei S.',
-        'status': 'I like football!!!',
         'countryName': 'Ukraine',
         'cityName': 'Kiev',
-        'profilePicture': 'https://source.unsplash.com/random',
-        'pictureAlt': 'Изображение пользователя',
       },
       {
-        'isFollowed': false,
-        'name': 'Andrew T.',
-        'status': 'Im free to help you to create good video production',
         'countryName': 'United States',
         'cityName': 'Philadelphia',
-        'profilePicture': 'https://source.unsplash.com/random',
-        'pictureAlt': 'Изображение пользователя',
       },
-
       {
-        'isFollowed': true,
-        'name': 'Alina T.',
-        'status': 'Im professional masseur',
         'countryName': 'Russia',
         'cityName': 'Chelyabinsk',
-        'profilePicture': 'https://source.unsplash.com/random',
-        'pictureAlt': 'Изображение пользователя',
       },
       {
-        'isFollowed': true,
-        'name': 'Lucker M.',
-        'status': 'Im good at extreme vocal',
         'countryName': 'United States',
         'cityName': 'Texas',
-        'profilePicture': 'https://source.unsplash.com/random',
-        'pictureAlt': 'Изображение пользователя',
       },
       {
-        'isFollowed': false,
-        'name': 'Anatoliy L.',
-        'status': 'Good electronics engineer',
         'countryName': 'Russia',
         'cityName': 'Kransnoyarks',
-        'profilePicture': 'https://source.unsplash.com/random',
-        'pictureAlt': 'Изображение пользователя',
       },
       {
-        'isFollowed': false,
-        'name': 'Okunev I.',
-        'status': 'Im lawyer with over 100 court victories!',
         'countryName': 'Russia',
         'cityName': 'Kirov',
-        'profilePicture': 'https://source.unsplash.com/random',
-        'pictureAlt': 'Изображение пользователя',
       },
-
     ],
     'minLoadingAmount': 4,
     'currentLoadingAmount': 4,
