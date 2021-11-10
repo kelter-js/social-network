@@ -76,9 +76,15 @@ const randomInteger = (min, max) => {
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
+const fetchImageUrl = async (newImage) => {
+  const image = await fetch(newImage);
+  return image.url;
+}
+
 export {
   createProfileData,
   InputHandlers,
   getCurrentHeader,
-  randomInteger
+  randomInteger,
+  fetchImageUrl
 }

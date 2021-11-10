@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const User = (props) => {
-  const fetchImageUrl = async (newImage) => {
-    const image = await fetch(newImage);
-    return image.url;
-  }
-
-  const [profilePictureSrc, setProfilePictureSrc] = useState();
-
-  useEffect(() => {
-    fetchImageUrl(props.user.photos.small).then(result => setProfilePictureSrc(result));
-  }, [props.user.photos.small]);
 
   const onClick = () => {
     props.toggleFollow(props.user.id);
@@ -18,7 +8,7 @@ const User = (props) => {
 
   return (
     <div className='users__user-wrapper'>
-      <img className='users__profile-picture' src={profilePictureSrc} alt={props.user.pictureAlt} />
+      <img className='users__profile-picture' src={props.user.photos.small} alt={props.user.pictureAlt} />
       <button className='users__button' type='button' onClick={onClick}>
         {props.user.followed ? props.unfollow : props.follow}
       </button>

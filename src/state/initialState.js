@@ -445,6 +445,7 @@ const initialState = {
   'users': {
     'userList': [],
     'header': 'Пользователи',
+    'allUsersDisplayed': false,
     'showMoreButtonText': 'Показать больше',
     'defaultStatus': 'This user didn`t set any status.',
     'defaultProfilePicture': 'https://source.unsplash.com/random',
