@@ -449,6 +449,15 @@ const initialState = {
     'showMoreButtonText': 'Показать больше',
     'defaultStatus': 'This user didn`t set any status.',
     'defaultProfilePicture': 'https://source.unsplash.com/random',
+    'pageSize': 10,
+    'totalPagesAmount': 0,
+    'isLoading': true,
+    'jumpToPageText': 'Jump!',
+    'firstPage': 1,
+    'currentPage': 1,
+    'jumpToPage': '',
+    'maxJumpIndexAttention': false,
+    'maxJumpLengthText': 'Max search input length is: ',
     'defaultLocations': [
       {
         'countryName': 'Belarus',
@@ -483,10 +492,8 @@ const initialState = {
         'cityName': 'Kirov',
       },
     ],
-    'minLoadingAmount': 4,
-    'currentLoadingAmount': 4,
-    'follow': 'Подписаться',
-    'unfollow': 'Отписаться',
+    'follow': 'Follow',
+    'unfollow': 'Unfollow',
   },
   'pageContent': {
     'settingsButton': 'settings',

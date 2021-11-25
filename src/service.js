@@ -16,9 +16,6 @@ const createProfileData = (data) => {
 }
 
 class InputHandlers {
-  static onChange (updater) {
-    return (e) => updater(e.target.value);
-  }
 
   static onFocus (updater, currentValue) {
     return () => {
@@ -40,7 +37,7 @@ class InputHandlers {
   static onEnter (submit, inputElement) {
     return (e) => {
       if (e.key === 'Enter') {
-        submit();
+        submit(inputElement.current.value);
         inputElement.current.blur();
       }
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { UserContainer } from './userContainer.js';
+import { PaginationContainer } from './paginationContainer.js';
 import { Loading } from '../../../loading.js';
 
 const UserList = (props) => {
@@ -10,6 +11,11 @@ const UserList = (props) => {
       <h3 className='users__header users__text'>
         {props.users.header}
       </h3>
+      <PaginationContainer
+        firstPage={props.users.firstPage}
+        currentPage={props.users.currentPage}
+        totalPages={props.users.totalPagesAmount}
+      />
       {props.users.userList.slice(0, props.users.currentLoadingAmount).map((user) => {
         return (
           <UserContainer
@@ -18,11 +24,14 @@ const UserList = (props) => {
           />
         );
       })}
-      <button className='users__button users__button--show-more' type='button' onClick={props.showMore} disabled={!currentUsersLength || props.users.allUsersDisplayed}>
-        {props.users.showMoreButtonText}
-      </button>
+      {!props.users.isLoading && (
+        <PaginationContainer
+          firstPage={props.users.firstPage}
+          currentPage={props.users.currentPage}
+          totalPages={props.users.totalPagesAmount}
+        />
+      )}
     </div>
   );
 }
-
 export { UserList }

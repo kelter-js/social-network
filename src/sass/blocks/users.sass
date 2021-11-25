@@ -52,6 +52,9 @@
   border: 2px solid $metallic
   border-radius: 10px
 
+.users__pagination-info--attention
+  color: $red
+
 .users__user-name
   margin-bottom: 26px
 
@@ -65,3 +68,79 @@
 .users__country
   width: 100%
   text-align: center
+
+.users__pagination-wrapper
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+  align-items: center
+  justify-content: center
+  width: 370px
+  margin-bottom: 10px
+  background-color: rgba($light-blue, 0.3)
+  border-radius: 10px
+  border: 2px solid $blue
+
+.users__pagination-info
+  margin: 0
+  margin-top: 10px
+
+.users__pagination-submit,
+.users__select-page
+  padding: 0
+  text-align: center
+  background: none
+  font-family: inherit
+  font-size: inherit
+  border: none
+  cursor: pointer
+
+.users__pagination-submit
+  height: 35px
+  width: 75px
+  color: $white
+  border: 1px solid rgba($black, .7)
+  background: linear-gradient(135deg, $lightest-blue 0, $lightest-blue 100%)
+  font-size: 25px
+  letter-spacing: 1px
+  border-radius: 20px
+
+  &:hover
+    box-shadow: 1px 5px 20px rgba($black-rgb ,.2)
+
+.users__select-page
+  height: 25px
+  width: 40px
+  border: 2px solid rgba($black, .5)
+  border-radius: 5px
+
+.users__select-page--current
+  height: 30px
+  width: 45px
+  cursor: default
+
+.users__pagination-list
+  display: flex
+  align-items: center
+  align-self: flex-start
+  margin: 0
+  margin-left: 10px
+  padding: 0
+  list-style: none
+
+.users__search-page-wrapper
+  margin-bottom: 10px
+
+.users__pagination-item
+  margin-right: 7.5px
+
+.users__pagination-index-field
+  margin-left: 10px
+  margin-right: 5px
+  padding: 5px
+  border-radius: 5px
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0

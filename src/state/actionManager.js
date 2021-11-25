@@ -2,15 +2,6 @@ class Actions {
   #actionTypes;
 
   constructor() {
-    this.createActionAddPost = this.createActionAddPost.bind(this);
-    this.createActionChangeText = this.createActionChangeText.bind(this);
-    this.createActionChangeCurrentHeader = this.createActionChangeCurrentHeader.bind(this);
-    this.createActionChangeLikeState = this.createActionChangeLikeState.bind(this);
-    this.createActionMessage = this.createActionMessage.bind(this);
-    this.createActionSetUsers = this.createActionSetUsers.bind(this);
-    this.createActionToggleFollow = this.createActionToggleFollow.bind(this);
-    this.createActionShowMoreUsers = this.createActionShowMoreUsers.bind(this);
-
     this.#actionTypes = {
       'post': 'ADD-POST',
       'changeText': 'CHANGE-TEXT',
@@ -19,7 +10,12 @@ class Actions {
       'header': 'CHANGE_HEADER',
       'toggleFollow': 'TOGGLE_FOLLOW',
       'setUsers': 'SET_USERS',
-      'showMoreUsers': 'SHOW_MORE_USERS',
+      'clearUsers': 'CLEAR_USERS',
+      'setUsersCount': 'SET_USERS_COUNT',
+      'setCurrentPage': 'SET_CURRENT_PAGE',
+      'setJumpPage': 'SET_JUMP_PAGE',
+      'updateMaxJumpIndexAttention': 'UPDATE_MAX_JUMP_INDEX_ATTENTION',
+      'setLoadingState': 'SET_LOADING_STATE',
     }
   }
 
@@ -29,9 +25,24 @@ class Actions {
     }
   }
 
-  createActionShowMoreUsers() {
+  createActionSetLoadingState(state) {
     return {
-      'type': this.#actionTypes.showMoreUsers,
+      'type': this.#actionTypes.setLoadingState,
+      'state': state,
+    }
+  }
+
+  createActionUpdateMaxJumpIndexAttention(attentionStatus) {
+    return {
+      'type': this.#actionTypes.updateMaxJumpIndexAttention,
+      'status': attentionStatus,
+    }
+  }
+
+  createActionUpdateJumpPage(pageIndex) {
+    return {
+      'type': this.#actionTypes.setJumpPage,
+      'pageIndex': pageIndex,
     }
   }
 
@@ -39,6 +50,26 @@ class Actions {
     return {
       'type': this.#actionTypes.setUsers,
       'userList': userList,
+    }
+  }
+
+  createActionClearUsers() {
+    return {
+      'type': this.#actionTypes.clearUsers,
+    }
+  }
+
+  createActionSetTotalUsersCount(pagesAmount) {
+    return {
+      'type': this.#actionTypes.setUsersCount,
+      'pagesAmount': pagesAmount,
+    }
+  }
+
+  createActionSetCurrentPage(currentPage) {
+    return {
+      'type': this.#actionTypes.setCurrentPage,
+      'currentPage': currentPage,
     }
   }
 

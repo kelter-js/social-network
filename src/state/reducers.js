@@ -6,7 +6,12 @@ import { changeText } from './changeTextReducer.js';
 import { initialState } from './initialState.js';
 import { setUsers } from './setUsers.js';
 import { toggleFollow } from './toggleFollowReducer.js';
-import { showMoreUsers } from './showMoreUsersReducer.js';
+import { setTotalUsersCount } from './setTotalUsersCount.js';
+import { setCurrentPage } from './setCurrentPage.js';
+import { clearUsers } from './clearUsers.js';
+import { setJumpPage } from './setJumpPage.js';
+import { updateMaxJumpIndexAttention } from './updateMaxJumpIndexAttention.js';
+import { setLoadingState } from './setLoadingState.js';
 
 const reducers = (state, action) => {
   const actions = {
@@ -17,7 +22,12 @@ const reducers = (state, action) => {
     'CHANGE_LIKE_STATE': (state, action) => changeLikeState(state, action),
     'TOGGLE_FOLLOW': (state, action) => toggleFollow(state, action),
     'SET_USERS': (state, action) => setUsers(state, action),
-    'SHOW_MORE_USERS': (state) => showMoreUsers(state),
+    'CLEAR_USERS': (state, action) => clearUsers(state, action),
+    'SET_USERS_COUNT': (state, action) => setTotalUsersCount(state, action),
+    'SET_CURRENT_PAGE': (state, action) => setCurrentPage(state, action),
+    'SET_JUMP_PAGE': (state, action) => setJumpPage(state, action),
+    'UPDATE_MAX_JUMP_INDEX_ATTENTION': (state, action) => updateMaxJumpIndexAttention(state, action),
+    'SET_LOADING_STATE': (state, action) => setLoadingState(state, action),
   }
 
   const currentAction = actions[action.type];
