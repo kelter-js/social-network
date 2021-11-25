@@ -41,7 +41,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     },
 
     setCurrentPage: (newPage) => {
-      if (ownProps.currentPage === +newPage || +newPage === 0) {
+      if (+newPage === 0) {
         return;
       }
 

@@ -16,9 +16,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...stateProps,
     ...ownProps,
     setCurrentPage: (newPage) => {
-      if (ownProps.currentPage === +newPage || +newPage === 0) {
+      if (+newPage === 0) {
         return;
       }
+      console.log(1)
       dispatch(stateProps.actionManager.createActionSetLoadingState(true));
       dispatch(stateProps.actionManager.createActionSetCurrentPage(newPage));
       dispatch(stateProps.actionManager.createActionClearUsers());
