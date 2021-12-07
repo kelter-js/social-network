@@ -1,4 +1,5 @@
 const changeLikeState = (state, action) => {
+  state.pageContent = { ...state.pageContent }
   state.pageContent.feed = [...state.pageContent.feed];
   state.pageContent.feed[action.postId] = {...state.pageContent.feed[action.postId]}
   const post = state.pageContent.feed[action.postId];

@@ -26,19 +26,23 @@ const Message = (props) => {
 
       <form onSubmit={props.handlers.onSubmit(addMessage)} className='page-main__dialogs-form'>
         <label className='page-main__dialogs-label'>
-          New message text...
+          {props.messageInfo}
           <textarea
             className='page-main__dialogs-text'
             ref={messageElement}
             value={(props.currentText === undefined) ? props.defaultText : props.currentText}
             name='messageText'
-            onChange={(e) => props.changeText(e.target.value)}
-            onBlur={props.handlers.onBlur(props.changeText, props.defaultText, props.currentText)}
-            onFocus={props.handlers.onFocus(props.changeText, props.currentText)}
+            onChange={(e) => props.changeText(e.target.value, props.eventType)}
+            onBlur={props.handlers.onBlur(props.changeText, props.defaultText, props.currentText, props.eventType)}
+            onFocus={props.handlers.onFocus(props.changeText, props.currentText, props.eventType)}
             onKeyDown={props.handlers.onEnter(addMessage, messageElement)}
           />
         </label>
-        <input className='page-main__send-message' type='submit' value='' />
+        <input
+          className='page-main__send-message'
+          type='submit'
+          value=''
+        />
       </form>
     </div>
   );

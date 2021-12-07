@@ -3,14 +3,38 @@ import { PaginationRouter } from './paginationRouter.js';
 
 const Pagination = (props) => {
   const onChange = (e) => {
-    props.updateJumpIndex(e.target.value);
+    const currentValue = e.target.value;
+
+    if (`${currentValue}`.length > `${props.totalPages}`.length) {
+      if (!props.maxJumpIndexAttention) {
+        props.updateMaxJumpIndexAttention(true);
+      }
+      return;
+    }
+
+    if (props.maxJumpIndexAttention) {
+      props.updateMaxJumpIndexAttention(false);
+    }
+
+    if (currentValue > props.totalPages) {
+      props.updateJumpPage(props.totalPages);
+      return;
+    }
+
+    props.updateJumpPage(currentValue);
   }
 
   const indexInput = useRef();
 
-  const onSubmit = (e) => {
+  const changePage = (e) => {
     e.preventDefault();
-    props.setCurrentPage(indexInput.current.value);
+
+    if (+indexInput.current.value !== 0) {
+      props.setLoadingState(true);
+      props.updateJumpPage('');
+      props.clearUsers();
+      props.setCurrentPage(+indexInput.current.value);
+    }
   }
 
   return (
@@ -30,7 +54,7 @@ const Pagination = (props) => {
         />
       </ul>
       <div className='users__search-page-wrapper'>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={changePage}>
           <label>
             Jump to page:
             <input

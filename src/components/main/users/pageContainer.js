@@ -1,32 +1,22 @@
 import { connect } from 'react-redux';
 import { Page } from './page.js';
+import {
+  setLoadingState,
+  setCurrentPage,
+  clearUsers
+} from '../../../state/actionManager.js';
 
 const mapStateToProps = (state) => {
   return {
-    'actionManager': state.actionManager,
-    'totalPages': state.users.totalPagesAmount,
-    'isLoading': state.users.isLoading,
+    totalPages: state.users.totalPagesAmount,
+    isLoading: state.users.isLoading,
   }
 }
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { dispatch } = dispatchProps;
-
-  return {
-    ...stateProps,
-    ...ownProps,
-    setCurrentPage: (newPage) => {
-      if (+newPage === 0) {
-        return;
-      }
-      console.log(1)
-      dispatch(stateProps.actionManager.createActionSetLoadingState(true));
-      dispatch(stateProps.actionManager.createActionSetCurrentPage(newPage));
-      dispatch(stateProps.actionManager.createActionClearUsers());
-    },
-  };
-}
-
-const PageContainer = connect(mapStateToProps, null, mergeProps)(Page);
+const PageContainer = connect(mapStateToProps, {
+  setLoadingState,
+  setCurrentPage,
+  clearUsers,
+})(Page);
 
 export { PageContainer }

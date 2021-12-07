@@ -1,29 +1,12 @@
-const createProfileData = (data) => {
-  const defaultProfile = {
-    'Date of Birth': '',
-    'City': '',
-    'Education': '',
-    'Web Site': '',
-  }
-
-  let counter = 0;
-
-  for (let item in defaultProfile) {
-    defaultProfile[item] = data[counter++];
-  }
-
-  return defaultProfile;
-}
-
 class InputHandlers {
 
-  static onFocus (updater, currentValue) {
+  static onFocus (updater, currentValue, eventType) {
     return () => {
       if (currentValue) {
         return;
       }
 
-      updater('');
+      updater('', eventType);
     }
   }
 
@@ -43,10 +26,10 @@ class InputHandlers {
     }
   }
 
-  static onBlur (updater, defaultValue, currentValue) {
+  static onBlur (updater, defaultValue, currentValue, eventType) {
     return () => {
       if (!currentValue) {
-        updater(undefined);
+        updater(undefined, eventType);
         return;
       }
 
@@ -54,7 +37,7 @@ class InputHandlers {
         return;
       }
 
-      updater(defaultValue);
+      updater(defaultValue, eventType);
     }
   }
 }
@@ -79,7 +62,6 @@ const fetchImageUrl = async (newImage) => {
 }
 
 export {
-  createProfileData,
   InputHandlers,
   getCurrentHeader,
   randomInteger,

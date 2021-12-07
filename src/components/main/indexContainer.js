@@ -1,27 +1,14 @@
 import { connect } from 'react-redux';
 import { Main } from './index.js';
+import { updateHeader } from '../../state/actionManager.js';
 
 const mapStateToProps = (state) => {
   return {
-    'defaultMenuPaths': state.defaultMenuPaths,
-    'pageContent': state.pageContent,
-    'actionManager': state.actionManager,
+    defaultMenuPaths: state.defaultMenuPaths,
+    pageContent: state.pageContent,
   }
 }
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { dispatch } = dispatchProps;
-
-  return {
-    ...stateProps,
-    ...ownProps,
-    updateHeader: (path) => {
-      dispatch(stateProps.actionManager.createActionChangeCurrentHeader(path));
-    },
-  };
-}
-
-
-const MainContainer = connect(mapStateToProps, null, mergeProps)(Main);
+const MainContainer = connect(mapStateToProps, {updateHeader})(Main);
 
 export { MainContainer }

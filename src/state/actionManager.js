@@ -19,68 +19,68 @@ class Actions {
     }
   }
 
-  createActionAddPost() {
+  addPost = () => {
     return {
       'type': this.#actionTypes.post,
     }
   }
 
-  createActionSetLoadingState(state) {
+  setLoadingState = (state) => {
     return {
       'type': this.#actionTypes.setLoadingState,
       'state': state,
     }
   }
 
-  createActionUpdateMaxJumpIndexAttention(attentionStatus) {
+  updateMaxJumpIndexAttention = (attentionStatus) => {
     return {
       'type': this.#actionTypes.updateMaxJumpIndexAttention,
       'status': attentionStatus,
     }
   }
 
-  createActionUpdateJumpPage(pageIndex) {
+  updateJumpPage = (pageIndex) => {
     return {
       'type': this.#actionTypes.setJumpPage,
       'pageIndex': pageIndex,
     }
   }
 
-  createActionSetUsers(userList) {
+  setUsers = (userList) => {
     return {
       'type': this.#actionTypes.setUsers,
       'userList': userList,
     }
   }
 
-  createActionClearUsers() {
+  clearUsers = () => {
     return {
       'type': this.#actionTypes.clearUsers,
     }
   }
 
-  createActionSetTotalUsersCount(pagesAmount) {
+  setTotalUsersCount = (pagesAmount) => {
     return {
       'type': this.#actionTypes.setUsersCount,
       'pagesAmount': pagesAmount,
     }
   }
 
-  createActionSetCurrentPage(currentPage) {
+  setCurrentPage = (currentPage) => {
     return {
       'type': this.#actionTypes.setCurrentPage,
       'currentPage': currentPage,
     }
   }
 
-  createActionToggleFollow(id) {
+  toggleFollow = (id) => {
     return {
       'type': this.#actionTypes.toggleFollow,
       'id': id,
     }
   }
 
-  createActionChangeText(text, receiver) {
+  changeText = (text, receiver) => {
     return {
       'type': this.#actionTypes.changeText,
       'text': text,
@@ -88,21 +88,21 @@ class Actions {
     }
   }
 
-  createActionChangeCurrentHeader(text) {
+  updateHeader = (text) => {
     return {
       'type': this.#actionTypes.header,
       'text': text,
     }
   }
 
-  createActionChangeLikeState(postId) {
+  changeLikeState = (postId) => {
     return {
       'type': this.#actionTypes.changeLikeState,
       'postId': postId,
     }
   }
 
-  createActionMessage(userId) {
+  addMessage = (userId) => {
     return {
       'type': this.#actionTypes.message,
       'user': userId,
@@ -110,6 +110,18 @@ class Actions {
   }
 }
 
-const actionManager = new Actions();
-
-export { actionManager }
+export const {
+  updateHeader,
+  addPost,
+  setLoadingState,
+  updateMaxJumpIndexAttention,
+  updateJumpPage,
+  setUsers,
+  clearUsers,
+  setTotalUsersCount,
+  setCurrentPage,
+  toggleFollow,
+  changeText,
+  changeLikeState,
+  addMessage,
+} = new Actions();

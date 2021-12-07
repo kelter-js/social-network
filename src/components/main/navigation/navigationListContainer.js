@@ -1,21 +1,8 @@
 import { connect } from 'react-redux';
 import { NavigationList } from './navigationList.js';
-import { NavigationItem } from './navigationItem.js';
 
 const mapStateToProps = (state) => {
-  const navigationItems = state.defaultMenu.map((elem, index) => {
-    return (
-      <li key={index}>
-        <NavigationItem
-          navItem={elem}
-        />
-      </li>
-    );
-  });
-
-  return {
-    'navigationItems': navigationItems,
-  }
+  return {defaultMenu: state.defaultMenuPaths}
 }
 
 const NavigationListContainer = connect(mapStateToProps)(NavigationList);

@@ -2,6 +2,9 @@ import React from 'react';
 
 const Feed = (props) => {
   const buttonClass = props.data.liked ? 'feed__likes feed__likes--pressed' : 'feed__likes';
+  const changeLikeState = () => {
+    props.changeLikeState(props.postId)
+  }
 
   return (
     <div className='feed__element'>
@@ -11,7 +14,7 @@ const Feed = (props) => {
       <button
         type='button'
         className={buttonClass}
-        onClick={props.changeLikeStatus}>
+        onClick={changeLikeState}>
         {props.data.likes}
       </button>
     </div>
