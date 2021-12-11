@@ -1,32 +1,38 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const User = (props) => {
-
-  const onClick = () => {
-    props.toggleFollow(props.user.id);
-  }
+  const {
+    toggleFollow,
+    user,
+    follow,
+    unfollow,
+    defaultStatus,
+  } = props;
 
   return (
     <div className='users__user-wrapper'>
-      <img className='users__profile-picture' src={props.user.photos.small} alt={props.user.pictureAlt} />
-      <button className='users__button' type='button' onClick={onClick}>
-        {props.user.followed ? props.unfollow : props.follow}
+      <NavLink to={`/profile/${user.id}`} onClick={props.setNewUser}>
+        <img className='users__profile-picture' src={user.photos.small} alt={user.pictureAlt} />
+      </NavLink>
+      <button className='users__button' type='button' onClick={toggleFollow}>
+        {user.followed ? unfollow : follow}
       </button>
       <div className='users__user-info'>
         <div>
           <h3 className='users__user-name users__text'>
-            {props.user.name}
+            {user.name}
           </h3>
           <p className='users__text'>
-            {props.user.status ? props.user.status : props.defaultStatus}
+            {user.status ? user.status : defaultStatus}
           </p>
         </div>
         <div className='users__location'>
           <p className='users__text users__country'>
-            {props.user.location.countryName + ','}
+            {user.location.countryName + ','}
           </p>
           <p className='users__text'>
-            {props.user.location.cityName}
+            {user.location.cityName}
           </p>
         </div>
       </div>

@@ -450,7 +450,6 @@ const initialState = {
     defaultProfilePicture: 'https://source.unsplash.com/random',
     pageSize: 10,
     totalPagesAmount: 0,
-    isLoading: true,
     jumpToPageText: 'Jump!',
     firstPage: 1,
     currentPage: 1,
@@ -501,33 +500,88 @@ const initialState = {
     defaultText: '...start your message here.',
     currentText: undefined,
     headers: headers,
+    minPathLength: 2,
+    lookingForJobTitle: {
+      yes: 'This user currently looking for some job.',
+      no: 'This user don`t look for any kind of job.',
+    },
+    defaultAnnotations: {
+      userInfo: 'Some information about user:',
+      skills: 'Current user skills:',
+      contacts: 'User profile external links:',
+    },
+    defaultTemplates: {
+      skills: 'This user decided to not share his information abouts skills',
+      aboutMe: 'This user decided to not share any information',
+      contacts: 'This user decided to not share any kind of link',
+    },
     feedDefaultText: 'Share news with your friends!',
     sendPost: 'Send new post!',
-    feed: [
-      {
-        post: 'Hey, is there anybody?',
-        likes: 15,
-        liked: false,
+    currentUser: {},
+    jobIcons: {
+      lookingForJobIcon: '/img/lookingForJob.png',
+      dontLookForJobIcon: '/img/dontLookForJob.png',
+    },
+    defaultUser: {
+      isDefault: true,
+      photos: {
+        small: '/img/default-profile.jpg',
+        large: '/img/default-background.jpg',
       },
-      {
-        post: 'Sup guize, is something really happening here?',
-        likes: 20,
-        liked: false,
-      },
-    ],
-    userData: {
-      mainAvatar: '/img/default-background.jpg',
-      profileAvatar: '/img/default-profile.jpg',
-      userData: {
-        'Date of Birth': '2 january',
-        'City': 'Minsk',
-        'Education': 'BSU 11',
-        'Web Site': 'smth-else.com',
-      },
-      userName: 'John Doe',
+      aboutMe: 'User information',
+      contacts: [
+        [
+          "facebook",
+          1
+        ],
+        [
+          "website",
+          1
+        ],
+        [
+          "vk",
+          1
+        ],
+        [
+          "twitter",
+          1
+        ],
+        [
+          "instagram",
+          1
+        ],
+        [
+          "youtube",
+          1
+        ],
+        [
+          "github",
+          1
+        ],
+        [
+          "mainLink",
+          1
+        ]
+      ],
+      lookingForAJob: false,
+      lookingForAJobDescription: 'About your skillz',
+      fullName: 'John Doe',
+      feed: [
+        {
+          post: 'Hey, is there anybody?',
+          likes: 15,
+          liked: false,
+        },
+        {
+          post: 'Sup guize, is something really happening here?',
+          likes: 20,
+          liked: false,
+        },
+      ]
     },
     currentHeader: getCurrentHeader(headers),
   },
+  isLoading: false,
   handlers: InputHandlers,
 }
 

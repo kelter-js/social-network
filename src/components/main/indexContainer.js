@@ -1,14 +1,27 @@
 import { connect } from 'react-redux';
 import { Main } from './index.js';
-import { updateHeader } from '../../state/actionManager.js';
+import {
+  updateHeader,
+  setUserProfile,
+} from '../../state/actionManager.js';
 
-const mapStateToProps = (state) => {
-  return {
-    defaultMenuPaths: state.defaultMenuPaths,
-    pageContent: state.pageContent,
+const mapStateToProps = (state) => ({defaultMenuPaths: state.defaultMenuPaths, pageContent: state.pageContent});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch } = dispatchProps;
+
+  if (Object.values(stateProps.pageContent.currentUser).length === 0) {
+    dispatch(setUserProfile(stateProps.pageContent.defaultUser));
   }
+
+  return {
+    ...stateProps,
+    ...ownProps,
+    updateHeader: (header) => dispatch(updateHeader(header)),
+    setDefaultProfile: () => dispatch(setUserProfile(stateProps.pageContent.defaultUser)),
+  };
 }
 
-const MainContainer = connect(mapStateToProps, {updateHeader})(Main);
+const MainContainer = connect(mapStateToProps, null, mergeProps)(Main);
 
 export { MainContainer }

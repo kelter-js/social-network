@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import {
   updateMaxJumpIndexAttention,
   updateJumpPage,
-  setLoadingState,
   clearUsers,
   setCurrentPage,
 } from '../../../state/actionManager.js';
@@ -13,7 +12,7 @@ const mapStateToProps = (state) => {
     jumpToPage: state.users.jumpToPage,
     maxJumpIndexAttention: state.users.maxJumpIndexAttention,
     maxJumpLengthText: state.users.maxJumpLengthText,
-    isLoading: state.users.isLoading,
+    isLoading: state.isLoading,
     jumpToPageText: state.users.jumpToPageText,
     onKeyDown: state.handlers.onEnter,
   }
@@ -22,7 +21,6 @@ const mapStateToProps = (state) => {
 const PaginationContainer = connect(mapStateToProps, {
   updateMaxJumpIndexAttention,
   updateJumpPage,
-  setLoadingState,
   clearUsers,
   setCurrentPage,
 })(Pagination);

@@ -16,6 +16,7 @@ class Actions {
       'setJumpPage': 'SET_JUMP_PAGE',
       'updateMaxJumpIndexAttention': 'UPDATE_MAX_JUMP_INDEX_ATTENTION',
       'setLoadingState': 'SET_LOADING_STATE',
+      'setUserProfile': 'SET_USER_PROFILE',
     }
   }
 
@@ -108,6 +109,13 @@ class Actions {
       'user': userId,
     }
   }
+
+  setUserProfile = (user) => {
+    return {
+      'type': this.#actionTypes.setUserProfile,
+      'user': user,
+    }
+  }
 }
 
 export const {
@@ -124,4 +132,5 @@ export const {
   changeText,
   changeLikeState,
   addMessage,
+  setUserProfile,
 } = new Actions();

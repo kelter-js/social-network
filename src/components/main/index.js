@@ -16,29 +16,40 @@ import { Settings } from './settings/settings.js';
 
 const Main = (props) => {
   const history = useHistory();
+
+  const {
+    pageContent,
+    defaultMenuPaths,
+    updateHeader,
+    setDefaultProfile,
+  } = props;
+
   history.listen((location) => {
     const path = location.pathname.split('/');
-    path.includes('messages') ? props.updateHeader('messages') : props.updateHeader(path[1]);
+    if ((path.length === pageContent.minPathLength) && !pageContent.currentUser.isDefault) {
+      setDefaultProfile();
+    }
+    path.includes('messages') ? updateHeader('messages') : updateHeader(path[1]);
   });
 
   return (
     <main className='page-main container'>
-      <h1 className='visually-hidden'>{props.pageContent.mainHeader}</h1>
+      <h1 className='visually-hidden'>{pageContent.mainHeader}</h1>
       <nav className='page-main__navigation'>
         <NavigationListContainer />
-        <NavigationItem navItem={props.pageContent.settingsButton} />
+        <NavigationItem navItem={pageContent.settingsButton} />
       </nav>
       <section className='page-main__content-wrapper'>
-        <h2 className='visually-hidden'>{props.pageContent.currentHeader}</h2>
+        <h2 className='visually-hidden'>{pageContent.currentHeader}</h2>
         <Switch>
-          <Route path={props.defaultMenuPaths.profile} render={() => <MainPageContentContainer />}/>
-          <Route path={props.defaultMenuPaths.messages} render={() => <DialogsContainer />}/>
-          <Route path={props.defaultMenuPaths.news} render={() => <News />} />
-          <Route path={props.defaultMenuPaths.music} render={() => <Music />} />
-          <Route path={props.defaultMenuPaths.users} render={() => <UserListContainer />} />
-          <Route path={props.defaultMenuPaths.settings} render={() => <Settings />} />
+          <Redirect exact from='/' to={defaultMenuPaths.profile} />
+          <Route path={defaultMenuPaths.profile} render={() => <MainPageContentContainer />} />
+          <Route path={defaultMenuPaths.messages} render={() => <DialogsContainer />} />
+          <Route path={defaultMenuPaths.news} render={() => <News />} />
+          <Route path={defaultMenuPaths.music} render={() => <Music />} />
+          <Route path={defaultMenuPaths.users} render={() => <UserListContainer />} />
+          <Route path={defaultMenuPaths.settings} render={() => <Settings />} />
         </Switch>
-        <Redirect to={props.defaultMenuPaths.profile} />
       </section>
     </main>
   );

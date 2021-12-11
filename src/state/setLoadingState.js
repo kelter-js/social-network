@@ -1,5 +1,5 @@
 const setLoadingState = (state, action) => {
-  state.users.isLoading = action.state;
+  state.isLoading = action.state;
   return state;
 }
 

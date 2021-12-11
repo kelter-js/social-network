@@ -12,6 +12,7 @@ import { clearUsers } from './clearUsers.js';
 import { setJumpPage } from './setJumpPage.js';
 import { updateMaxJumpIndexAttention } from './updateMaxJumpIndexAttention.js';
 import { setLoadingState } from './setLoadingState.js';
+import { setUserProfile } from './setUserProfile.js';
 
 const reducers = (state, action) => {
   const actions = {
@@ -28,6 +29,7 @@ const reducers = (state, action) => {
     'SET_JUMP_PAGE': (state, action) => setJumpPage(state, action),
     'UPDATE_MAX_JUMP_INDEX_ATTENTION': (state, action) => updateMaxJumpIndexAttention(state, action),
     'SET_LOADING_STATE': (state, action) => setLoadingState(state, action),
+    'SET_USER_PROFILE': (state, action) => setUserProfile(state, action),
   }
 
   const currentAction = actions[action.type];

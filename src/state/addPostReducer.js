@@ -7,7 +7,12 @@ const addPost = (state) => {
     }
   }
   state.pageContent = { ...state.pageContent }
-  state.pageContent.feed.push(createPost(state.pageContent.currentText));
+
+  if (!state.pageContent.currentUser.feed) {
+    state.pageContent.currentUser.feed = [];
+  }
+
+  state.pageContent.currentUser.feed.push(createPost(state.pageContent.currentText));
   state.pageContent.currentText = undefined;
   return state;
 }

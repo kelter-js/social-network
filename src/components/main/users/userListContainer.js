@@ -11,6 +11,7 @@ import * as axios from 'axios';
 const mapStateToProps = (state) => {
   return {
     users: state.users,
+    isLoading: state.isLoading,
   }
 }
 
@@ -18,6 +19,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps;
 
   if (stateProps.users.userList.length === 0) {
+    dispatch(setLoadingState(true));
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/users?count=${stateProps.users.pageSize}&page=${stateProps.users.currentPage}`)
       .then(async (result) => {
@@ -26,21 +28,19 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
         const templatedUserList = await Promise.all(result.data.items.map(async (item) => {
           if (item.photos.small === null) {
-            await fetchImageUrl(stateProps.users.defaultProfilePicture).then(result => item.photos.small = result);
+            await fetchImageUrl(stateProps.users.defaultProfilePicture).then(result => item.photos.small = item.photos.large = result);
           }
 
           if (!item.location) {
             item.location = stateProps.users.defaultLocations[randomInteger(0, stateProps.users.defaultLocations.length - 1)];
           }
-
           return item;
         }));
-
         return templatedUserList;
       })
       .then(result => {
-        dispatch(setLoadingState(false));
         dispatch(setUsers(result));
+        dispatch(setLoadingState(false));
       });
   }
 

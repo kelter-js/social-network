@@ -5,8 +5,10 @@ import { MessageContainer } from './messageContainer.js';
 import { Switch } from 'react-router-dom';
 
 const Dialogs = (props) => {
+  const { chat } = props;
+
   const messagesList = Object
-    .entries(props.chat.messages)
+    .entries(chat.messages)
     .map((message, index) => {
       return (
         <Route
@@ -15,8 +17,8 @@ const Dialogs = (props) => {
           render={() =>
             <MessageContainer
               messages={message[1]}
-              defaultText={props.chat.defaultText}
-              currentText={props.chat.currentText}
+              defaultText={chat.defaultText}
+              currentText={chat.currentText}
               currentDialog={message[0]}
             />}
         />
@@ -25,7 +27,7 @@ const Dialogs = (props) => {
 
   return (
     <div className='page-main__dialogs-wrapper dialogs'>
-      <DialogList dialogs={props.chat.dialogs} />
+      <DialogList dialogs={chat.dialogs} />
       <Switch>
         {messagesList}
       </Switch>

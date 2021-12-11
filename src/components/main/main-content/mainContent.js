@@ -1,31 +1,57 @@
 import React, { useRef } from 'react';
 import { Profile } from './profile/profile.js';
 import { FeedList } from './feed/feedList.js';
+import { Loading } from '../../../loading.js';
 
 const MainPageContent = (props) => {
   const textAreaElement = useRef();
+
+  const {
+    pageContent,
+    handlers,
+    changeText,
+    addPost,
+    isLoading,
+  } = props;
+
   return (
     <div>
-      <Profile data={props.pageContent.userData} />
-      <form onSubmit = {props.handlers.onSubmit(props.addPost)} className='page-main__news'>
-        <label className='news__label'>
-          {props.pageContent.feedDefaultText}
-          <textarea
-            className='news__message'
-            ref={textAreaElement}
-            value={(props.pageContent.currentText === undefined) ? props.pageContent.defaultText : props.pageContent.currentText}
-            name='newsMessage'
-            onChange={(e) => props.changeText(e.target.value, props.pageContent.eventType)}
-            onBlur={props.handlers.onBlur(props.changeText, props.pageContent.defaultText, props.pageContent.currentText, props.pageContent.eventType)}
-            onFocus={props.handlers.onFocus(props.changeText, props.pageContent.currentText, props.pageContent.eventType)}
-            onKeyDown={props.handlers.onEnter(props.addPost, textAreaElement)}
+      {isLoading && <Loading />}
+      {!isLoading && <>
+        <Profile
+          user={pageContent.currentUser}
+          annotations={pageContent.defaultAnnotations}
+          templates={pageContent.defaultTemplates}
+          jobIcons={pageContent.jobIcons}
+          titles={pageContent.lookingForJobTitle}
+        />
+        <form onSubmit={handlers.onSubmit(addPost)} className='page-main__news'>
+          <label className='news__label'>
+            {pageContent.feedDefaultText}
+            <textarea
+              className='news__message'
+              ref={textAreaElement}
+              value={(pageContent.currentText === undefined) ? pageContent.defaultText : pageContent.currentText}
+              name='newsMessage'
+              onChange={(e) => changeText(e.target.value, pageContent.eventType)}
+              onBlur={handlers.onBlur(changeText, pageContent.defaultText, pageContent.currentText, pageContent.eventType)}
+              onFocus={handlers.onFocus(changeText, pageContent.currentText, pageContent.eventType)}
+              onKeyDown={handlers.onEnter(addPost, textAreaElement)}
+            />
+          </label>
+          <input
+            className='news__submit'
+            type='submit'
+            value={pageContent.sendPost}
+            disabled={!pageContent.currentText}
           />
-        </label>
-        <input className='news__submit' type='submit' value={props.pageContent.sendPost}/>
-      </form>
-      <div className='page-feed'>
-        <FeedList feed={props.pageContent.feed}/>
-      </div>
+        </form>
+        {pageContent.currentUser.feed && (
+          <div className='page-feed'>
+            <FeedList feed={pageContent.currentUser.feed} />
+          </div>
+        )}
+      </>}
     </div>
   );
 }

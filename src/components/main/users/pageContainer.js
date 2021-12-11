@@ -6,12 +6,7 @@ import {
   clearUsers
 } from '../../../state/actionManager.js';
 
-const mapStateToProps = (state) => {
-  return {
-    totalPages: state.users.totalPagesAmount,
-    isLoading: state.users.isLoading,
-  }
-}
+const mapStateToProps = (state) => ({totalPages: state.users.totalPagesAmount, isLoading: state.users.isLoading});
 
 const PageContainer = connect(mapStateToProps, {
   setLoadingState,

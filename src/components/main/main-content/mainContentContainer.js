@@ -5,16 +5,8 @@ import {
   changeText,
 } from '../../../state/actionManager.js';
 
-const mapStateToProps = (state) => {
-  return {
-    handlers: state.handlers,
-    pageContent: state.pageContent,
-  }
-}
+const mapStateToProps = (state) => ({handlers: state.handlers, pageContent: state.pageContent, isLoading: state.isLoading});
 
-const MainPageContentContainer = connect(mapStateToProps, {
-  addPost,
-  changeText,
-})(MainPageContent);
+const MainPageContentContainer = connect(mapStateToProps, {addPost, changeText})(MainPageContent);
 
 export { MainPageContentContainer }
