@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 const User = (props) => {
   const {
@@ -8,13 +8,21 @@ const User = (props) => {
     follow,
     unfollow,
     defaultStatus,
+    setNewUser,
   } = props;
+
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push('/profile', {userId: user.id});
+    setNewUser();
+  }
 
   return (
     <div className='users__user-wrapper'>
-      <NavLink to={`/profile/${user.id}`} onClick={props.setNewUser}>
+      <button style={{border: 'none', background: 'none', cursor: 'pointer'}} to={`/profile/${user.id}`} onClick={handleClick}>
         <img className='users__profile-picture' src={user.photos.small} alt={user.pictureAlt} />
-      </NavLink>
+      </button>
       <button className='users__button' type='button' onClick={toggleFollow}>
         {user.followed ? unfollow : follow}
       </button>

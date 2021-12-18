@@ -3,7 +3,8 @@ import {
   Route,
   Switch,
   Redirect,
-  useHistory
+  useHistory,
+  useLocation,
 } from 'react-router-dom';
 import { NavigationListContainer } from './navigation/navigationListContainer.js';
 import { NavigationItem } from './navigation/navigationItem.js';
@@ -26,9 +27,11 @@ const Main = (props) => {
 
   history.listen((location) => {
     const path = location.pathname.split('/');
-    if ((path.length === pageContent.minPathLength) && !pageContent.currentUser.isDefault) {
+
+    if (!location.state) {
       setDefaultProfile();
     }
+
     path.includes('messages') ? updateHeader('messages') : updateHeader(path[1]);
   });
 

@@ -19,7 +19,7 @@ const initialState = {
     'users',
   ],
   defaultMenuPaths: {
-    profile: '/profile',
+    profile: '/profile/:userId?',
     messages: '/messages',
     news: '/news',
     music: '/music',
@@ -523,7 +523,6 @@ const initialState = {
       dontLookForJobIcon: '/img/dontLookForJob.png',
     },
     defaultUser: {
-      isDefault: true,
       photos: {
         small: '/img/default-profile.jpg',
         large: '/img/default-background.jpg',

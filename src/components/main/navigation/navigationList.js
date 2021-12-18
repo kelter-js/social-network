@@ -6,7 +6,7 @@ const NavigationList = (props) => {
     return (
       <li key={index}>
         <NavigationItem
-          navItem={elem.slice(1)}
+          navItem={elem.split('/')[1]}
         />
       </li>
     );

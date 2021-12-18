@@ -42,9 +42,7 @@ const Pagination = (props) => {
 
   const indexInput = useRef();
 
-  const changePage = (e) => {
-    e.preventDefault();
-
+  const changePage = () => {
     if (+indexInput.current.value !== 0) {
       clearUsers();
       setCurrentPage(+indexInput.current.value);
@@ -79,7 +77,7 @@ const Pagination = (props) => {
               disabled={isLoading}
               value={jumpToPage}
               onChange={onChange}
-              onKeyDown={onKeyDown(setCurrentPage, indexInput)}
+              onKeyDown={onKeyDown(changePage, indexInput)}
               ref={indexInput}
               name='pageIndex'
               className='users__pagination-index-field'
