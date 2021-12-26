@@ -17,103 +17,111 @@ class Actions {
       'updateMaxJumpIndexAttention': 'UPDATE_MAX_JUMP_INDEX_ATTENTION',
       'setLoadingState': 'SET_LOADING_STATE',
       'setUserProfile': 'SET_USER_PROFILE',
+      'setUserData': 'SET_USER_DATA',
     }
   }
 
   addPost = () => {
     return {
-      'type': this.#actionTypes.post,
+      type: this.#actionTypes.post,
+    }
+  }
+
+  setUserData = (data) => {
+    return {
+      type: this.#actionTypes.setUserData,
+      data: data,
     }
   }
 
   setLoadingState = (state) => {
     return {
-      'type': this.#actionTypes.setLoadingState,
-      'state': state,
+      type: this.#actionTypes.setLoadingState,
+      state: state,
     }
   }
 
   updateMaxJumpIndexAttention = (attentionStatus) => {
     return {
-      'type': this.#actionTypes.updateMaxJumpIndexAttention,
-      'status': attentionStatus,
+      type: this.#actionTypes.updateMaxJumpIndexAttention,
+      status: attentionStatus,
     }
   }
 
   updateJumpPage = (pageIndex) => {
     return {
-      'type': this.#actionTypes.setJumpPage,
-      'pageIndex': pageIndex,
+      type: this.#actionTypes.setJumpPage,
+      pageIndex: pageIndex,
     }
   }
 
   setUsers = (userList) => {
     return {
-      'type': this.#actionTypes.setUsers,
-      'userList': userList,
+      type: this.#actionTypes.setUsers,
+      userList: userList,
     }
   }
 
   clearUsers = () => {
     return {
-      'type': this.#actionTypes.clearUsers,
+      type: this.#actionTypes.clearUsers,
     }
   }
 
   setTotalUsersCount = (pagesAmount) => {
     return {
-      'type': this.#actionTypes.setUsersCount,
-      'pagesAmount': pagesAmount,
+      type: this.#actionTypes.setUsersCount,
+      pagesAmount: pagesAmount,
     }
   }
 
   setCurrentPage = (currentPage) => {
     return {
-      'type': this.#actionTypes.setCurrentPage,
-      'currentPage': currentPage,
+      type: this.#actionTypes.setCurrentPage,
+      currentPage: currentPage,
     }
   }
 
   toggleFollow = (id) => {
     return {
-      'type': this.#actionTypes.toggleFollow,
-      'id': id,
+      type: this.#actionTypes.toggleFollow,
+      id: id,
     }
   }
 
   changeText = (text, receiver) => {
     return {
-      'type': this.#actionTypes.changeText,
-      'text': text,
-      'receiver': receiver,
+      type: this.#actionTypes.changeText,
+      text: text,
+      receiver: receiver,
     }
   }
 
   updateHeader = (text) => {
     return {
-      'type': this.#actionTypes.header,
-      'text': text,
+      type: this.#actionTypes.header,
+      text: text,
     }
   }
 
   changeLikeState = (postId) => {
     return {
-      'type': this.#actionTypes.changeLikeState,
-      'postId': postId,
+      type: this.#actionTypes.changeLikeState,
+      postId: postId,
     }
   }
 
   addMessage = (userId) => {
     return {
-      'type': this.#actionTypes.message,
-      'user': userId,
+      type: this.#actionTypes.message,
+      user: userId,
     }
   }
 
   setUserProfile = (user) => {
     return {
-      'type': this.#actionTypes.setUserProfile,
-      'user': user,
+      type: this.#actionTypes.setUserProfile,
+      user: user,
     }
   }
 }
@@ -133,4 +141,5 @@ export const {
   changeLikeState,
   addMessage,
   setUserProfile,
+  setUserData,
 } = new Actions();

@@ -580,6 +580,12 @@ const initialState = {
     },
     currentHeader: getCurrentHeader(headers),
   },
+  userData: {
+    userId: null,
+    email: null,
+    login: null,
+    isAuthenticated: false,
+  },
   isLoading: false,
   handlers: InputHandlers,
 }
