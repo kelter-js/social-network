@@ -82,10 +82,11 @@ class Actions {
     }
   }
 
-  toggleFollow = (id) => {
+  switchFollow = (id, follow) => {
     return {
       type: this.#actionTypes.toggleFollow,
-      id: id,
+      id,
+      follow,
     }
   }
 
@@ -136,7 +137,7 @@ export const {
   clearUsers,
   setTotalUsersCount,
   setCurrentPage,
-  toggleFollow,
+  switchFollow,
   changeText,
   changeLikeState,
   addMessage,

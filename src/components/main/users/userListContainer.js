@@ -21,7 +21,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   if (stateProps.users.userList.length === 0) {
     dispatch(setLoadingState(true));
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users?count=${stateProps.users.pageSize}&page=${stateProps.users.currentPage}`)
+      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${stateProps.users.currentPage}&count=${stateProps.users.pageSize}`, {
+        withCredentials: true,
+      })
       .then(async (result) => {
         const totalPagesAmount = Math.ceil(result.data.totalCount / stateProps.users.pageSize);
         dispatch(setTotalUsersCount(totalPagesAmount));

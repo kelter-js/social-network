@@ -7,7 +7,7 @@
 .users__user-wrapper
   display: grid
   gap: 20px
-  grid-template-columns: 100px 1fr
+  grid-template-columns: 115px 1fr
   grid-template-rows: 100px 30px
   margin-bottom: 20px
 
@@ -30,6 +30,12 @@
   font-size: 20px
   grid-column: 1 / 2
   grid-row: 2 / 3
+
+  &:disabled
+    cursor: auto
+    background-color: $metallic
+    border-color: $metallic
+    color: $white
 
 .users__button--show-more
   min-height: 30px
