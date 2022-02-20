@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { UserContainer } from './userContainer.js';
 import { PaginationContainer } from './paginationContainer.js';
 import { Loading } from '../../../loading.js';
 
-const UserList = (props) => {
-  const {
-    users,
-    isLoading,
-  } = props;
+const UserList = ({ users, isLoading, loadUsers }) => {
+  useEffect(() => {
+    if (users.userList.length === 0) {
+      loadUsers(users.currentPage, users.pageSize);
+    }
+  }, [users.userList, users.currentPage]);
 
   const currentUsersLength = users.userList.length;
   return (

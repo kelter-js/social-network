@@ -5,7 +5,7 @@ import {
   setLoadingState,
 } from '../../../state/actionManager.js';
 import { User } from './user.js';
-import * as axios from 'axios';
+import userAPI from '../../../API/api.js';
 
 const mapStateToProps = (state) => {
   return {
@@ -16,30 +16,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const onFollow = async (id) => {
-  return (
-    await axios
-      .post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
-        withCredentials: true,
-        headers: {
-          'API-KEY': '3fb46a3e-6490-460b-8c43-075fa7280e3f',
-        },
-      })
-  );
-}
-
-const onUnfollow = async (id) => {
-  return (
-    await axios
-      .delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
-        withCredentials: true,
-        headers: {
-          'API-KEY': '3fb46a3e-6490-460b-8c43-075fa7280e3f',
-        },
-      })
-  );
-}
-
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps;
   return {
@@ -47,14 +23,14 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...ownProps,
     toggleFollow: async (isFollowed) => {
       (isFollowed) ? (
-        onUnfollow(ownProps.user.id)
+        userAPI.unfollowUser(ownProps.user.id)
           .then((result) => {
             if (result.data.resultCode === 0) {
               dispatch(switchFollow(ownProps.user.id, false));
             }
           })
       ) : (
-        onFollow(ownProps.user.id)
+        userAPI.followUser(ownProps.user.id)
           .then((result) => {
             if (result.data.resultCode === 0) {
               dispatch(switchFollow(ownProps.user.id, true));
@@ -64,8 +40,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     },
     setNewUser: () => {
       dispatch(setLoadingState(true));
-      axios
-        .get(`https://social-network.samuraijs.com/api/1.0/profile/${ownProps.user.id}`)
+      userAPI.getProfile(ownProps.user.id)
         .then((userProfile) => {
           //instead of fetching new random photos, we took already fetched, by filtering userlist using id
           userProfile.data.photos = stateProps.userList.filter(item => item.id === userProfile.data.userId)[0].photos;

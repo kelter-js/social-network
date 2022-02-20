@@ -37,7 +37,7 @@ const reducers = (state, action) => {
   const currentAction = actions[action.type];
 
   if (currentAction) {
-    let stateCopy = {...state}
+    let stateCopy = { ...state }
     stateCopy = currentAction(stateCopy, action);
     return stateCopy;
   }
@@ -45,4 +45,4 @@ const reducers = (state, action) => {
   return initialState;
 }
 
-export {reducers}
+export { reducers }
