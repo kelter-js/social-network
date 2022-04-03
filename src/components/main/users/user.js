@@ -1,32 +1,28 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const User = (props) => {
-  const {
-    toggleFollow,
-    user,
-    follow,
-    unfollow,
-    defaultStatus,
-    setNewUser,
-  } = props;
+const User = ({
+  toggleFollow,
+  user,
+  follow,
+  unfollow,
+  defaultStatus,
+  setNewUser,
+}) => {
+  const [inAction, setInAction] = useState(false);
 
   const history = useHistory();
-
-  const [inAction, setInAction] = useState(false);
 
   const openProfile = () => {
     history.push('/profile', { userId: user.id });
     setNewUser();
-  }
+  };
 
   const toggleAction = (isFollowed) => {
     return () => {
       setInAction(true);
       toggleFollow(isFollowed)
-        .finally(() => {
-          setInAction(false);
-        });
+        .finally(() => setInAction(false));
     };
   }
 

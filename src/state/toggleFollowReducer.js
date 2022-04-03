@@ -3,7 +3,7 @@ const toggleFollow = (state, action) => {
   const indexCurrentElem = state.users.userList.indexOf(currentElem);
   currentElem.followed = action.follow;
   state.users = {...state.users};
-  state.users.userList[indexCurrentElem] = {...state.users.userList[indexCurrentElem]};
+  state.users.userList[indexCurrentElem] = {...currentElem};
   return state;
 }
 
