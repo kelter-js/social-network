@@ -1,7 +1,7 @@
 import userAPI from '../API/api';
 import { setUserProfile, setLoadingState } from '../state/actionManager';
 
-const setNewUser = ({
+const getUserData = ({
   userList,
   id,
 }) => {
@@ -20,4 +20,4 @@ const setNewUser = ({
   }
 };
 
-export default setNewUser;
+export default getUserData;

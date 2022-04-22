@@ -30,14 +30,14 @@ class Actions {
   setUserData = (data) => {
     return {
       type: this.#actionTypes.setUserData,
-      data: data,
+      data,
     }
   }
 
   setLoadingState = (state) => {
     return {
       type: this.#actionTypes.setLoadingState,
-      state: state,
+      state,
     }
   }
 
@@ -51,14 +51,14 @@ class Actions {
   updateJumpPage = (pageIndex) => {
     return {
       type: this.#actionTypes.setJumpPage,
-      pageIndex: pageIndex,
+      pageIndex,
     }
   }
 
   setUsers = (userList) => {
     return {
       type: this.#actionTypes.setUsers,
-      userList: userList,
+      userList,
     }
   }
 
@@ -71,14 +71,14 @@ class Actions {
   setTotalUsersCount = (pagesAmount) => {
     return {
       type: this.#actionTypes.setUsersCount,
-      pagesAmount: pagesAmount,
+      pagesAmount,
     }
   }
 
   setCurrentPage = (currentPage) => {
     return {
       type: this.#actionTypes.setCurrentPage,
-      currentPage: currentPage,
+      currentPage,
     }
   }
 
@@ -93,22 +93,22 @@ class Actions {
   changeText = (text, receiver) => {
     return {
       type: this.#actionTypes.changeText,
-      text: text,
-      receiver: receiver,
+      text,
+      receiver,
     }
   }
 
   updateHeader = (text) => {
     return {
       type: this.#actionTypes.header,
-      text: text,
+      text,
     }
   }
 
   changeLikeState = (postId) => {
     return {
       type: this.#actionTypes.changeLikeState,
-      postId: postId,
+      postId,
     }
   }
 
@@ -122,7 +122,7 @@ class Actions {
   setUserProfile = (user) => {
     return {
       type: this.#actionTypes.setUserProfile,
-      user: user,
+      user,
     }
   }
 }

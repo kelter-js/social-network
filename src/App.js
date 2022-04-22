@@ -1,19 +1,39 @@
-import React from 'react';
-import HeaderContainer from './components/header/headerContainer';
-import { MainContainer } from './components/main/indexContainer.js';
-import { Footer } from './components/footer/index.js';
-import { BrowserRouter } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import authenticateUser from "./thunk/authenticateUser";
+import ComponentRouter from "./router";
 
-const App = () => {
-  return (
-    <>
-      <BrowserRouter>
-        <HeaderContainer />
-        <MainContainer />
-      </BrowserRouter>
-      <Footer />
-    </>
-  );
-}
+const mapStateToProps = (state) => ({
+  defaultMenuPaths: state.defaultMenuPaths,
+  isAuthenticated: state.userData.isAuthenticated
+});
+const mapDispatchToProps = (dispatch) => ({ authenticate: () => dispatch(authenticateUser) });
 
-export { App }
+const App = ({
+  defaultMenuPaths,
+  authenticate,
+  isAuthenticated
+}) => {
+  const history = useHistory();
+
+  useEffect(authenticate, []);
+
+  const renderByCredentials = () => {
+    if (!isAuthenticated) {
+      history.push('/login');
+    } else {
+      if (history.location.pathname === '/login') {
+        history.push('/profile');
+      }
+    }
+  };
+
+  useEffect(() => {
+    renderByCredentials();
+  }, [isAuthenticated]);
+
+  return (<ComponentRouter paths={defaultMenuPaths} />);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

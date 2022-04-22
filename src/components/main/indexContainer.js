@@ -5,7 +5,7 @@ import {
   setUserProfile,
 } from '../../state/actionManager.js';
 
-const mapStateToProps = (state) => ({defaultMenuPaths: state.defaultMenuPaths, pageContent: state.pageContent});
+const mapStateToProps = (state) => ({ pageContent: state.pageContent });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps;

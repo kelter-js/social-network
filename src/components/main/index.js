@@ -1,28 +1,15 @@
 import React from 'react';
-import {
-  Route,
-  Switch,
-  Redirect,
-  useHistory,
-} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { NavigationListContainer } from './navigation/navigationListContainer.js';
 import { NavigationItem } from './navigation/navigationItem.js';
-import { MainPageContentContainer } from './main-content/mainContentContainer.js';
-import { UserListContainer } from './users/userListContainer.js';
-import { DialogsContainer } from './dialogs/dialogsContainer.js';
-import { Music } from './music/music.js';
-import { News } from './news/news.js';
-import { Settings } from './settings/settings.js';
 
-const Main = (props) => {
+const Main = ({
+  pageContent,
+  ComponentToRender,
+  updateHeader,
+  setDefaultProfile
+}) => {
   const history = useHistory();
-
-  const {
-    pageContent,
-    defaultMenuPaths,
-    updateHeader,
-    setDefaultProfile,
-  } = props;
 
   history.listen((location) => {
     const path = location.pathname.split('/');
@@ -43,15 +30,7 @@ const Main = (props) => {
       </nav>
       <section className='page-main__content-wrapper'>
         <h2 className='visually-hidden'>{pageContent.currentHeader}</h2>
-        <Switch>
-          <Redirect exact from='/' to={defaultMenuPaths.profile} />
-          <Route path={defaultMenuPaths.profile} render={() => <MainPageContentContainer />} />
-          <Route path={defaultMenuPaths.messages} render={() => <DialogsContainer />} />
-          <Route path={defaultMenuPaths.news} render={() => <News />} />
-          <Route path={defaultMenuPaths.music} render={() => <Music />} />
-          <Route path={defaultMenuPaths.users} render={() => <UserListContainer />} />
-          <Route path={defaultMenuPaths.settings} render={() => <Settings />} />
-        </Switch>
+        <ComponentToRender />
       </section>
     </main>
   );

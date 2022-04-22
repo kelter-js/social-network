@@ -7,15 +7,14 @@ const User = ({
   follow,
   unfollow,
   defaultStatus,
-  setNewUser,
+  getUserProfile,
 }) => {
   const [inAction, setInAction] = useState(false);
 
   const history = useHistory();
 
   const openProfile = () => {
-    history.push('/profile', { userId: user.id });
-    setNewUser();
+    getUserProfile().then(() => history.push('/profile'));
   };
 
   const toggleAction = (isFollowed) => {

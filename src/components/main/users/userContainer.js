@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { User } from './user.js';
 import toggleFollow from '../../../thunk/toggleFollow';
-import setNewUser from '../../../thunk/setNewUser';
+import getUserData from '../../../thunk/getUserData';
 
 const mapStateToProps = (state) => {
   return {
@@ -23,8 +23,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         id: ownProps.user.id,
       }));
     },
-    setNewUser: () => {
-      dispatch(setNewUser({
+    getUserProfile: async () => {
+      dispatch(getUserData({
         id: ownProps.user.id,
         userList: stateProps.userList,
       }));

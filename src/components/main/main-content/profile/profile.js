@@ -15,7 +15,7 @@ const Profile = (props) => {
         const itemClass = `profile__user-contact profile__user-contact--${item[0]}`;
         return (
           <li className={itemClass} key={index}>
-            <a href={item[1]} className='profile__user-link'>
+            <a href={item[1]} className='profile__user-link' target='_blank'>
               {item[1]}
             </a>
           </li>

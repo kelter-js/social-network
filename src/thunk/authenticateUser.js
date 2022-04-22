@@ -1,9 +1,9 @@
-import userAPI from '../API/api';
+import { authAPI } from '../API/api';
 import { setUserData } from '../state/actionManager';
 
 const authenticateUser = (dispatch) => {
-  userAPI
-    .authenticateUser()
+  authAPI
+    .authenticateMe()
     .then(result => {
       if (result.data.resultCode === 0) {
         dispatch(setUserData(result.data.data));

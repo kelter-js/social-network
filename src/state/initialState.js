@@ -24,6 +24,7 @@ const initialState = {
     news: '/news',
     music: '/music',
     users: '/users',
+    login: '/login',
   },
   chat: {
     messages: {
