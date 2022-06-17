@@ -25,6 +25,7 @@ const userAPI = {
 
 export const authAPI = {
   authenticateMe: () => network.get('auth/me'),
+  login: (data) => network.post('auth/login', data),
 };
 
 export default userAPI;

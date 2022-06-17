@@ -587,6 +587,10 @@ const initialState = {
     login: null,
     isAuthenticated: false,
   },
+  loginData: {
+    password: "",
+    email: "",
+  },
   isLoading: false,
   handlers: InputHandlers,
 }

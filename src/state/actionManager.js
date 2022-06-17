@@ -18,6 +18,7 @@ class Actions {
       'setLoadingState': 'SET_LOADING_STATE',
       'setUserProfile': 'SET_USER_PROFILE',
       'setUserData': 'SET_USER_DATA',
+      'setLoginData': 'SET_LOGIN_DATA',
     }
   }
 
@@ -30,6 +31,13 @@ class Actions {
   setUserData = (data) => {
     return {
       type: this.#actionTypes.setUserData,
+      data,
+    }
+  }
+
+  setLoginData = (data) => {
+    return {
+      type: this.#actionTypes.setLoginData,
       data,
     }
   }
@@ -143,4 +151,5 @@ export const {
   addMessage,
   setUserProfile,
   setUserData,
+  setLoginData,
 } = new Actions();

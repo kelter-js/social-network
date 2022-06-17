@@ -14,6 +14,7 @@ import { updateMaxJumpIndexAttention } from './updateMaxJumpIndexAttention.js';
 import { setLoadingState } from './setLoadingState.js';
 import { setUserProfile } from './setUserProfile.js';
 import { setUserData } from './setUserData.js';
+import { setLoginData } from './setLoginData.js';
 
 const reducers = (state, action) => {
   const actions = {
@@ -32,6 +33,7 @@ const reducers = (state, action) => {
     'SET_LOADING_STATE': (state, action) => setLoadingState(state, action),
     'SET_USER_PROFILE': (state, action) => setUserProfile(state, action),
     'SET_USER_DATA': (state, action) => setUserData(state, action),
+    'SET_LOGIN_DATA': (state, action) => setLoginData(state, action),
   }
 
   const currentAction = actions[action.type];
