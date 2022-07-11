@@ -1,14 +1,13 @@
 import React from 'react';
-import { PageContainer } from './pageContainer.js';
+import PageContainer from './pageContainer.js';
 
-const PaginationRouter = (props) => {
-  const {
-    pages,
-    totalPages,
-    firstPage,
-    isStart,
-    isLoading,
-  } = props;
+const PaginationRouter = ({
+  pages,
+  totalPages,
+  firstPage,
+  isStart,
+  isLoading,
+}) => {
 
   if (pages !== totalPages && pages !== firstPage && !isStart) {
     return null;

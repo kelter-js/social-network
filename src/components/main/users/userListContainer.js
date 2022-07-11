@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { UserList } from './userList.js';
 import getUsers from "../../../thunk/getUsers";
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
   return {
@@ -26,6 +27,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 }
 
-const UserListContainer = connect(mapStateToProps, null, mergeProps)(UserList);
-
-export { UserListContainer }
+export default compose(connect(mapStateToProps, null, mergeProps))(UserList);

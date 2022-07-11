@@ -1,18 +1,16 @@
 import React, { useRef } from 'react';
 
-const Message = (props) => {
-  const {
-    addMessage,
-    currentDialog,
-    messages,
-    handlers,
-    messageInfo,
-    defaultText,
-    currentText,
-    changeText,
-    eventType,
-  } = props;
-
+const Message = ({
+  addMessage,
+  currentDialog,
+  messages,
+  handlers,
+  messageInfo,
+  defaultText,
+  currentText,
+  changeText,
+  eventType,
+}) => {
   const messageElement = useRef();
   const sendMessage = () => {
     addMessage(currentDialog);

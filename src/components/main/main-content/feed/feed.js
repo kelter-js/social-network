@@ -1,12 +1,10 @@
 import React from 'react';
 
-const Feed = (props) => {
-  const {
-    data,
-    postId,
-    changeLikeState,
-  } = props;
-
+const Feed = ({
+  data,
+  postId,
+  changeLikeState,
+}) => {
   const buttonClass = data.liked ? 'feed__likes feed__likes--pressed' : 'feed__likes';
 
   const onClick = () => {

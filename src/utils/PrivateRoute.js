@@ -1,9 +1,9 @@
 import React from 'react';
-import { MainContainer } from "../components/main/indexContainer";
+import Main from "../components/main/indexContainer";
 
 const PrivateRoute = ({ Component }) => {
   return (
-    <MainContainer ComponentToRender={Component} />
+    <Main ComponentToRender={Component} />
   );
 };
 

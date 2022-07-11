@@ -1,5 +1,5 @@
 const addMessage = (state, action) => {
-  const createMessage = (text) =>  {
+  const createMessage = (text) => {
     return {
       'text': text,
       'author': 'You',
@@ -9,7 +9,7 @@ const addMessage = (state, action) => {
       },
     }
   }
-  state.chat = {...state.chat}
+  state.chat = { ...state.chat }
   state.chat.messages[action.user].push(createMessage(state.chat.currentText));
   state.chat.currentText = undefined;
   return state;

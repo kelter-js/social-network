@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { User } from './user.js';
 import toggleFollow from '../../../thunk/toggleFollow';
 import getUserData from '../../../thunk/getUserData';
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
   return {
@@ -32,6 +33,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 }
 
-const UserContainer = connect(mapStateToProps, null, mergeProps)(User);
-
-export { UserContainer }
+export default compose(connect(mapStateToProps, null, mergeProps))(User);

@@ -1,16 +1,14 @@
 import React from 'react';
 
-const Page = (props) => {
-  const {
-    currentPage,
-    setLoadingState,
-    setCurrentPage,
-    clearUsers,
-    currentPageStyle,
-    isLoading,
-    disable,
-  } = props;
-
+const Page = ({
+  currentPage,
+  setLoadingState,
+  setCurrentPage,
+  clearUsers,
+  currentPageStyle,
+  isLoading,
+  disable,
+}) => {
   const changePage = () => {
     if (+currentPage !== 0) {
       setLoadingState(true);

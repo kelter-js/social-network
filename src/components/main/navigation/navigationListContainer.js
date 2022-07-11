@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import { NavigationList } from './navigationList.js';
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
   return {defaultMenu: state.defaultMenuPaths}
 }
 
-const NavigationListContainer = connect(mapStateToProps)(NavigationList);
-
-export { NavigationListContainer }
+export default compose(connect(mapStateToProps))(NavigationList);

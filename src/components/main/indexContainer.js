@@ -4,6 +4,7 @@ import {
   updateHeader,
   setUserProfile,
 } from '../../state/actionManager.js';
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => ({ pageContent: state.pageContent });
 
@@ -22,6 +23,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 }
 
-const MainContainer = connect(mapStateToProps, null, mergeProps)(Main);
-
-export { MainContainer }
+export default compose(connect(mapStateToProps, null, mergeProps))(Main);

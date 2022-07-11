@@ -4,9 +4,8 @@ import {
   addPost,
   changeText,
 } from '../../../state/actionManager.js';
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => ({handlers: state.handlers, pageContent: state.pageContent, isLoading: state.isLoading});
 
-const MainPageContentContainer = connect(mapStateToProps, {addPost, changeText})(MainPageContent);
-
-export { MainPageContentContainer }
+export default compose(connect(mapStateToProps, {addPost, changeText}))(MainPageContent);

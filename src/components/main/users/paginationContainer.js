@@ -6,6 +6,7 @@ import {
   setCurrentPage,
 } from '../../../state/actionManager.js';
 import { Pagination } from './pagination.js';
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
   return {
@@ -18,11 +19,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-const PaginationContainer = connect(mapStateToProps, {
-  updateMaxJumpIndexAttention,
-  updateJumpPage,
-  clearUsers,
-  setCurrentPage,
-})(Pagination);
-
-export { PaginationContainer }
+export default compose(
+  connect(mapStateToProps, {
+    updateMaxJumpIndexAttention,
+    updateJumpPage,
+    clearUsers,
+    setCurrentPage,
+  })
+)(Pagination);

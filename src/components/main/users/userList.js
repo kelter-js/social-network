@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { UserContainer } from './userContainer.js';
-import { PaginationContainer } from './paginationContainer.js';
+import User from './userContainer.js';
+import Pagination from './paginationContainer.js';
 import { Loading } from '../../../loading.js';
 
 const UserList = ({ users, isLoading, loadUsers }) => {
@@ -17,21 +17,21 @@ const UserList = ({ users, isLoading, loadUsers }) => {
       <h3 className='users__header users__text'>
         {users.header}
       </h3>
-      <PaginationContainer
+      <Pagination
         firstPage={users.firstPage}
         currentPage={users.currentPage}
         totalPages={users.totalPagesAmount}
       />
       {users.userList.slice(0, users.currentLoadingAmount).map((user) => {
         return (
-          <UserContainer
+          <User
             user={user}
             key={user.id}
           />
         );
       })}
       {!isLoading && (
-        <PaginationContainer
+        <Pagination
           firstPage={users.firstPage}
           currentPage={users.currentPage}
           totalPages={users.totalPagesAmount}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { NavigationListContainer } from './navigation/navigationListContainer.js';
+import NavigationList from './navigation/navigationListContainer.js';
 import { NavigationItem } from './navigation/navigationItem.js';
 
 const Main = ({
@@ -25,7 +25,7 @@ const Main = ({
     <main className='page-main container'>
       <h1 className='visually-hidden'>{pageContent.mainHeader}</h1>
       <nav className='page-main__navigation'>
-        <NavigationListContainer />
+        <NavigationList />
         <NavigationItem navItem={pageContent.settingsButton} />
       </nav>
       <section className='page-main__content-wrapper'>

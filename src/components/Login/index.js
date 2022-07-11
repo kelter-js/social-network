@@ -23,10 +23,12 @@ const Login = ({
       value: target.value,
     });
   };
+
   const onLogin = (e) => {
     e.preventDefault();
     authorize();
   };
+
   return (
     <div className='container'>
       <form onSubmit={onLogin} style={{ display: 'flex', flexDirection: 'column' }}>

@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import { Dialogs } from './dialogs.js';
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => ({chat: state.chat});
 
-const DialogsContainer = connect(mapStateToProps)(Dialogs);
-
-export { DialogsContainer }
+export default compose(connect(mapStateToProps))(Dialogs);

@@ -5,11 +5,11 @@ import {
   Redirect,
 } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
-import { MainPageContentContainer } from "./components/main/main-content/mainContentContainer";
-import { DialogsContainer } from "./components/main/dialogs/dialogsContainer";
+import MainPageContent from "./components/main/main-content/mainContentContainer";
+import Dialogs from "./components/main/dialogs/dialogsContainer";
 import { News } from "./components/main/news/news";
 import { Music } from "./components/main/music/music";
-import { UserListContainer } from "./components/main/users/userListContainer";
+import UserList from "./components/main/users/userListContainer";
 import { Settings } from "./components/main/settings/settings";
 import HeaderContainer from './components/header/headerContainer';
 import { Footer } from './components/footer/index.js';
@@ -27,11 +27,11 @@ const ComponentRouter = ({ paths }) => {
         <Redirect exact from='/' to={paths.profile} />
         <Route
           path={paths.profile}
-          render={() => <PrivateRoute Component={MainPageContentContainer} />}
+          render={() => <PrivateRoute Component={MainPageContent} />}
         />
         <Route
           path={paths.messages}
-          render={() => <PrivateRoute Component={DialogsContainer} />}
+          render={() => <PrivateRoute Component={Dialogs} />}
         />
         <Route
           path={paths.news}
@@ -43,7 +43,7 @@ const ComponentRouter = ({ paths }) => {
         />
         <Route
           path={paths.users}
-          render={() => <PrivateRoute Component={UserListContainer} />}
+          render={() => <PrivateRoute Component={UserList} />}
         />
         <Route
           path={paths.settings}

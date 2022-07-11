@@ -4,6 +4,7 @@ import {
   addMessage,
   changeText,
 } from '../../../state/actionManager.js';
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,10 +13,7 @@ const mapStateToProps = (state) => {
     messageInfo: state.chat.messageInfo,
   }
 }
-
-const MessageContainer = connect(mapStateToProps, {
+export default compose(connect(mapStateToProps, {
   changeText,
   addMessage,
-})(Message);
-
-export { MessageContainer }
+}))(Message);

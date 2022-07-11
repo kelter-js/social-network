@@ -5,13 +5,14 @@ import {
   setCurrentPage,
   clearUsers
 } from '../../../state/actionManager.js';
+import { compose } from 'redux';
 
-const mapStateToProps = (state) => ({totalPages: state.users.totalPagesAmount, isLoading: state.users.isLoading});
+const mapStateToProps = (state) => ({ totalPages: state.users.totalPagesAmount, isLoading: state.users.isLoading });
 
-const PageContainer = connect(mapStateToProps, {
-  setLoadingState,
-  setCurrentPage,
-  clearUsers,
-})(Page);
-
-export { PageContainer }
+export default compose(
+  connect(mapStateToProps, {
+    setLoadingState,
+    setCurrentPage,
+    clearUsers,
+  })
+)(Page);

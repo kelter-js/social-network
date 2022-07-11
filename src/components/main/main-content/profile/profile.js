@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Profile = (props) => {
-  const {
-    user,
-    annotations,
-    templates,
-    jobIcons,
-    titles,
-  } = props;
-
-  const contacts = (user.contacts.length === 0) ? templates.contacts : (
+const Profile = ({
+  user,
+  annotations,
+  templates,
+  jobIcons,
+  titles,
+}) => {
+  const contacts = (user.contacts.length === 0) ? (
+    templates.contacts
+  ) : (
     <ul className='profile__user-links-list'>
       {user.contacts.map((item, index) => {
         const itemClass = `profile__user-contact profile__user-contact--${item[0]}`;

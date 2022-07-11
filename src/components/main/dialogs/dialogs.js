@@ -1,12 +1,10 @@
 import React from 'react';
 import { DialogList } from './dialogList.js';
 import { Route } from 'react-router-dom';
-import { MessageContainer } from './messageContainer.js';
+import Message from './messageContainer.js';
 import { Switch } from 'react-router-dom';
 
-const Dialogs = (props) => {
-  const { chat } = props;
-
+const Dialogs = ({ chat }) => {
   const messagesList = Object
     .entries(chat.messages)
     .map((message, index) => {
@@ -15,7 +13,7 @@ const Dialogs = (props) => {
           key={index}
           path={`/messages/${message[0].split(' ').join('')}`}
           render={() =>
-            <MessageContainer
+            <Message
               messages={message[1]}
               defaultText={chat.defaultText}
               currentText={chat.currentText}

@@ -1,22 +1,21 @@
 import React, { useRef } from 'react';
 import { PaginationRouter } from './paginationRouter.js';
 
-const Pagination = (props) => {
-  const {
-    maxJumpIndexAttention,
-    updateMaxJumpIndexAttention,
-    totalPages,
-    updateJumpPage,
-    clearUsers,
-    setCurrentPage,
-    currentPage,
-    firstPage,
-    jumpToPage,
-    isLoading,
-    jumpToPageText,
-    maxJumpLengthText,
-    onKeyDown,
-  } = props;
+const Pagination = ({
+  maxJumpIndexAttention,
+  updateMaxJumpIndexAttention,
+  totalPages,
+  updateJumpPage,
+  clearUsers,
+  setCurrentPage,
+  currentPage,
+  firstPage,
+  jumpToPage,
+  isLoading,
+  jumpToPageText,
+  maxJumpLengthText,
+  onKeyDown,
+}) => {
 
   const onChange = (e) => {
     const currentValue = e.target.value;
