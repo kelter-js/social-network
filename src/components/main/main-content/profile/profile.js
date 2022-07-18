@@ -1,4 +1,5 @@
 import React from 'react';
+import Status from '../../../../common/Status/Status';
 
 const Profile = ({
   user,
@@ -32,7 +33,10 @@ const Profile = ({
           <img alt='User' className='profile__avatar' src={user.photos.small} />
         </div>
         <div className='profile__info-wrapper'>
-          <h3 className='profile__name'>{user.fullName}</h3>
+          <div className='profile__name'>
+            <h3>{user.fullName}</h3>
+            <Status status='some kind of status'/>
+          </div>
           <div className='profile__text-wrapper profile__text-wrapper--job'>
             <div>
               <p className='profile__user-text'>

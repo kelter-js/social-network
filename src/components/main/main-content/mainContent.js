@@ -14,8 +14,9 @@ const MainPageContent = ({
 
   return (
     <div>
-      {isLoading && <Loading />}
-      {!isLoading && (
+      {isLoading ? (
+        <Loading />
+      ) : (
         <>
           <Profile
             user={pageContent.currentUser}
