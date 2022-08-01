@@ -582,10 +582,11 @@ const initialState = {
     currentHeader: getCurrentHeader(headers),
   },
   userData: {
-    userId: null,
+    id: null,
     email: null,
     login: null,
     isAuthenticated: false,
+    status: "",
   },
   loginData: {
     password: "",

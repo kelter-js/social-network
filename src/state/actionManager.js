@@ -19,6 +19,7 @@ class Actions {
       'setUserProfile': 'SET_USER_PROFILE',
       'setUserData': 'SET_USER_DATA',
       'setLoginData': 'SET_LOGIN_DATA',
+      'setUserStatus': 'SET_USER_STATUS',
     }
   }
 
@@ -90,6 +91,13 @@ class Actions {
     }
   }
 
+  setUserStatus = (status) => {
+    return {
+      type: this.#actionTypes.setUserStatus,
+      status,
+    }
+  }
+
   switchFollow = (id, follow) => {
     return {
       type: this.#actionTypes.toggleFollow,
@@ -147,6 +155,7 @@ export const {
   setCurrentPage,
   switchFollow,
   changeText,
+  setUserStatus,
   changeLikeState,
   addMessage,
   setUserProfile,

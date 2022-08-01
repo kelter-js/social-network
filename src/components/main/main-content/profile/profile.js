@@ -35,7 +35,7 @@ const Profile = ({
         <div className='profile__info-wrapper'>
           <div className='profile__name'>
             <h3>{user.fullName}</h3>
-            <Status status='some kind of status'/>
+            <Status />
           </div>
           <div className='profile__text-wrapper profile__text-wrapper--job'>
             <div>

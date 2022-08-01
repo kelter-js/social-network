@@ -15,6 +15,7 @@ import { setLoadingState } from './setLoadingState.js';
 import { setUserProfile } from './setUserProfile.js';
 import { setUserData } from './setUserData.js';
 import { setLoginData } from './setLoginData.js';
+import { setUserStatus } from './setUserStatus.js';
 
 const reducers = (state, action) => {
   const actions = {
@@ -34,6 +35,7 @@ const reducers = (state, action) => {
     'SET_USER_PROFILE': (state, action) => setUserProfile(state, action),
     'SET_USER_DATA': (state, action) => setUserData(state, action),
     'SET_LOGIN_DATA': (state, action) => setLoginData(state, action),
+    'SET_USER_STATUS': (state, action) => setUserStatus(state, action),
   }
 
   const currentAction = actions[action.type];
