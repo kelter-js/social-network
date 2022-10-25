@@ -1,43 +1,10 @@
 class InputHandlers {
-
-  static onFocus (updater, currentValue, eventType) {
-    return () => {
-      if (currentValue) {
-        return;
-      }
-
-      updater('', eventType);
-    }
-  }
-
-  static onSubmit (submit) {
-    return (e) => {
-      e.preventDefault();
-      submit();
-    }
-  }
-
   static onEnter (submit, inputElement) {
     return (e) => {
       if (e.key === 'Enter') {
         submit(inputElement.current.value);
         inputElement.current.blur();
       }
-    }
-  }
-
-  static onBlur (updater, defaultValue, currentValue, eventType) {
-    return () => {
-      if (!currentValue) {
-        updater(undefined, eventType);
-        return;
-      }
-
-      if (currentValue !== defaultValue) {
-        return;
-      }
-
-      updater(defaultValue, eventType);
     }
   }
 }

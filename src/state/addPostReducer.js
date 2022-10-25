@@ -1,4 +1,4 @@
-const addPost = (state) => {
+const addPost = (state, action) => {
   const createPost = (text) =>  {
     return {
       'post': text,
@@ -6,14 +6,14 @@ const addPost = (state) => {
       'liked': false,
     }
   }
+
   state.pageContent = { ...state.pageContent }
 
   if (!state.pageContent.currentUser.feed) {
     state.pageContent.currentUser.feed = [];
   }
 
-  state.pageContent.currentUser.feed.push(createPost(state.pageContent.currentText));
-  state.pageContent.currentText = undefined;
+  state.pageContent.currentUser.feed.push(createPost(action.text));
   return state;
 }
 

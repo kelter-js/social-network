@@ -22,9 +22,10 @@ class Actions {
     }
   }
 
-  addPost = () => {
+  addPost = (text) => {
     return {
       type: this.#actionTypes.post,
+      text,
     }
   }
 
@@ -120,10 +121,11 @@ class Actions {
     }
   }
 
-  addMessage = (userId) => {
+  addMessage = (userId, text) => {
     return {
       type: this.#actionTypes.message,
       user: userId,
+      text,
     }
   }
 

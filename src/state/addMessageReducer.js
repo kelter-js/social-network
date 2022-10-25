@@ -8,11 +8,12 @@ const addMessage = (state, action) => {
         'message': 'dialogs__phrase--user',
       },
     }
-  }
+  };
+
   state.chat = { ...state.chat }
-  state.chat.messages[action.user].push(createMessage(state.chat.currentText));
-  state.chat.currentText = undefined;
+  state.chat.messages[action.user] = [...state.chat.messages[action.user]];
+  state.chat.messages[action.user].push(createMessage(action.text))
   return state;
-}
+};
 
 export { addMessage }

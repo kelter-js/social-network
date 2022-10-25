@@ -1,16 +1,14 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Profile } from './profile/profile.js';
 import { FeedList } from './feed/feedList.js';
 import { Loading } from '../../../loading.js';
+import PostCreationForm from './PostCreationForm.jsx';
 
 const MainPageContent = ({
   pageContent,
-  handlers,
-  changeText,
   addPost,
   isLoading,
 }) => {
-  const textAreaElement = useRef();
 
   return (
     <div>
@@ -25,27 +23,12 @@ const MainPageContent = ({
             jobIcons={pageContent.jobIcons}
             titles={pageContent.lookingForJobTitle}
           />
-          <form onSubmit={handlers.onSubmit(addPost)} className='page-main__news'>
-            <label className='news__label'>
-              {pageContent.feedDefaultText}
-              <textarea
-                className='news__message'
-                ref={textAreaElement}
-                value={(pageContent.currentText === undefined) ? pageContent.defaultText : pageContent.currentText}
-                name='newsMessage'
-                onChange={(e) => changeText(e.target.value, pageContent.eventType)}
-                onBlur={handlers.onBlur(changeText, pageContent.defaultText, pageContent.currentText, pageContent.eventType)}
-                onFocus={handlers.onFocus(changeText, pageContent.currentText, pageContent.eventType)}
-                onKeyDown={handlers.onEnter(addPost, textAreaElement)}
-              />
-            </label>
-            <input
-              className='news__submit'
-              type='submit'
-              value={pageContent.sendPost}
-              disabled={!pageContent.currentText}
-            />
-          </form>
+
+          <PostCreationForm
+            defaultText={pageContent.feedDefaultText}
+            addPost={addPost}
+          />
+
           {pageContent.currentUser.feed && (
             <div className='page-feed'>
               <FeedList feed={pageContent.currentUser.feed} />

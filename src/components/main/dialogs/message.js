@@ -1,20 +1,15 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import MessageForm from './MessageForm';
 
 const Message = ({
   addMessage,
   currentDialog,
   messages,
-  handlers,
-  messageInfo,
-  defaultText,
-  currentText,
-  changeText,
-  eventType,
+  messageInfo
 }) => {
-  const messageElement = useRef();
-  const sendMessage = () => {
-    addMessage(currentDialog);
-  }
+  const sendMessage = (messageText) => {
+    addMessage(currentDialog, messageText);
+  };
 
   const messagesList = messages.map((message, index) => {
     return (
@@ -33,26 +28,10 @@ const Message = ({
     <div className='dialogs__message'>
       {messagesList}
 
-      <form onSubmit={handlers.onSubmit(sendMessage)} className='page-main__dialogs-form'>
-        <label className='page-main__dialogs-label'>
-          {messageInfo}
-          <textarea
-            className='page-main__dialogs-text'
-            ref={messageElement}
-            value={(currentText === undefined) ? defaultText : currentText}
-            name='messageText'
-            onChange={(e) => changeText(e.target.value, eventType)}
-            onBlur={handlers.onBlur(changeText, defaultText, currentText, eventType)}
-            onFocus={handlers.onFocus(changeText, currentText, eventType)}
-            onKeyDown={handlers.onEnter(sendMessage, messageElement)}
-          />
-        </label>
-        <input
-          className='page-main__send-message'
-          type='submit'
-          value=''
-        />
-      </form>
+      <MessageForm
+        messageInfo={messageInfo}
+        sendMessage={sendMessage}
+      />
     </div>
   );
 }

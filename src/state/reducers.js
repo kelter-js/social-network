@@ -18,7 +18,7 @@ import { setUserStatus } from './setUserStatus.js';
 
 const reducers = (state, action) => {
   const actions = {
-    'ADD-POST': (state) => addPost(state),
+    'ADD-POST': (state) => addPost(state, action),
     'CHANGE_HEADER': (state, action) => changeHeader(state, action),
     'CHANGE-TEXT': (state, action) => changeText(state, action),
     'ADD-MESSAGE': (state, action) => addMessage(state, action),

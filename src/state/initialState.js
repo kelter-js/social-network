@@ -439,9 +439,6 @@ const initialState = {
       'Russian Caliber',
     ],
     messageInfo: 'New message text...',
-    defaultText: '...Start your message here!',
-    currentText: undefined,
-    eventType: 'chat',
   },
   users: {
     userList: [],
@@ -496,10 +493,7 @@ const initialState = {
   },
   pageContent: {
     settingsButton: 'settings',
-    eventType: 'pageContent',
     mainHeader: 'Социальная сеть ВРеакте',
-    defaultText: '...start your message here.',
-    currentText: undefined,
     headers: headers,
     minPathLength: 2,
     lookingForJobTitle: {

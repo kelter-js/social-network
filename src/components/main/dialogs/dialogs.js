@@ -15,10 +15,9 @@ const Dialogs = ({ chat }) => {
           render={() =>
             <Message
               messages={message[1]}
-              defaultText={chat.defaultText}
-              currentText={chat.currentText}
               currentDialog={message[0]}
-            />}
+            />
+          }
         />
       );
     });
