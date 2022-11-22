@@ -9,6 +9,6 @@ const authenticateUser = (dispatch) => {
         dispatch(setUserData(result.data.data));
       }
     });
-};;
+};
 
 export default authenticateUser;

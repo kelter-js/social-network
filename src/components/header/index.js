@@ -1,13 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
-const Header = (props) => {
+const Header = ({ userData, onLogout }) => {
   return (
     <header className='page-header container'>
-      {props.userData.isAuthenticated ? (
-        <p className='page-header__user-name'>
-          {props.userData.login}
-        </p>
+      {userData.isAuthenticated ? (
+        <>
+          <p className='page-header__user-name'>
+            {userData.login}
+          </p>
+          <Button onClick={onLogout} variant="contained" color="primary">
+            Logout
+          </Button>
+        </>
       ) : (
         <NavLink to='/login' className='page-header__login'>
           Login

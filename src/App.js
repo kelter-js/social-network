@@ -6,7 +6,7 @@ import ComponentRouter from "./router";
 
 const mapStateToProps = (state) => ({
   defaultMenuPaths: state.defaultMenuPaths,
-  isAuthenticated: state.userData.isAuthenticated
+  isAuthenticated: state.userData.isAuthenticated,
 });
 const mapDispatchToProps = (dispatch) => ({ authenticate: () => dispatch(authenticateUser) });
 

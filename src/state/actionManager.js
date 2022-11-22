@@ -19,6 +19,7 @@ class Actions {
       'setUserProfile': 'SET_USER_PROFILE',
       'setUserData': 'SET_USER_DATA',
       'setUserStatus': 'SET_USER_STATUS',
+      'logoutUser': 'LOGOUT_USER',
     }
   }
 
@@ -121,6 +122,12 @@ class Actions {
     }
   }
 
+  logoutUser = () => {
+    return {
+      type: this.#actionTypes.logoutUser,
+    }
+  }
+
   addMessage = (userId, text) => {
     return {
       type: this.#actionTypes.message,
@@ -154,4 +161,5 @@ export const {
   addMessage,
   setUserProfile,
   setUserData,
+  logoutUser,
 } = new Actions();

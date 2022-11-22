@@ -13,14 +13,14 @@ const schema = yup.object({
   password: yup
     .string()
     .required('No password provided.')
-    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .min(8, 'Password is too short - should be 8 chars minimum.'),
+  rememberMe: yup.boolean(),
 }).required();
 
 const LoginForm = ({
   isLoading,
   handler
 }) => {
-
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
@@ -42,6 +42,10 @@ const LoginForm = ({
         User password
       </label>
       <input {...register("password")} type='password' id='pass' />
+      <label>
+        <input {...register("rememberMe")} type="checkbox" />
+        Remember me
+      </label>
       <ErrorMessage errors={errors} name="password" />
       <LoadingButton
         style={{ backgroundColor: '#00308F', marginTop: 25 }}
