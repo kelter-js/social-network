@@ -581,6 +581,7 @@ const initialState = {
     login: null,
     isAuthenticated: false,
     status: "",
+    loginError: null,
   },
   loginData: {
     password: "",

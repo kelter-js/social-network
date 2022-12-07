@@ -20,6 +20,8 @@ class Actions {
       'setUserData': 'SET_USER_DATA',
       'setUserStatus': 'SET_USER_STATUS',
       'logoutUser': 'LOGOUT_USER',
+      'setLoginError': 'LOGIN_ERROR',
+      'removeLoginError': 'REMOVE_LOGIN_ERROR',
     }
   }
 
@@ -27,6 +29,19 @@ class Actions {
     return {
       type: this.#actionTypes.post,
       text,
+    }
+  }
+
+  removeLoginError = () => {
+    return {
+      type: this.#actionTypes.removeLoginError,
+    }
+  }
+
+  loginError = (error) => {
+    return {
+      type: this.#actionTypes.setLoginError,
+      error,
     }
   }
 
@@ -162,4 +177,6 @@ export const {
   setUserProfile,
   setUserData,
   logoutUser,
+  loginError,
+  removeLoginError
 } = new Actions();

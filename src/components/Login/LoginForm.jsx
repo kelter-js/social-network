@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import * as yup from "yup";
 import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
+import Alert from '@mui/material/Alert';
 
 const schema = yup.object({
   email: yup
@@ -17,18 +18,28 @@ const schema = yup.object({
   rememberMe: yup.boolean(),
 }).required();
 
-const LoginForm = ({
-  isLoading,
-  handler
-}) => {
+const LoginForm = ({ isLoading, handler, isLoginFailed }) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
   });
 
+  const [error, setError] = useState(isLoginFailed);
+
+  useEffect(() => {
+    setError(isLoginFailed);
+  }, [isLoginFailed]);
+
+  const onChange = () => {
+    if (error) {
+      setError(null);
+    }
+  };
+
   return (
     <form
       onSubmit={handleSubmit((data) => {
+        setError(null);
         handler(data);
       })}
       style={{ display: 'flex', flexDirection: 'column' }}
@@ -36,17 +47,20 @@ const LoginForm = ({
       <label htmlFor='login'>
         User login
       </label>
-      <input {...register("email")} type='email' id='login' />
+      <input {...register("email", { onChange })} type='email' id='login' />
       <ErrorMessage errors={errors} name="email" />
       <label htmlFor='login'>
         User password
       </label>
-      <input {...register("password")} type='password' id='pass' />
+      <input {...register("password", { onChange })} type='password' id='pass' />
       <label>
         <input {...register("rememberMe")} type="checkbox" />
         Remember me
       </label>
       <ErrorMessage errors={errors} name="password" />
+
+      {error && <Alert severity="error">{error}</Alert>}
+
       <LoadingButton
         style={{ backgroundColor: '#00308F', marginTop: 25 }}
         variant='contained'

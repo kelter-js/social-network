@@ -16,6 +16,8 @@ import { setUserProfile } from './setUserProfile.js';
 import { setUserData } from './setUserData.js';
 import { setUserLogout } from './setUserLogout.js';
 import { setUserStatus } from './setUserStatus.js';
+import { setUserLoginError } from './setUserLoginError.js';
+import { removeLoginError } from './removeLoginError.js';
 
 const reducers = (state, action) => {
   const actions = {
@@ -36,6 +38,8 @@ const reducers = (state, action) => {
     'SET_USER_DATA': (state, action) => setUserData(state, action),
     'LOGOUT_USER': (state, action) => setUserLogout(state, action),
     'SET_USER_STATUS': (state, action) => setUserStatus(state, action),
+    'LOGIN_ERROR': (state, action) => setUserLoginError(state, action),
+    'REMOVE_LOGIN_ERROR': (state, action) => removeLoginError(state, action),
   }
 
   const currentAction = actions[action.type];
