@@ -10,7 +10,6 @@ const updateUserStatus = (status, id) => {
         }
       })
   };
-
 };
 
 export default updateUserStatus;

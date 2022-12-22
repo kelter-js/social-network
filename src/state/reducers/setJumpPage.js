@@ -3,4 +3,4 @@ const setJumpPage = (state, action) => {
   return state;
 }
 
-export { setJumpPage }
+export default setJumpPage;

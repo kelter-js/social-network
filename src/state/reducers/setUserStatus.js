@@ -4,4 +4,4 @@ const setUserStatus = (state, action) => {
   return state;
 }
 
-export { setUserStatus }
+export default setUserStatus;

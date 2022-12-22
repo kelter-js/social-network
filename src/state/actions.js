@@ -23,6 +23,7 @@ class Actions {
       'setLoginError': 'LOGIN_ERROR',
       'removeLoginError': 'REMOREMOVE_LOGIN_ERRORVE_LOGIN_ERROR',
       'setAuthenticating': 'SET_AUTHENTICATNG',
+      'setRequestFrame': 'SET_REQUEST_FRAME',
     }
   }
 
@@ -57,6 +58,12 @@ class Actions {
     return {
       type: this.#actionTypes.setLoadingState,
       state,
+    }
+  }
+
+  setRequestFrame = () => {
+    return {
+      type: this.#actionTypes.setRequestFrame,
     }
   }
 
@@ -187,5 +194,6 @@ export const {
   logoutUser,
   loginError,
   removeLoginError,
-  setAuthenticating
+  setAuthenticating,
+  setRequestFrame
 } = new Actions();

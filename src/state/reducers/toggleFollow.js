@@ -7,4 +7,4 @@ const toggleFollow = (state, action) => {
   return state;
 }
 
-export { toggleFollow }
+export default toggleFollow;

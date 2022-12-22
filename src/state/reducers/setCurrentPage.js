@@ -3,4 +3,4 @@ const setCurrentPage = (state, action) => {
   return state;
 }
 
-export { setCurrentPage }
+export default setCurrentPage;

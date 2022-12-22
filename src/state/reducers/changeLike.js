@@ -8,4 +8,4 @@ const changeLikeState = (state, action) => {
   return state;
 }
 
-export { changeLikeState }
+export default changeLikeState;

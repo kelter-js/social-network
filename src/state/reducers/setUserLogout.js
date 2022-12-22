@@ -10,4 +10,4 @@ const setUserLogout = (state) => {
   return state;
 }
 
-export { setUserLogout }
+export default setUserLogout;

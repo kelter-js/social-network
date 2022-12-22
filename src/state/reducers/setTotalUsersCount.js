@@ -3,4 +3,4 @@ const setTotalUsersCount = (state, action) => {
   return state;
 }
 
-export { setTotalUsersCount }
+export default setTotalUsersCount;

@@ -3,4 +3,4 @@ const updateMaxJumpIndexAttention = (state, action) => {
   return state;
 }
 
-export { updateMaxJumpIndexAttention }
+export default updateMaxJumpIndexAttention;

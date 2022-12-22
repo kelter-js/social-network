@@ -490,6 +490,7 @@ const initialState = {
     ],
     follow: 'Follow',
     unfollow: 'Unfollow',
+    lastRequestFrame: null,
   },
   pageContent: {
     settingsButton: 'settings',
@@ -592,4 +593,4 @@ const initialState = {
   handlers: InputHandlers,
 }
 
-export { initialState }
+export default initialState;

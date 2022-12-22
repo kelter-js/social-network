@@ -6,4 +6,4 @@ const setUserLoginError = (state, action) => {
   return state;
 }
 
-export { setUserLoginError }
+export default setUserLoginError;

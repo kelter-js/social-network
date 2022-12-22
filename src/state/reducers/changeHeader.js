@@ -4,4 +4,4 @@ const changeHeader = (state, action) => {
   return state;
 }
 
-export { changeHeader }
+export default changeHeader;

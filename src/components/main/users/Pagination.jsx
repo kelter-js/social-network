@@ -85,7 +85,7 @@ const Pagination = ({
                 className='users__pagination-index-field'
               />
             </label>
-            <button type='submit' className='users__pagination-submit'>
+            <button disabled={isLoading} type='submit' className='users__pagination-submit'>
               {jumpToPageText}
             </button>
           </form>

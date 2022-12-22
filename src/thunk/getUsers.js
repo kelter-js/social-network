@@ -3,6 +3,7 @@ import {
   setTotalUsersCount,
   setLoadingState,
   setUsers,
+  setRequestFrame
 } from '../state/actions';
 import { randomInteger, fetchImageUrl } from '../utils/service';
 
@@ -11,6 +12,7 @@ const getUsers = ({
   pageSize,
   url,
   locations,
+  lastFrame
 }) => {
   const fillUserData = async (data) => {
     return await Promise.all(data.items.map(async (item) => {
@@ -24,8 +26,11 @@ const getUsers = ({
       return item;
     }));
   };
+
   return (dispatch) => {
     dispatch(setLoadingState(true));
+    dispatch(setRequestFrame());
+    const currentFrame = Date.now();
 
     userAPI
       .getUserList(currentPage, pageSize)
@@ -33,7 +38,9 @@ const getUsers = ({
         const totalPagesAmount = Math.ceil(data.totalCount / pageSize);
         dispatch(setTotalUsersCount(totalPagesAmount));
         const templatedUserList = await fillUserData(data);
-        dispatch(setUsers(templatedUserList));
+        if (currentFrame > lastFrame) {
+          dispatch(setUsers(templatedUserList));
+        }
       })
       .finally(() => dispatch(setLoadingState(false)));
   };

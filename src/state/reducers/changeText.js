@@ -4,4 +4,4 @@ const changeText = (state, action) => {
   return state;
 }
 
-export { changeText }
+export default changeText;

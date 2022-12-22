@@ -4,4 +4,4 @@ const setUserProfile = (state, action) => {
   return state;
 }
 
-export { setUserProfile }
+export default setUserProfile;

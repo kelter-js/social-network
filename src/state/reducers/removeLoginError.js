@@ -6,4 +6,4 @@ const removeLoginError = (state, action) => {
   return state;
 }
 
-export { removeLoginError }
+export default removeLoginError;

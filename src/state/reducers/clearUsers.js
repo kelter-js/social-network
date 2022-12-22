@@ -4,4 +4,4 @@ const clearUsers = (state, action) => {
   return state;
 }
 
-export { clearUsers }
+export default clearUsers;

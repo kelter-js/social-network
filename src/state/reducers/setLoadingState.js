@@ -3,4 +3,4 @@ const setLoadingState = (state, action) => {
   return state;
 }
 
-export { setLoadingState }
+export default setLoadingState;

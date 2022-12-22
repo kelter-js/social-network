@@ -8,4 +8,4 @@ const setUserData = (state, action) => {
   return state;
 }
 
-export { setUserData }
+export default setUserData;

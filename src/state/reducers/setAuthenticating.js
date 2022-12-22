@@ -3,4 +3,4 @@ const setAuthenticating = (state, action) => {
   return state;
 }
 
-export { setAuthenticating }
+export default setAuthenticating;

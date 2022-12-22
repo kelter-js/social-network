@@ -1,24 +1,25 @@
-import { addMessage } from './reducers/addMessage';
-import { addPost } from './reducers/addPost';
-import { changeHeader } from './reducers/changeHeader';
-import { changeLikeState } from './reducers/changeLike';
-import { changeText } from './reducers/changeText';
-import { initialState } from './initialState';
-import { setUsers } from './reducers/setUsers';
-import { toggleFollow } from './reducers/toggleFollow';
-import { setTotalUsersCount } from './reducers/setTotalUsersCount';
-import { setCurrentPage } from './reducers/setCurrentPage';
-import { clearUsers } from './reducers/clearUsers';
-import { setJumpPage } from './reducers/setJumpPage';
-import { updateMaxJumpIndexAttention } from './reducers/updateMaxJumpIndexAttention';
-import { setLoadingState } from './reducers/setLoadingState';
-import { setUserProfile } from './reducers/setUserProfile';
-import { setUserData } from './reducers/setUserData';
-import { setUserLogout } from './reducers/setUserLogout';
-import { setUserStatus } from './reducers/setUserStatus';
-import { setUserLoginError } from './reducers/setUserLoginError';
-import { removeLoginError } from './reducers/removeLoginError';
-import { setAuthenticating } from './reducers/setAuthenticating';
+import addMessage from './reducers/addMessage';
+import addPost from './reducers/addPost';
+import changeHeader from './reducers/changeHeader';
+import changeLikeState from './reducers/changeLike';
+import changeText from './reducers/changeText';
+import initialState from './initialState';
+import setUsers from './reducers/setUsers';
+import toggleFollow from './reducers/toggleFollow';
+import setTotalUsersCount from './reducers/setTotalUsersCount';
+import setCurrentPage from './reducers/setCurrentPage';
+import clearUsers from './reducers/clearUsers';
+import setJumpPage from './reducers/setJumpPage';
+import updateMaxJumpIndexAttention from './reducers/updateMaxJumpIndexAttention';
+import setLoadingState from './reducers/setLoadingState';
+import setUserProfile from './reducers/setUserProfile';
+import setUserData from './reducers/setUserData';
+import setUserLogout from './reducers/setUserLogout';
+import setUserStatus from './reducers/setUserStatus';
+import setUserLoginError from './reducers/setUserLoginError';
+import removeLoginError from './reducers/removeLoginError';
+import setAuthenticating from './reducers/setAuthenticating';
+import setRequestFrame from './reducers/setRequestFrame';
 
 const reducer = (state, action) => {
   const actions = {
@@ -42,6 +43,7 @@ const reducer = (state, action) => {
     'SET_USER_STATUS': (state, action) => setUserStatus(state, action),
     'LOGIN_ERROR': (state, action) => setUserLoginError(state, action),
     'REMOVE_LOGIN_ERROR': (state, action) => removeLoginError(state, action),
+    'SET_REQUEST_FRAME': (state, action) => setRequestFrame(state, action),
   }
 
   const currentAction = actions[action.type];

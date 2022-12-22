@@ -25,7 +25,6 @@ const UserList = ({ users, isLoading, loadUsers }) => {
         firstPage={users.firstPage}
         currentPage={users.currentPage}
         totalPages={users.totalPagesAmount}
-        shouldHide={isLoading}
       />
 
       {users.userList.slice(0, users.currentLoadingAmount).map((user) => {

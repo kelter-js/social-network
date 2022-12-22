@@ -16,4 +16,4 @@ const addMessage = (state, action) => {
   return state;
 };
 
-export { addMessage }
+export default addMessage;

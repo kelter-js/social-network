@@ -17,4 +17,4 @@ const addPost = (state, action) => {
   return state;
 }
 
-export { addPost }
+export default addPost;

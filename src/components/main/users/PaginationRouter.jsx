@@ -1,5 +1,5 @@
 import React from 'react';
-import PageContainer from './PageContainer';
+import Page from './PageContainer';
 
 const PaginationRouter = ({
   pages,
@@ -15,9 +15,9 @@ const PaginationRouter = ({
 
   const startRoute = (
     <>
-      <PageContainer currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
-      <PageContainer currentPage={pages + 1} disable={isLoading} />
-      <PageContainer currentPage={pages + 2} disable={isLoading} />
+      <Page currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
+      <Page currentPage={pages + 1} disable={isLoading} />
+      <Page currentPage={pages + 2} disable={isLoading} />
       <li className='users__pagination-item'><p>...</p></li>
     </>
   );
@@ -27,30 +27,30 @@ const PaginationRouter = ({
 
   const middleRoute = (
     <>
-      {isSecondary && <PageContainer currentPage={firstPage} disable={isLoading} />}
+      {isSecondary && <Page currentPage={firstPage} disable={isLoading} />}
       {isSecondary && <li className='users__pagination-item'><p>...</p></li>}
-      <PageContainer currentPage={pages - 1} disable={isLoading} />
-      <PageContainer currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
-      <PageContainer currentPage={pages + 1} disable={isLoading} />
+      <Page currentPage={pages - 1} disable={isLoading} />
+      <Page currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
+      <Page currentPage={pages + 1} disable={isLoading} />
       {isPenult && <li className='users__pagination-item'><p>...</p></li>}
-      {isPenult && <PageContainer currentPage={totalPages} disable={isLoading} />}
+      {isPenult && <Page currentPage={totalPages} disable={isLoading} />}
     </>
   );
 
   const endRoute = (
     <>
       <li className='users__pagination-item'><p>...</p></li>
-      <PageContainer currentPage={pages - 2} disable={isLoading} />
-      <PageContainer currentPage={pages - 1} disable={isLoading} />
-      <PageContainer currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
+      <Page currentPage={pages - 2} disable={isLoading} />
+      <Page currentPage={pages - 1} disable={isLoading} />
+      <Page currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
     </>
   );
 
   switch (pages) {
     case totalPages:
-      return (isStart) ? (<PageContainer currentPage={firstPage} disable={isLoading} />) : endRoute;
+      return (isStart) ? (<Page currentPage={firstPage} disable={isLoading} />) : endRoute;
     case firstPage:
-      return (isStart) ? startRoute : (<PageContainer currentPage={totalPages} disable={isLoading} />);
+      return (isStart) ? startRoute : (<Page currentPage={totalPages} disable={isLoading} />);
     default:
       return middleRoute;
   }
