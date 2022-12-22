@@ -1,7 +1,5 @@
 import { profileAPI } from '../API/api';
-import {
-  setUserStatus,
-} from '../state/actionManager';
+import { setUserStatus } from '../state/actions';
 
 const getUserStatus = (userId) => {
   return (dispatch) => {

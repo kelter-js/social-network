@@ -1,5 +1,5 @@
 import userAPI from '../API/api';
-import { switchFollow } from '../state/actionManager';
+import { switchFollow } from '../state/actions';
 
 const toggleFollow = ({
   id,

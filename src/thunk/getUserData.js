@@ -1,5 +1,5 @@
 import userAPI from '../API/api';
-import { setUserProfile, setLoadingState } from '../state/actionManager';
+import { setUserProfile, setLoadingState } from '../state/actions';
 
 const getUserData = ({
   userList,

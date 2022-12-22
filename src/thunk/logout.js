@@ -1,5 +1,5 @@
 import { authAPI } from '../API/api';
-import { setLoadingState, logoutUser } from '../state/actionManager';
+import { setLoadingState, logoutUser } from '../state/actions';
 
 const logout = (dispatch) => {
   dispatch(setLoadingState(true));

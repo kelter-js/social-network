@@ -1,12 +1,12 @@
 import React from 'react';
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@mui/material/Button';
 
 const schema = yup.object({
-  postText: yup.string().trim().required("Your message should not be empty"),
+  postText: yup.string().trim().required('Your message should not be empty'),
 }).required();
 
 const PostCreationForm = ({ defaultText, addPost }) => {
@@ -17,7 +17,7 @@ const PostCreationForm = ({ defaultText, addPost }) => {
 
   const onSubmit = (text) => {
     addPost(text);
-    reset({ postText: "" });
+    reset({ postText: '' });
   }
 
   return (
@@ -26,16 +26,16 @@ const PostCreationForm = ({ defaultText, addPost }) => {
         {defaultText}
 
         <textarea
-          {...register("postText")}
+          {...register('postText')}
           className='news__message'
           placeholder='...start your message here.'
         />
-        <ErrorMessage errors={errors} name="postText" />
+        <ErrorMessage errors={errors} name='postText' />
       </label>
 
       <Button
-        variant="contained"
-        color="success"
+        variant='contained'
+        color='success'
         type='submit'>
         Send new post
       </Button>

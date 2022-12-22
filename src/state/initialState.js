@@ -1,5 +1,5 @@
-import { getCurrentHeader } from '../service.js';
-import { InputHandlers } from '../service.js';
+import { getCurrentHeader } from '../utils/service';
+import { InputHandlers } from '../utils/service';
 
 const headers = {
   profile: 'Профиль пользователя',
@@ -525,35 +525,35 @@ const initialState = {
       aboutMe: 'User information',
       contacts: [
         [
-          "facebook",
+          'facebook',
           1
         ],
         [
-          "website",
+          'website',
           1
         ],
         [
-          "vk",
+          'vk',
           1
         ],
         [
-          "twitter",
+          'twitter',
           1
         ],
         [
-          "instagram",
+          'instagram',
           1
         ],
         [
-          "youtube",
+          'youtube',
           1
         ],
         [
-          "github",
+          'github',
           1
         ],
         [
-          "mainLink",
+          'mainLink',
           1
         ]
       ],
@@ -580,14 +580,15 @@ const initialState = {
     email: null,
     login: null,
     isAuthenticated: false,
-    status: "",
+    status: '',
     loginError: null,
   },
   loginData: {
-    password: "",
-    email: "",
+    password: '',
+    email: '',
   },
   isLoading: false,
+  isAuthenticating: false,
   handlers: InputHandlers,
 }
 

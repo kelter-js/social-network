@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import getUserStatus from '../../thunk/getUserStatus';
-import updateUserStatus from '../../thunk/updateUserStatus';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import getUserStatus from '../../thunk/getUserStatus';
+import updateUserStatus from '../../thunk/updateUserStatus';
+import useCallback from '../../hooks/useCallback';
 
 const mapStateToProps = (state) => {
   return ({
@@ -36,11 +37,8 @@ const Status = ({
     }
   };
 
-  useEffect(() => {
-    setStatusValue(status);
-  }, [status]);
-
-  useEffect(() => {
+  useCallback(() => setStatusValue(status), [status]);
+  useCallback(() => {
     if (id) {
       getUserStatus(id);
     }
@@ -63,12 +61,12 @@ const Status = ({
   };
 
   return showStatus ? (
-    <p ref={statusBar} className='profile__status-text' style={(userId === id) ? { cursor: "pointer" } : { cursor: "unset" }}>
+    <p ref={statusBar} className='profile__status-text' style={(userId === id) ? { cursor: 'pointer' } : { cursor: 'unset' }}>
       {status ?? ''}
     </p>
   ) : (
-    <div className='profile__status-change-container'>
-      <div style={{ width: '100%' }} onClick={e => e.stopPropagation()}>
+    <div className='profile__status-change-container' onClick={e => e.stopPropagation()}>
+      <div style={{ width: '100%' }}>
         <input type='text' onChange={onChange} autoFocus value={statusValue} />
         <button type='button' onClick={onClick}>
           Save changes

@@ -1,6 +1,6 @@
-import { createProfileData, InputHandlers } from '../service.js';
-import { reduceHandler } from './reducers.js';
-import { actionManager } from './actionManager.js';
+import { createProfileData, InputHandlers } from '../service';
+import { reduceHandler } from './reducers';
+import { actionManager } from './actions';
 
 class Store {
   #state;

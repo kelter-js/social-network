@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
-import * as yup from "yup";
+import * as yup from 'yup';
 import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from "react-hook-form";
-import Alert from '@mui/material/Alert';
+import { useForm } from 'react-hook-form';
+import { TextField, Alert, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
+import useCallback from '../../hooks/useCallback';
 
 const schema = yup.object({
   email: yup
@@ -13,8 +14,8 @@ const schema = yup.object({
     .required(),
   password: yup
     .string()
-    .required('No password provided.')
-    .min(8, 'Password is too short - should be 8 chars minimum.'),
+    .required('No password provided')
+    .min(8, 'Password is too short - should be 8 chars minimum'),
   rememberMe: yup.boolean(),
 }).required();
 
@@ -26,9 +27,7 @@ const LoginForm = ({ isLoading, handler, isLoginFailed }) => {
 
   const [error, setError] = useState(isLoginFailed);
 
-  useEffect(() => {
-    setError(isLoginFailed);
-  }, [isLoginFailed]);
+  useCallback(() => setError(isLoginFailed), [isLoginFailed]);
 
   const onChange = () => {
     if (error) {
@@ -44,22 +43,17 @@ const LoginForm = ({ isLoading, handler, isLoginFailed }) => {
       })}
       style={{ display: 'flex', flexDirection: 'column' }}
     >
-      <label htmlFor='login'>
-        User login
-      </label>
-      <input {...register("email", { onChange })} type='email' id='login' />
-      <ErrorMessage errors={errors} name="email" />
-      <label htmlFor='login'>
-        User password
-      </label>
-      <input {...register("password", { onChange })} type='password' id='pass' />
-      <label>
-        <input {...register("rememberMe")} type="checkbox" />
-        Remember me
-      </label>
-      <ErrorMessage errors={errors} name="password" />
+      <TextField {...register('email', { onChange })} style={{ marginBottom: 15 }} label='User login' type='email' id='login' />
+      <ErrorMessage errors={errors} name='email' />
 
-      {error && <Alert severity="error">{error}</Alert>}
+      <TextField {...register('password', { onChange })} label='User password' type='password' id='pass' />
+      <ErrorMessage errors={errors} name='password' />
+
+      <FormGroup>
+        <FormControlLabel control={<Checkbox {...register('rememberMe')} />} label='Remember me' />
+      </FormGroup>
+
+      {error && <Alert severity='error'>{error}</Alert>}
 
       <LoadingButton
         style={{ backgroundColor: '#00308F', marginTop: 25 }}

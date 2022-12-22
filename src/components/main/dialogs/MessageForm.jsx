@@ -1,11 +1,11 @@
 import React from 'react';
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const schema = yup.object({
-  messageText: yup.string().trim().required("Your message should not be empty"),
+  messageText: yup.string().trim().required('Your message should not be empty'),
 }).required();
 
 const MessageForm = ({ messageInfo, sendMessage }) => {
@@ -16,7 +16,7 @@ const MessageForm = ({ messageInfo, sendMessage }) => {
 
   const onSubmit = (text) => {
     sendMessage(text);
-    reset({ messageText: "" });
+    reset({ messageText: '' });
   }
 
   return (
@@ -27,12 +27,12 @@ const MessageForm = ({ messageInfo, sendMessage }) => {
       <label className='page-main__dialogs-label'>
         {messageInfo}
         <textarea
-          {...register("messageText")}
+          {...register('messageText')}
           className='page-main__dialogs-text'
           name='messageText'
           placeholder='...type your message here.'
         />
-        <ErrorMessage errors={errors} name="messageText" />
+        <ErrorMessage errors={errors} name='messageText' />
       </label>
       <button
         className='page-main__send-message'

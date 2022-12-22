@@ -3,8 +3,8 @@ import {
   setTotalUsersCount,
   setLoadingState,
   setUsers,
-} from '../state/actionManager';
-import { randomInteger, fetchImageUrl } from '../service';
+} from '../state/actions';
+import { randomInteger, fetchImageUrl } from '../utils/service';
 
 const getUsers = ({
   currentPage,

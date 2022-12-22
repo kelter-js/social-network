@@ -2,14 +2,12 @@ import { authAPI } from '../API/api';
 import userAPI from '../API/api';
 import {
   setUserData,
-  setLoadingState,
   loginError,
   removeLoginError
-} from '../state/actionManager';
+} from '../state/actions';
 
 const authorizeUser = (data) => {
   return (dispatch) => {
-    dispatch(setLoadingState(true));
     dispatch(removeLoginError());
 
     authAPI
@@ -29,9 +27,6 @@ const authorizeUser = (data) => {
         } else {
           dispatch(loginError(result.data.messages[0]));
         }
-      })
-      .finally(() => {
-        dispatch(setLoadingState(false));
       });
   };
 };
