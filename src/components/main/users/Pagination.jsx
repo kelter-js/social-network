@@ -51,6 +51,14 @@ const Pagination = ({
     }
   }
 
+  const getMaxLengthElemClass = () => {
+    return maxJumpIndexAttention ? (
+      'users__pagination-info users__pagination-info--attention'
+    ) : (
+      'users__pagination-info'
+    );
+  }
+
   return (
     shouldHide ? null : (
       <div className='users__pagination-wrapper'>
@@ -90,9 +98,7 @@ const Pagination = ({
             </button>
           </form>
           {!isLoading && (
-            <p
-              className={maxJumpIndexAttention ? 'users__pagination-info users__pagination-info--attention' : 'users__pagination-info'}
-            >
+            <p className={getMaxLengthElemClass()}>
               {maxJumpLengthText} {`${totalPages}`.length}
             </p>
           )}

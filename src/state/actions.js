@@ -61,9 +61,10 @@ class Actions {
     }
   }
 
-  setRequestFrame = () => {
+  setRequestFrame = (mark) => {
     return {
       type: this.#actionTypes.setRequestFrame,
+      mark,
     }
   }
 
@@ -88,10 +89,11 @@ class Actions {
     }
   }
 
-  setUsers = (userList) => {
+  setUsers = ({ list, mark }) => {
     return {
       type: this.#actionTypes.setUsers,
-      userList,
+      list,
+      mark
     }
   }
 

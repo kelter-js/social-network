@@ -22,7 +22,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         pageSize,
         url: stateProps.users.defaultProfilePicture,
         locations: stateProps.users.defaultLocations,
-        lastFrame: stateProps.users.lastRequestFrame ?? 0,
       }));
     },
   };

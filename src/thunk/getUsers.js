@@ -11,8 +11,7 @@ const getUsers = ({
   currentPage,
   pageSize,
   url,
-  locations,
-  lastFrame
+  locations
 }) => {
   const fillUserData = async (data) => {
     return await Promise.all(data.items.map(async (item) => {
@@ -29,8 +28,8 @@ const getUsers = ({
 
   return (dispatch) => {
     dispatch(setLoadingState(true));
-    dispatch(setRequestFrame());
-    const currentFrame = Date.now();
+    const requestMark = Date.now();
+    dispatch(setRequestFrame(requestMark));
 
     userAPI
       .getUserList(currentPage, pageSize)
@@ -38,11 +37,8 @@ const getUsers = ({
         const totalPagesAmount = Math.ceil(data.totalCount / pageSize);
         dispatch(setTotalUsersCount(totalPagesAmount));
         const templatedUserList = await fillUserData(data);
-        if (currentFrame > lastFrame) {
-          dispatch(setUsers(templatedUserList));
-        }
-      })
-      .finally(() => dispatch(setLoadingState(false)));
+        dispatch(setUsers({ list: templatedUserList, mark: requestMark }));
+      });
   };
 };
 

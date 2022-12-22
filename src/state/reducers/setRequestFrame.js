@@ -1,7 +1,7 @@
-const setRequestFrame = (state) => {
+const setRequestFrame = (state, action) => {
   state.users = {
     ...state.users,
-    lastRequestFrame: Date.now(),
+    lastRequestFrame: action.mark,
   }
 
   return state;
