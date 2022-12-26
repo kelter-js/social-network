@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import Loading from '../../utils/Loading';
 import authorizeUser from '../../thunk/authorizeUser';
 import LoginForm from './LoginForm';
+import { getLoadingState, getAuthenticatingState } from '../../state/selectors/serviceSelectors';
+import { getLoginError } from '../../state/selectors/userSelectors';
 
 const mapStateToProps = (state) => ({
-  isLoading: state.isLoading,
-  isLoginFailed: state.userData.loginError,
-  isAuthenticating: state.isAuthenticating,
+  isLoading: getLoadingState(state),
+  isLoginFailed: getLoginError(state),
+  isAuthenticating: getAuthenticatingState(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

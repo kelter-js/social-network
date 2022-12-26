@@ -4,12 +4,13 @@ import { compose } from 'redux';
 import getUserStatus from '../../thunk/getUserStatus';
 import updateUserStatus from '../../thunk/updateUserStatus';
 import useCallback from '../../hooks/useCallback';
+import { getCurrentId, getCurrentUserStatus, getUserId } from '../../state/selectors/userSelectors';
 
 const mapStateToProps = (state) => {
   return ({
-    id: state.pageContent.currentUser.userId || state.userData.id,
-    status: state.pageContent.currentUser.status,
-    userId: state.userData.id,
+    id: getCurrentId(state),
+    status: getCurrentUserStatus(state),
+    userId: getUserId(state),
   })
 };
 

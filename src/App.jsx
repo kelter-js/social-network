@@ -5,10 +5,11 @@ import authenticateUser from './thunk/authenticateUser';
 import ComponentRouter from './ComponentRouter';
 import useCallback from './hooks/useCallback';
 import useInitiatePath from './hooks/useInitiatePath';
+import { getMenuPaths, getAuthenticationState } from './state/selectors/serviceSelectors';
 
 const mapStateToProps = (state) => ({
-  defaultMenuPaths: state.defaultMenuPaths,
-  isAuthenticated: state.userData.isAuthenticated,
+  defaultMenuPaths: getMenuPaths(state),
+  isAuthenticated: getAuthenticationState(state),
 });
 const mapDispatchToProps = (dispatch) => ({ authenticate: () => dispatch(authenticateUser) });
 

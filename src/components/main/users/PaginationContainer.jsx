@@ -7,15 +7,23 @@ import {
   setCurrentPage,
 } from '../../../state/actions';
 import Pagination from './Pagination';
+import { getLoadingState } from '../../../state/selectors/serviceSelectors';
+import {
+  getPageToJump,
+  getMaxIndex,
+  getJumpLength,
+  getJumpText,
+  getEnterHandler
+ } from '../../../state/selectors/paginationSelectors';
 
 const mapStateToProps = (state) => {
   return {
-    jumpToPage: state.users.jumpToPage,
-    maxJumpIndexAttention: state.users.maxJumpIndexAttention,
-    maxJumpLengthText: state.users.maxJumpLengthText,
-    isLoading: state.isLoading,
-    jumpToPageText: state.users.jumpToPageText,
-    onKeyDown: state.handlers.onEnter,
+    jumpToPage: getPageToJump(state),
+    maxJumpIndexAttention: getMaxIndex(state),
+    maxJumpLengthText: getJumpLength(state),
+    isLoading: getLoadingState(state),
+    jumpToPageText: getJumpText(state),
+    onKeyDown: getEnterHandler(state),
   }
 }
 

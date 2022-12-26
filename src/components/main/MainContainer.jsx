@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Main from './Main';
 import { updateHeader, setUserProfile } from '../../state/actions';
+import { getPageContent } from '../../state/selectors/mainComponentSelectors';
 
-const mapStateToProps = (state) => ({ pageContent: state.pageContent });
+const mapStateToProps = (state) => ({ pageContent: getPageContent(state) });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps;

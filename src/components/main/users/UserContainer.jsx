@@ -3,14 +3,21 @@ import { compose } from 'redux';
 import User from './User';
 import toggleFollow from '../../../thunk/toggleFollow';
 import getUserData from '../../../thunk/getUserData';
+import {
+  getUnfollow,
+  getFollow,
+  getDefaultStatus,
+  getUserList,
+  getMenuPath
+ } from '../../../state/selectors/userSelectors';
 
 const mapStateToProps = (state) => {
   return {
-    unfollow: state.users.unfollow,
-    follow: state.users.follow,
-    defaultStatus: state.users.defaultStatus,
-    userList: state.users.userList,
-    path: `/${state.defaultMenu[0]}`,
+    unfollow: getUnfollow(state),
+    follow: getFollow(state),
+    defaultStatus: getDefaultStatus(state),
+    userList: getUserList(state),
+    path: getMenuPath(state),
   };
 };
 

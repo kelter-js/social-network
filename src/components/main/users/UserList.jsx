@@ -45,4 +45,5 @@ const UserList = ({ users, isLoading, loadUsers }) => {
     </div>
   );
 }
+
 export default UserList;

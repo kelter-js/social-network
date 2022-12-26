@@ -2,11 +2,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import UserList from './UserList';
 import getUsers from '../../../thunk/getUsers';
+import { getUsersSelector } from '../../../state/selectors/userSelectors';
+import { getLoadingState } from '../../../state/selectors/serviceSelectors';
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users,
-    isLoading: state.isLoading,
+    users: getUsersSelector(state),
+    isLoading: getLoadingState(state),
   };
 };
 
