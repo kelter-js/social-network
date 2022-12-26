@@ -1,5 +1,5 @@
-export const getMessageInfo = (state) => {
-  return state.chat.messageInfo;
+export const getMessagePlaceholder = (state) => {
+  return state.chat.messagePlaceholder;
 };
 
 export const getChat = (state) => {

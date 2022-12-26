@@ -5,7 +5,7 @@ const Message = ({
   addMessage,
   currentDialog,
   messages,
-  messageInfo
+  placeholder
 }) => {
   const sendMessage = (messageText) => {
     addMessage(currentDialog, messageText);
@@ -29,7 +29,7 @@ const Message = ({
       {messagesList}
 
       <MessageForm
-        messageInfo={messageInfo}
+        placeholder={placeholder}
         sendMessage={sendMessage}
       />
     </div>

@@ -438,7 +438,7 @@ const initialState = {
       'Another One',
       'Russian Caliber',
     ],
-    messageInfo: 'New message text...',
+    messagePlaceholder: 'New message text...',
   },
   users: {
     userList: [],

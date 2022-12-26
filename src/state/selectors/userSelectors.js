@@ -29,7 +29,7 @@ export const getLoginError = (state) => {
 };
 
 export const getCurrentUserData = (state) => {
-  return state.state.userData;
+  return state.userData;
 };
 
 const getCurrentIdSelector = (state) => {

@@ -8,7 +8,7 @@ const schema = yup.object({
   messageText: yup.string().trim().required('Your message should not be empty'),
 }).required();
 
-const MessageForm = ({ messageInfo, sendMessage }) => {
+const MessageForm = ({ placeholder, sendMessage }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
@@ -25,7 +25,7 @@ const MessageForm = ({ messageInfo, sendMessage }) => {
       className='page-main__dialogs-form'
     >
       <label className='page-main__dialogs-label'>
-        {messageInfo}
+        {placeholder}
         <textarea
           {...register('messageText')}
           className='page-main__dialogs-text'
