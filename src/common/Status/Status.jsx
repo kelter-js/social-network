@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import getUserStatus from '../../thunk/getUserStatus';
 import updateUserStatus from '../../thunk/updateUserStatus';
-import useCallback from '../../hooks/useCallback';
 import { getCurrentId, getCurrentUserStatus, getUserId } from '../../state/selectors/userSelectors';
 
 const mapStateToProps = (state) => {
@@ -38,8 +37,9 @@ const Status = ({
     }
   };
 
-  useCallback(() => setStatusValue(status), [status]);
-  useCallback(() => {
+  useEffect(() => setStatusValue(status), [status]);
+
+  useEffect(() => {
     if (id) {
       getUserStatus(id);
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Feed from './FeedContainer';
 
 const FeedList = (props) => {
@@ -7,4 +7,4 @@ const FeedList = (props) => {
   );
 }
 
-export default FeedList;
+export default memo(FeedList);

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import authenticateUser from './thunk/authenticateUser';
 import ComponentRouter from './ComponentRouter';
-import useCallback from './hooks/useCallback';
 import useInitiatePath from './hooks/useInitiatePath';
 import { getMenuPaths, getAuthenticationState } from './state/selectors/serviceSelectors';
 
@@ -31,8 +30,8 @@ const App = ({
     }
   };
 
-  useCallback(authenticate);
-  useCallback(redirectByCredentials, [isAuthenticated]);
+  useEffect(authenticate, []);
+  useEffect(redirectByCredentials, [isAuthenticated]);
 
   return (<ComponentRouter paths={defaultMenuPaths} />);
 };

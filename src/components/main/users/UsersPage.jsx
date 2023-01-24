@@ -1,6 +1,7 @@
 import React from 'react';
+import Button from '@mui/material/Button';
 
-const Page = ({
+const UsersPage = ({
   currentPage,
   setLoadingState,
   setCurrentPage,
@@ -17,17 +18,19 @@ const Page = ({
     }
   }
 
+  const currentStyle = `users__select-page ${currentPageStyle ? currentPageStyle : ""}`;
+
   return (
     <li className='users__pagination-item'>
-      <button
-        className={currentPageStyle ? `users__select-page ${currentPageStyle}` : 'users__select-page'}
-        type='button'
+      <Button
+        className={currentStyle}
         onClick={changePage}
-        disabled={isLoading || disable}>
+        disabled={isLoading || disable}
+        variant='contained'>
         {currentPage}
-      </button>
+      </Button>
     </li>
   );
 }
 
-export default Page;
+export default UsersPage;

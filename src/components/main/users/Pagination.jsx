@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 import PaginationRouter from './PaginationRouter';
+import Button from '@mui/material/Button';
 
 const Pagination = ({
   maxJumpIndexAttention,
@@ -60,7 +61,7 @@ const Pagination = ({
   }
 
   return (
-    shouldHide ? null : (
+    (shouldHide) ? (null) : (
       <div className='users__pagination-wrapper'>
         <ul className='users__pagination-list'>
           <PaginationRouter
@@ -93,9 +94,13 @@ const Pagination = ({
                 className='users__pagination-index-field'
               />
             </label>
-            <button disabled={isLoading} type='submit' className='users__pagination-submit'>
+            <Button
+              disabled={isLoading}
+              type='submit'
+              className='users__pagination-submit'
+              variant='contained'>
               {jumpToPageText}
-            </button>
+            </Button>
           </form>
           {!isLoading && (
             <p className={getMaxLengthElemClass()}>
@@ -108,4 +113,4 @@ const Pagination = ({
   );
 }
 
-export default Pagination;
+export default memo(Pagination);

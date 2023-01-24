@@ -1,10 +1,10 @@
 import React from 'react';
 import DialogItem from './DialogItem';
 
-const DialogList = (props) => {
+const DialogList = ({ dialogs }) => {
   return (
     <ul className='dialogs__dialog-list'>
-      {props.dialogs.map((dialog, index) => {
+      {dialogs.map((dialog, index) => {
         const path = `/messages/${dialog.split(' ').join('')}`;
         return (
           <DialogItem

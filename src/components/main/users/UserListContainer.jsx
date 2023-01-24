@@ -4,6 +4,7 @@ import UserList from './UserList';
 import getUsers from '../../../thunk/getUsers';
 import { getUsersSelector } from '../../../state/selectors/userSelectors';
 import { getLoadingState } from '../../../state/selectors/serviceSelectors';
+import { memo } from 'react';
 
 const mapStateToProps = (state) => {
   return {
@@ -29,4 +30,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 }
 
-export default compose(connect(mapStateToProps, null, mergeProps))(UserList);
+export default memo(compose(connect(mapStateToProps, null, mergeProps))(UserList));

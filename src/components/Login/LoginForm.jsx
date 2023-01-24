@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import * as yup from 'yup';
 import { ErrorMessage } from '@hookform/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { TextField, Alert, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
-import useCallback from '../../hooks/useCallback';
 
 const schema = yup.object({
   email: yup
@@ -27,7 +26,9 @@ const LoginForm = ({ isLoading, handler, isLoginFailed }) => {
 
   const [error, setError] = useState(isLoginFailed);
 
-  useCallback(() => setError(isLoginFailed), [isLoginFailed]);
+  useEffect(() => {
+    setError(isLoginFailed)
+  }, [isLoginFailed]);
 
   const onChange = () => {
     if (error) {

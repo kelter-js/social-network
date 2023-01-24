@@ -15,11 +15,9 @@ const UserList = ({ users, isLoading, loadUsers }) => {
     <div className='users'>
       {!currentUsersLength && <Loading title='Please wait, loading users...' shouldBeCentered />}
 
-      {!isLoading && (
-        <h3 className='users__header users__text'>
-          {users.header}
-        </h3>
-      )}
+      <h3 className='users__header users__text'>
+        {users.header}
+      </h3>
 
       <Pagination
         firstPage={users.firstPage}
