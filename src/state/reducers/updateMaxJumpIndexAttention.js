@@ -1,5 +1,5 @@
 const updateMaxJumpIndexAttention = (state, action) => {
-  state.users.maxJumpIndexAttention = action.status;
+  state.users.maxJumpIndexAttention = Boolean(action.status);
   return state;
 }
 

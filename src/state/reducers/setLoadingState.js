@@ -1,5 +1,5 @@
 const setLoadingState = (state, action) => {
-  state.isLoading = action.state;
+  state.isLoading = Boolean(action.state);
   return state;
 }
 

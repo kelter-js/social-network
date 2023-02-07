@@ -1,7 +1,9 @@
 const setRequestFrame = (state, action) => {
-  state.users = {
-    ...state.users,
-    lastRequestFrame: action.mark,
+  if (action.mark) {
+    state.users = {
+      ...state.users,
+      lastRequestFrame: action.mark,
+    }
   }
 
   return state;

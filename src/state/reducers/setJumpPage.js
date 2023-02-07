@@ -1,5 +1,8 @@
 const setJumpPage = (state, action) => {
-  state.users.jumpToPage = action.pageIndex;
+  if (action.pageIndex) {
+    state.users.jumpToPage = action.pageIndex;
+  }
+
   return state;
 }
 

@@ -1,6 +1,9 @@
 const setUserProfile = (state, action) => {
-  state.pageContent = {...state.pageContent};
-  state.pageContent.currentUser = action.user
+  if (action.user) {
+    state.pageContent = { ...state.pageContent };
+    state.pageContent.currentUser = action.user;
+  }
+
   return state;
 }
 

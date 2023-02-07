@@ -2,7 +2,6 @@ import addMessage from './reducers/addMessage';
 import addPost from './reducers/addPost';
 import changeHeader from './reducers/changeHeader';
 import changeLikeState from './reducers/changeLike';
-import changeText from './reducers/changeText';
 import initialState from './initialState';
 import setUsers from './reducers/setUsers';
 import toggleFollow from './reducers/toggleFollow';
@@ -25,7 +24,6 @@ const reducer = (state, action) => {
   const actions = {
     'ADD-POST': (state) => addPost(state, action),
     'CHANGE_HEADER': (state, action) => changeHeader(state, action),
-    'CHANGE-TEXT': (state, action) => changeText(state, action),
     'ADD-MESSAGE': (state, action) => addMessage(state, action),
     'CHANGE_LIKE_STATE': (state, action) => changeLikeState(state, action),
     'TOGGLE_FOLLOW': (state, action) => toggleFollow(state, action),

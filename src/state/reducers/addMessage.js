@@ -10,9 +10,15 @@ const addMessage = (state, action) => {
     }
   };
 
-  state.chat = { ...state.chat }
-  state.chat.messages[action.user] = [...state.chat.messages[action.user]];
-  state.chat.messages[action.user].push(createMessage(action.text))
+  if (action.user && action.text) {
+    state.chat = { ...state.chat }
+
+    const previousChatState = state.chat.messages[action.user];
+    state.chat.messages[action.user] = previousChatState ? [...previousChatState] : [];
+
+    state.chat.messages[action.user].push(createMessage(action.text));
+  }
+
   return state;
 };
 

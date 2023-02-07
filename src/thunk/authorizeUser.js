@@ -2,7 +2,7 @@ import { authAPI } from '../API/api';
 import userAPI from '../API/api';
 import {
   setUserData,
-  loginError,
+  setLoginError,
   removeLoginError
 } from '../state/actions';
 
@@ -25,7 +25,7 @@ const authorizeUser = (data) => {
               }));
             });
         } else {
-          dispatch(loginError(result.data.messages[0]));
+          dispatch(setLoginError(result.data.messages[0]));
         }
       });
   };

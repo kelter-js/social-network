@@ -1,5 +1,5 @@
 const setAuthenticating = (state, action) => {
-  state.isAuthenticating = action.state;
+  state.isAuthenticating = Boolean(action.state);
   return state;
 }
 

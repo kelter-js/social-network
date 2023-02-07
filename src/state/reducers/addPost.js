@@ -1,5 +1,5 @@
 const addPost = (state, action) => {
-  const createPost = (text) =>  {
+  const createPost = (text) => {
     return {
       'post': text,
       'likes': 35,
@@ -7,13 +7,15 @@ const addPost = (state, action) => {
     }
   }
 
-  state.pageContent = { ...state.pageContent }
+  if (action.text) {
+    state.pageContent = { ...state.pageContent }
 
-  if (!state.pageContent.currentUser.feed) {
-    state.pageContent.currentUser.feed = [];
+    const previousState = state.pageContent.currentUser.feed;
+    state.pageContent.currentUser.feed = previousState ? [...previousState] : [];
+
+    state.pageContent.currentUser.feed.push(createPost(action.text));
   }
 
-  state.pageContent.currentUser.feed.push(createPost(action.text));
   return state;
 }
 

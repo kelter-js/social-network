@@ -1,8 +1,11 @@
 const setUserLoginError = (state, action) => {
-  state.userData = {
-    ...state.userData,
-    loginError: action.error,
+  if (action.error) {
+    state.userData = {
+      ...state.userData,
+      loginError: action.error,
+    }
   }
+
   return state;
 }
 

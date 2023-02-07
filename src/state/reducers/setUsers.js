@@ -4,9 +4,12 @@ const setUsers = (state, action) => {
     return state;
   }
 
-  state.users = { ...state.users }
-  state.users.userList = action.list;
-  state.isLoading = false;
+  if (action.list) {
+    state.users = { ...state.users }
+    state.users.userList = action.list;
+    state.isLoading = false;
+  }
+
   return state;
 }
 

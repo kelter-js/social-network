@@ -4,7 +4,6 @@ class Actions {
   constructor() {
     this.#actionTypes = {
       'post': 'ADD-POST',
-      'changeText': 'CHANGE-TEXT',
       'message': 'ADD-MESSAGE',
       'changeLikeState': 'CHANGE_LIKE_STATE',
       'header': 'CHANGE_HEADER',
@@ -21,7 +20,7 @@ class Actions {
       'setUserStatus': 'SET_USER_STATUS',
       'logoutUser': 'LOGOUT_USER',
       'setLoginError': 'LOGIN_ERROR',
-      'removeLoginError': 'REMOREMOVE_LOGIN_ERRORVE_LOGIN_ERROR',
+      'removeLoginError': 'REMOVE_LOGIN_ERROR',
       'setAuthenticating': 'SET_AUTHENTICATNG',
       'setRequestFrame': 'SET_REQUEST_FRAME',
     }
@@ -40,7 +39,7 @@ class Actions {
     }
   }
 
-  loginError = (error) => {
+  setLoginError = (error) => {
     return {
       type: this.#actionTypes.setLoginError,
       error,
@@ -132,14 +131,6 @@ class Actions {
     }
   }
 
-  changeText = (text, receiver) => {
-    return {
-      type: this.#actionTypes.changeText,
-      text,
-      receiver,
-    }
-  }
-
   updateHeader = (text) => {
     return {
       type: this.#actionTypes.header,
@@ -187,14 +178,13 @@ export const {
   setTotalUsersCount,
   setCurrentPage,
   switchFollow,
-  changeText,
   setUserStatus,
   changeLikeState,
   addMessage,
   setUserProfile,
   setUserData,
   logoutUser,
-  loginError,
+  setLoginError,
   removeLoginError,
   setAuthenticating,
   setRequestFrame

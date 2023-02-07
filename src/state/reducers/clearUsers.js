@@ -1,6 +1,6 @@
 const clearUsers = (state, action) => {
   state.users = { ...state.users }
-  state.users.userList.length = [];
+  state.users.userList = [];
   return state;
 }
 

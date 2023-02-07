@@ -1,5 +1,7 @@
 const setCurrentPage = (state, action) => {
-  state.users.currentPage = action.currentPage;
+  if (action.currentPage) {
+    state.users.currentPage = action.currentPage;
+  }
   return state;
 }
 
