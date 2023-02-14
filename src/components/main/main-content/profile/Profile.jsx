@@ -12,7 +12,7 @@ const Profile = ({
     <ul className='profile__user-links-list'>
       {user.contacts.map((item, index) => {
         const itemClass = `profile__user-contact profile__user-contact--${item[0]}`;
-        const link = String(item[1]).includes("https://") ? item[1] : `https://${item[1]}`;
+        const link = String(item[1]).includes('https://') ? item[1] : `https://${item[1]}`;
         return (
           <li className={itemClass} key={index}>
             <a rel='noreferrer' href={link} className='profile__user-link' target='_blank'>

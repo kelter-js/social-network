@@ -1,33 +1,33 @@
 import clearUsers from './clearUsers';
-import initialState from '../initialState';
+import { users } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { users: { ...initialState.users } }
+let state = { ...users }
 
 beforeEach(() => {
-  state = { users: deepClone(initialState.users) };
+  state = deepClone(users);
 });
 
 it('Should clear user list', () => {
-  state.users.userList = [{
-    "name": "MadMouse",
-    "id": 'someKindOfID',
-    "uniqueUrlName": null,
-    "photos": {
-      "small": "someTestImageUrlSmall.png",
-      "large": "someTestImageUrlLarge.png"
+  state.userList = [{
+    'name': 'MadMouse',
+    'id': 'someKindOfID',
+    'uniqueUrlName': null,
+    'photos': {
+      'small': 'someTestImageUrlSmall.png',
+      'large': 'someTestImageUrlLarge.png'
     },
-    "status": null,
-    "followed": false,
-    "location": {
-      "countryName": "someCountryName",
-      "cityName": "someCityName"
+    'status': null,
+    'followed': false,
+    'location': {
+      'countryName': 'someCountryName',
+      'cityName': 'someCityName'
     }
   }];
-  const previousUserListLength = state.users.userList.length;
+  const previousUserListLength = state.userList.length;
 
-  clearUsers(state, {});
+  state = clearUsers(state);
 
-  expect(previousUserListLength).not.toBe(state.users.userList.length);
-  expect(state.users.userList.length).toBe(0);
+  expect(previousUserListLength).not.toBe(state.userList.length);
+  expect(state.userList.length).toBe(0);
 });

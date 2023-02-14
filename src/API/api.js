@@ -3,20 +3,23 @@ import * as axios from 'axios';
 const network = axios.create({
   withCredentials: true,
   headers: {
-    'API-KEY': '3fb46a3e-6490-460b-8c43-075fa7280e3f',
+    'API-KEY': '30217e1e1-05a7-4762-8f23-1cde107e677c',
   },
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
 });
 
 const userAPI = {
-  getUserList(currentPage, pageSize) {
-    return network
-      .get(`users?page=${currentPage}&count=${pageSize}`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        return response.data;
-      })
+  async getUserList(currentPage, pageSize) {
+    try {
+      const response = await network
+        .get(`users?page=${currentPage}&count=${pageSize}`, {
+          withCredentials: true,
+        });
+
+      return response.data;
+    } catch (err) {
+      return [];
+    }
   },
   followUser: (id) => network.post(`follow/${id}`),
   unfollowUser: (id) => network.delete(`follow/${id}`),

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import PrivateRoute from './utils/PrivateRoute';
 import MainPageContent from './components/main/main-content/MainContentContainer';
 import Dialogs from './components/main/dialogs/DialogsContainer';
 import UserList from './components/main/users/UserListContainer';
 import Header from './components/header/HeaderContainer';
 import Footer from './components/footer/Footer';
 import Login from './components/Login/Login';
+import Main from './components/main/MainContainer';
 import DummyComponent from './utils/DummyComponent';
 
 const ComponentRouter = ({ paths }) => {
@@ -22,27 +22,27 @@ const ComponentRouter = ({ paths }) => {
         <Redirect exact from='/' to={paths.profile} />
         <Route
           path={paths.profile}
-          render={() => <PrivateRoute content={<MainPageContent />} />}
+          render={() => <Main mainContent={<MainPageContent />} />}
         />
         <Route
           path={paths.messages}
-          render={() => <PrivateRoute content={<Dialogs />} />}
+          render={() => <Main mainContent={<Dialogs />} />}
         />
         <Route
           path={paths.news}
-          render={() => <PrivateRoute content={<DummyComponent title='Заглушка под страницу с новостями' />} />}
+          render={() => <Main mainContent={<DummyComponent title='Заглушка под страницу с новостями' />} />}
         />
         <Route
           path={paths.music}
-          render={() => <PrivateRoute content={<DummyComponent title='Заглушка под страницу с музыкой' />} />}
+          render={() => <Main mainContent={<DummyComponent title='Заглушка под страницу с музыкой' />} />}
         />
         <Route
           path={paths.users}
-          render={() => <PrivateRoute content={<UserList />} />}
+          render={() => <Main mainContent={<UserList />} />}
         />
         <Route
           path={paths.settings}
-          render={() => <PrivateRoute content={<DummyComponent title='Заглушка под страницу с настройками' />} />}
+          render={() => <Main mainContent={<DummyComponent title='Заглушка под страницу с настройками' />} />}
         />
       </Switch>
 

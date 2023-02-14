@@ -23,7 +23,7 @@ const Login = ({
   isAuthenticating,
 }) => {
   return (
-    isAuthenticating ? (
+    (isAuthenticating) ? (
       <Loading title='Please wait, initialising...' />
     ) : (
       <div className='container'>

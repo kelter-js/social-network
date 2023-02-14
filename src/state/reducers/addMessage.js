@@ -11,12 +11,12 @@ const addMessage = (state, action) => {
   };
 
   if (action.user && action.text) {
-    state.chat = { ...state.chat }
+    state = { ...state }
 
-    const previousChatState = state.chat.messages[action.user];
-    state.chat.messages[action.user] = previousChatState ? [...previousChatState] : [];
+    const previousChatState = state.messages[action.user];
+    state.messages[action.user] = previousChatState ? [...previousChatState] : [];
 
-    state.chat.messages[action.user].push(createMessage(action.text));
+    state.messages[action.user].push(createMessage(action.text));
   }
 
   return state;

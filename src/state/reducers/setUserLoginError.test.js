@@ -1,29 +1,30 @@
 import setUserLoginError from './setUserLoginError';
-import initialState from '../initialState';
+import { userData } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { userData: { ...initialState.userData } }
+let state = { ...userData }
 
 beforeEach(() => {
-  state = { userData: deepClone(initialState.userData) }
+  state = deepClone(userData);
 });
 
-const action = { error: new Error("Some kind of login error") }
+const action = { error: new Error('Some kind of login error') }
 
 it('Should set user login error object', () => {
-  const previousLoginErrorState = { ...state.userData.loginError }
+  const previousLoginErrorState = state.loginError;
 
-  setUserLoginError(state, action);
+  state = setUserLoginError(state, action);
 
-  expect(previousLoginErrorState).not.toStrictEqual(state.userData.loginError);
-  expect(state.userData.loginError).toBe(action.error);
+  expect(previousLoginErrorState).not.toStrictEqual(state.loginError);
+  expect(state.loginError).toBe(action.error);
 });
 
 it('Shouldn`t set user login error object since action is an empty object', () => {
-  const previousLoginErrorState = state.userData.loginError;
+  const previousLoginErrorState = state.loginError;
   const emptyAction = {};
-  setUserLoginError(state, emptyAction);
 
-  expect(previousLoginErrorState).toStrictEqual(state.userData.loginError);
+  state = setUserLoginError(state, emptyAction);
+
+  expect(previousLoginErrorState).toStrictEqual(state.loginError);
   expect(previousLoginErrorState).not.toBe(emptyAction);
 });

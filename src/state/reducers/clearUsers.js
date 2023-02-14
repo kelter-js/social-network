@@ -1,6 +1,6 @@
-const clearUsers = (state, action) => {
-  state.users = { ...state.users }
-  state.users.userList = [];
+const clearUsers = (state) => {
+  state = { ...state }
+  state.userList = [];
   return state;
 }
 

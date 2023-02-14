@@ -1,16 +1,11 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {
-  updateMaxJumpIndexAttention,
-  updateJumpPage,
-  clearUsers,
-  setCurrentPage,
-} from '../../../state/actions';
+import { clearUsers, setCurrentPage, updateJumpPage, updateJumpIndex } from '../../../state/usersReducer';
 import Pagination from './Pagination';
 import { getLoadingState } from '../../../state/selectors/serviceSelectors';
 import {
   getPageToJump,
-  getMaxIndex,
+  getMaxJumpWarning,
   getJumpLength,
   getJumpText,
   getEnterHandler
@@ -19,7 +14,7 @@ import {
 const mapStateToProps = (state) => {
   return {
     jumpToPage: getPageToJump(state),
-    maxJumpIndexAttention: getMaxIndex(state),
+    jumpIndex: getMaxJumpWarning(state),
     maxJumpLengthText: getJumpLength(state),
     isLoading: getLoadingState(state),
     jumpToPageText: getJumpText(state),
@@ -29,7 +24,7 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, {
-    updateMaxJumpIndexAttention,
+    updateJumpIndex,
     updateJumpPage,
     clearUsers,
     setCurrentPage,

@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 export const getUsersSelector = (state) => {
   return state.users;
@@ -21,7 +21,7 @@ export const getUserList = (state) => {
 };
 
 export const getMenuPath = (state) => {
-  return `/${state.defaultMenu[0]}`;
+  return `/${state.initial.defaultMenu[0]}`;
 };
 
 export const getLoginError = (state) => {

@@ -2,8 +2,8 @@ export const getPageToJump = (state) => {
   return state.users.jumpToPage;
 };
 
-export const getMaxIndex = (state) => {
-  return state.users.maxJumpIndexAttention;
+export const getMaxJumpWarning = (state) => {
+  return state.users.maxJumpWarning;
 };
 
 export const getJumpLength = (state) => {
@@ -15,7 +15,7 @@ export const getJumpText = (state) => {
 };
 
 export const getEnterHandler = (state) => {
-  return state.handlers.onEnter;
+  return state.initial.handlers.onEnter;
 };
 
 export const getPagesAmount = (state) => {

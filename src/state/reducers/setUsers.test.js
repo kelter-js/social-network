@@ -1,11 +1,11 @@
 import setUsers from './setUsers';
-import initialState from '../initialState';
+import { users } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { users: { ...initialState.users } }
+let state = { ...users }
 
 beforeEach(() => {
-  state = { users: deepClone(initialState.users) }
+  state = deepClone(users);
 });
 
 const action = {
@@ -165,28 +165,28 @@ const action = {
 }
 
 it('Should set users list data', () => {
-  const previousUsersList = [ ...state.users.userList ];
+  const previousUsersList = [...state.userList];
 
-  setUsers(state, action);
+  state = setUsers(state, action);
 
-  expect(previousUsersList).not.toStrictEqual(state.users.userList);
-  expect(state.users.userList[0]).toStrictEqual(action.list[0]);
+  expect(previousUsersList).not.toStrictEqual(state.userList);
+  expect(state.userList[0]).toStrictEqual(action.list[0]);
 });
 
 it('Shouldn`t set user list data since action object is empty', () => {
-  const previousUsersList = [ ...state.users.userList ];
+  const previousUsersList = [...state.userList];
 
-  setUsers(state, {});
+  state = setUsers(state, {});
 
-  expect(previousUsersList).toStrictEqual(state.users.userList);
+  expect(previousUsersList).toStrictEqual(state.userList);
 });
 
 it('Shouldn`t set user list data since action timemark is older than storage timemark', () => {
   //this timestamp is newer than timestamp in action, so that means reducer will not update storage user list
-  state.users.lastRequestFrame = Date.now()
-  const previousUsersList = [ ...state.users.userList ];
+  state.lastRequestFrame = Date.now()
+  const previousUsersList = [...state.userList];
 
-  setUsers(state, action);
+  state = setUsers(state, action);
 
-  expect(previousUsersList).toStrictEqual(state.users.userList);
+  expect(previousUsersList).toStrictEqual(state.userList);
 });

@@ -1,5 +1,5 @@
 const setUserLogout = (state) => {
-  state.userData = {
+  state = {
     id: null,
     email: null,
     login: null,

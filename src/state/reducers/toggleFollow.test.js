@@ -1,12 +1,12 @@
 import toggleFollow from './toggleFollow';
-import initialState from '../initialState';
+import { users } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { users: { ...initialState.users } }
+let state = { ...users }
 
 beforeEach(() => {
-  state = { users: deepClone(initialState.users) }
-  state.users.userList = [
+  state = deepClone(users);
+  state.userList = [
     {
       name: 'Sowa',
       id: 27850,
@@ -163,33 +163,33 @@ beforeEach(() => {
 const getAction = (follow) => ({ id: 27850, follow });
 
 it('Should toggle follow to dedicated user to true', () => {
-  const previousFollowStatus = state.users.userList[0].followed;
+  const previousFollowStatus = state.userList[0].followed;
 
   toggleFollow(state, getAction(true));
 
-  expect(previousFollowStatus).not.toStrictEqual(state.users.userList[0].followed);
-  expect(state.users.userList[0].followed).toStrictEqual(true);
+  expect(previousFollowStatus).not.toStrictEqual(state.userList[0].followed);
+  expect(state.userList[0].followed).toStrictEqual(true);
 });
 
 it('Should toggle follow to dedicated user and then unfollow', () => {
-  const previousFollowStatus = state.users.userList[0].followed;
+  const previousFollowStatus = state.userList[0].followed;
 
   toggleFollow(state, getAction(true));
 
-  expect(previousFollowStatus).not.toStrictEqual(state.users.userList[0].followed);
-  expect(state.users.userList[0].followed).toStrictEqual(true);
+  expect(previousFollowStatus).not.toStrictEqual(state.userList[0].followed);
+  expect(state.userList[0].followed).toStrictEqual(true);
 
   toggleFollow(state, getAction(false));
 
-  expect(state.users.userList[0].followed).toStrictEqual(false);
+  expect(state.userList[0].followed).toStrictEqual(false);
 });
 
 it('Should convert non-boolean action.follow value to boolean', () => {
-  const previousFollowStatus = state.users.userList[0].followed;
+  const previousFollowStatus = state.userList[0].followed;
 
   toggleFollow(state, getAction({}));
 
-  expect(previousFollowStatus).not.toStrictEqual(state.users.userList[0].followed);
-  expect(state.users.userList[0].followed).toStrictEqual(true);
+  expect(previousFollowStatus).not.toStrictEqual(state.userList[0].followed);
+  expect(state.userList[0].followed).toStrictEqual(true);
 
 });

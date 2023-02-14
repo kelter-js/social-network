@@ -1,6 +1,6 @@
 const setUserStatus = (state, action) => {
-  state.pageContent = { ...state.pageContent };
-  state.pageContent.currentUser = { ...state.pageContent.currentUser, status: action.status || '' };
+  state = { ...state };
+  state.currentUser = { ...state.currentUser, status: action.status || '' };
   return state;
 }
 

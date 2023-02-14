@@ -1,72 +1,72 @@
 import setUserData from './setUserData';
-import initialState from '../initialState';
+import { userData } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { userData: { ...initialState.userData } }
+let state = { ...userData }
 
 beforeEach(() => {
-  state = { userData: deepClone(initialState.userData) };
+  state = deepClone(userData);
 });
 
 const action = {
   data: {
     id: 21510,
-    login: "someKindOfLogin",
-    email: "someKindOfEmail@email.com"
+    login: 'someKindOfLogin',
+    email: 'someKindOfEmail@email.com'
   }
 }
 
 it('Should set user data', () => {
-  const previousUserData = { ...state.userData };
+  const previousUserData = { ...state };
 
-  setUserData(state, action);
+  state = setUserData(state, action);
 
-  expect(previousUserData).not.toStrictEqual(state.userData);
+  expect(previousUserData).not.toStrictEqual(state);
 });
 
 it('Should set flag isAuthenticated to true', () => {
-  setUserData(state, action);
+  state = setUserData(state, action);
 
-  expect(state.userData.isAuthenticated).toStrictEqual(true);
+  expect(state.isAuthenticated).toStrictEqual(true);
 });
 
 it('Should set flag loginError to null', () => {
-  state.userData.loginError = new Error("Login error");
-  const previousLoginErrorState = { ...state.userData.loginError }
-  setUserData(state, action);
+  state.loginError = new Error('Login error');
+  const previousLoginErrorState = { ...state.loginError }
+  state = setUserData(state, action);
 
-  expect(previousLoginErrorState).not.toBe(state.userData.loginError);
-  expect(state.userData.loginError).toStrictEqual(null);
+  expect(previousLoginErrorState).not.toBe(state.loginError);
+  expect(state.loginError).toStrictEqual(null);
 });
 
 it('Should set user id from action', () => {
-  setUserData(state, action);
+  state = setUserData(state, action);
 
-  expect(state.userData.id).toStrictEqual(action.data.id);
+  expect(state.id).toStrictEqual(action.data.id);
 });
 
 it('Should set login from action', () => {
-  setUserData(state, action);
+  state = setUserData(state, action);
 
-  expect(state.userData.login).toStrictEqual(action.data.login);
+  expect(state.login).toStrictEqual(action.data.login);
 });
 
 it('Should set email from action', () => {
-  setUserData(state, action);
+  state = setUserData(state, action);
 
-  expect(state.userData.email).toStrictEqual(action.data.email);
+  expect(state.email).toStrictEqual(action.data.email);
 });
 
 it('Shouldn`t set user data since action is an empty object', () => {
-  const previousUserData = { ...state.userData };
+  const previousUserData = { ...state };
 
-  setUserData(state, {});
+  state = setUserData(state, {});
 
-  expect(previousUserData).toStrictEqual(state.userData);
-  expect(state.userData.id).toBe(null);
-  expect(state.userData.email).toBe(null);
-  expect(state.userData.login).toBe(null);
-  expect(state.userData.isAuthenticated).toBe(false);
-  expect(state.userData.status).toBe('');
-  expect(state.userData.loginError).toBe(null);
+  expect(previousUserData).toStrictEqual(state);
+  expect(state.id).toBe(null);
+  expect(state.email).toBe(null);
+  expect(state.login).toBe(null);
+  expect(state.isAuthenticated).toBe(false);
+  expect(state.status).toBe('');
+  expect(state.loginError).toBe(null);
 });

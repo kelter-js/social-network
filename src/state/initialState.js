@@ -452,7 +452,7 @@ const initialState = {
     firstPage: 1,
     currentPage: 1,
     jumpToPage: '',
-    maxJumpIndexAttention: false,
+    maxJumpWarning: false,
     maxJumpLengthText: 'Max search input length is: ',
     defaultLocations: [
       {
@@ -588,9 +588,22 @@ const initialState = {
     password: '',
     email: '',
   },
-  isLoading: false,
-  isAuthenticating: false,
+  loading: {
+    isLoading: false,
+    isAuthenticating: false,
+  },
   handlers: InputHandlers,
 }
 
-export default initialState;
+export const {
+  defaultMenu,
+  defaultMenuPaths,
+  chat,
+  users,
+  pageContent,
+  userData,
+  loginData,
+  loading,
+  isAuthenticating,
+  handlers,
+} = initialState;

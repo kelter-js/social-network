@@ -1,28 +1,20 @@
 import setJumpPage from './setJumpPage';
-import initialState from '../initialState';
+import { users } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { users: { ...initialState.users } }
+let state = {...users }
 
 beforeEach(() => {
-  state = { users: deepClone(initialState.users) };
+  state = deepClone(users);
 });
 
 const action = { pageIndex: 10 }
 
 it('Should change current page index', () => {
-  const previousJumpIndex = state.users.jumpToPage;
+  const previousJumpIndex = state.jumpToPage;
 
   setJumpPage(state, action);
 
-  expect(previousJumpIndex).not.toBe(state.users.jumpToPage);
-  expect(state.users.jumpToPage).toBe(10);
-});
-
-it('Shouldn`t change page index since action is an empty object', () => {
-  const previousPage = state.users.jumpToPage;
-
-  setJumpPage(state, {});
-
-  expect(previousPage).toBe(state.users.jumpToPage);
+  expect(previousJumpIndex).not.toBe(state.jumpToPage);
+  expect(state.jumpToPage).toBe(10);
 });

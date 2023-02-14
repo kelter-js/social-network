@@ -1,12 +1,10 @@
 import { profileAPI } from '../API/api';
-import { setUserStatus } from '../state/actions';
+import { setUserStatus } from '../state/profileReducer';
 
 const getUserStatus = (userId) => {
-  return (dispatch) => {
-    profileAPI.getStatus(userId)
-      .then((userStatus) => {
-        dispatch(setUserStatus(userStatus.data));
-      })
+  return async (dispatch) => {
+    const userStatus = await profileAPI.getStatus(userId);
+    dispatch(setUserStatus(userStatus.data));
   };
 };
 

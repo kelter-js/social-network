@@ -1,29 +1,29 @@
 import setRequestFrame from './setRequestFrame';
-import initialState from '../initialState';
+import { users } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { users: { ...initialState.users } }
+let state = { ...users }
 
 beforeEach(() => {
-  state = { users: deepClone(initialState.users) };
+  state = deepClone(users);
 });
 
 const mark = Date.now();
 const action = { mark: mark }
 
 it('Should change frame timestamp', () => {
-  const previousFrameState = state.users.lastRequestFrame;
+  const previousFrameState = state.lastRequestFrame;
 
-  setRequestFrame(state, action);
+  state = setRequestFrame(state, action);
 
-  expect(previousFrameState).not.toBe(state.users.lastRequestFrame);
-  expect(state.users.lastRequestFrame).toBe(mark);
+  expect(previousFrameState).not.toBe(state.lastRequestFrame);
+  expect(state.lastRequestFrame).toBe(mark);
 });
 
 it('Shouldn`t change frame timestamp since action is an empty object', () => {
-  const previousFrameState = state.users.jumpToPage;
+  const previousFrameState = state.lastRequestFrame;
 
-  setRequestFrame(state, {});
+  state = setRequestFrame(state, {});
 
-  expect(previousFrameState).toBe(state.users.jumpToPage);
+  expect(previousFrameState).toBe(state.lastRequestFrame);
 });

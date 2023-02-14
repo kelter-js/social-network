@@ -3,8 +3,8 @@ import PaginationRouter from './PaginationRouter';
 import Button from '@mui/material/Button';
 
 const Pagination = ({
-  maxJumpIndexAttention,
-  updateMaxJumpIndexAttention,
+  jumpIndex,
+  updateJumpIndex,
   totalPages,
   updateJumpPage,
   clearUsers,
@@ -22,14 +22,14 @@ const Pagination = ({
     const currentValue = e.target.value;
 
     if (`${currentValue}`.length > `${totalPages}`.length) {
-      if (!maxJumpIndexAttention) {
-        updateMaxJumpIndexAttention(true);
+      if (!jumpIndex) {
+        updateJumpIndex(true);
       }
       return;
     }
 
-    if (maxJumpIndexAttention) {
-      updateMaxJumpIndexAttention(false);
+    if (jumpIndex) {
+      updateJumpIndex(false);
     }
 
     if (currentValue > totalPages) {
@@ -53,7 +53,7 @@ const Pagination = ({
   }
 
   const getMaxLengthElemClass = () => {
-    return maxJumpIndexAttention ? (
+    return jumpIndex ? (
       'users__pagination-info users__pagination-info--attention'
     ) : (
       'users__pagination-info'

@@ -1,20 +1,20 @@
 import setUserStatus from './setUserStatus';
-import initialState from '../initialState';
+import { pageContent } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { pageContent: { ...initialState.pageContent } }
+let state = { ...pageContent }
 
 beforeEach(() => {
-  state = { pageContent: deepClone(initialState.pageContent) }
+  state = deepClone(pageContent);
 });
 
 const action = { status: 'someTestUserStatus' }
 
 it('Should set profile status', () => {
-  const previousStatus = state.pageContent.currentUser.status;
+  const previousStatus = state.currentUser.status;
 
-  setUserStatus(state, action);
+  state = setUserStatus(state, action);
 
-  expect(previousStatus).not.toStrictEqual(state.pageContent.currentUser.status);
-  expect(state.pageContent.currentUser.status).toStrictEqual(action.status);
+  expect(previousStatus).not.toStrictEqual(state.currentUser.status);
+  expect(state.currentUser.status).toStrictEqual(action.status);
 });

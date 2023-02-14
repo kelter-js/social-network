@@ -1,7 +1,7 @@
 const setUserLoginError = (state, action) => {
   if (action.error) {
-    state.userData = {
-      ...state.userData,
+    state = {
+      ...state,
       loginError: action.error,
     }
   }

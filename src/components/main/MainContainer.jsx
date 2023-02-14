@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Main from './Main';
-import { updateHeader, setUserProfile } from '../../state/actions';
+import { setUserProfile, changeHeader } from '../../state/profileReducer';
 import { getPageContent } from '../../state/selectors/mainComponentSelectors';
 
 const mapStateToProps = (state) => ({ pageContent: getPageContent(state) });
@@ -16,7 +16,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     ...stateProps,
     ...ownProps,
-    updateHeader: (header) => dispatch(updateHeader(header)),
+    updateHeader: (header) => dispatch(changeHeader(header)),
     setDefaultProfile: () => dispatch(setUserProfile(stateProps.pageContent.defaultUser)),
   };
 }

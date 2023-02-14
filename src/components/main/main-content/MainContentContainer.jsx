@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import MainPageContent from './MainContent';
-import { addPost } from '../../../state/actions';
 import { getLoadingState } from '../../../state/selectors/serviceSelectors';
 import { getPageContent } from '../../../state/selectors/mainComponentSelectors';
+import { addPost } from '../../../state/profileReducer';
 
 const mapStateToProps = (state) => ({
   pageContent: getPageContent(state),

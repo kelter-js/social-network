@@ -1,10 +1,10 @@
 const toggleFollow = (state, action) => {
-  const [currentElem] = state.users.userList.filter(item => item.id === action.id);
-  const indexCurrentElem = state.users.userList.indexOf(currentElem);
+  const [currentElem] = state.userList.filter(item => item.id === action.id);
+  const indexCurrentElem = state.userList.indexOf(currentElem);
 
   currentElem.followed = Boolean(action.follow);
-  state.users = { ...state.users };
-  state.users.userList[indexCurrentElem] = { ...currentElem };
+  state = { ...state };
+  state.userList[indexCurrentElem] = { ...currentElem };
 
   return state;
 }

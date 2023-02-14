@@ -14,8 +14,9 @@ const User = ({
 
   const history = useHistory();
 
-  const openProfile = () => {
-    getUserProfile().then(() => history.push(path));
+  const openProfile = async () => {
+    await getUserProfile();
+    history.push(path);
   };
 
   const toggleAction = (isFollowed) => {

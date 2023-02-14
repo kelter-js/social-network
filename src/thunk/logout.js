@@ -1,13 +1,13 @@
 import { authAPI } from '../API/api';
-import { setLoadingState, logoutUser } from '../state/actions';
+import { setLoadingState } from '../state/loadingReducer';
+import { logoutUser } from '../state/userDataReducer';
 
-const logout = (dispatch) => {
+const logout = async (dispatch) => {
   dispatch(setLoadingState(true));
 
-  authAPI
-    .logout()
-    .then(() => dispatch(logoutUser()))
-    .finally(() => dispatch(setLoadingState(false)));
+  await authAPI.logout();
+  dispatch(logoutUser());
+  dispatch(setLoadingState(false));
 };
 
 export default logout;

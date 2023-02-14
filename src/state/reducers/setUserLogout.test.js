@@ -1,29 +1,29 @@
 import setUserLogout from './setUserLogout';
-import initialState from '../initialState';
+import { userData } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { userData: { ...initialState.userData } }
+let state = { ...userData }
 
 beforeEach(() => {
-  state = { userData: deepClone(initialState.userData) }
+  state = deepClone(userData);
 });
 
 it('Should clean user data object', () => {
-  state.userData = {
+  state = {
     id: 'testId',
     email: 'test@test.test',
     login: 'testLogin',
     isAuthenticated: true,
     status: 'testStatus',
   }
-  const previousUserData = { ...state.userData }
+  const previousUserData = { ...state }
 
-  setUserLogout(state);
+  state = setUserLogout(state);
 
-  expect(previousUserData).not.toStrictEqual(state.userData);
-  expect(state.userData.id).toBe(null);
-  expect(state.userData.email).toBe(null);
-  expect(state.userData.login).toBe(null);
-  expect(state.userData.isAuthenticated).toBe(false);
-  expect(state.userData.status).toBe('');
+  expect(previousUserData).not.toStrictEqual(state);
+  expect(state.id).toBe(null);
+  expect(state.email).toBe(null);
+  expect(state.login).toBe(null);
+  expect(state.isAuthenticated).toBe(false);
+  expect(state.status).toBe('');
 });

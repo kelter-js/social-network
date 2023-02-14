@@ -1,11 +1,11 @@
 import setUserProfile from './setUserProfile';
-import initialState from '../initialState';
+import { pageContent } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { pageContent: { ...initialState.pageContent } }
+let state = { ...pageContent }
 
 beforeEach(() => {
-  state = { pageContent: deepClone(initialState.pageContent) }
+  state = deepClone(pageContent);
 });
 
 const action = {
@@ -68,24 +68,24 @@ const action = {
 }
 
 it('Should set profile data', () => {
-  const previousProfileData = { ...state.pageContent.currentUser }
+  const previousProfileData = { ...state.currentUser }
 
-  setUserProfile(state, action);
+  state = setUserProfile(state, action);
 
-  expect(previousProfileData).not.toStrictEqual(state.pageContent.currentUser);
-  expect(state.pageContent.currentUser.photos).toBe(action.user.photos);
-  expect(state.pageContent.currentUser.aboutMe).toBe(action.user.aboutMe);
-  expect(state.pageContent.currentUser.contacts).toBe(action.user.contacts);
-  expect(state.pageContent.currentUser.lookingForAJob).toBe(action.user.lookingForAJob);
-  expect(state.pageContent.currentUser.lookingForAJobDescription).toBe(action.user.lookingForAJobDescription);
-  expect(state.pageContent.currentUser.fullName).toBe(action.user.fullName);
-  expect(state.pageContent.currentUser.feed).toBe(action.user.feed);
+  expect(previousProfileData).not.toStrictEqual(state.currentUser);
+  expect(state.currentUser.photos).toBe(action.user.photos);
+  expect(state.currentUser.aboutMe).toBe(action.user.aboutMe);
+  expect(state.currentUser.contacts).toBe(action.user.contacts);
+  expect(state.currentUser.lookingForAJob).toBe(action.user.lookingForAJob);
+  expect(state.currentUser.lookingForAJobDescription).toBe(action.user.lookingForAJobDescription);
+  expect(state.currentUser.fullName).toBe(action.user.fullName);
+  expect(state.currentUser.feed).toBe(action.user.feed);
 });
 
 it('Shouldn`t set profile data since action object is empty', () => {
-  const previousProfileData = { ...state.pageContent.currentUser }
+  const previousProfileData = { ...state.currentUser }
 
-  setUserProfile(state, {});
+  state = setUserProfile(state, {});
 
-  expect(previousProfileData).toStrictEqual(state.pageContent.currentUser);
+  expect(previousProfileData).toStrictEqual(state.currentUser);
 });

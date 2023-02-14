@@ -1,19 +1,19 @@
 import removeLoginError from './removeLoginError';
-import initialState from '../initialState';
+import { userData } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { userData: { ...initialState.userData } }
+let state = { ...userData }
 
 beforeEach(() => {
-  state = { userData: deepClone(initialState.userData) };
+  state = deepClone(userData);
 });
 
 it('Should clear state from login error', () => {
-  state.userData.loginError = new Error("Login error");
-  const previousState = { ...state.userData.loginError };
+  state.loginError = new Error('Login error');
+  const previousState = { ...state.loginError };
 
-  removeLoginError(state, {});
+  state = removeLoginError(state, {});
 
-  expect(previousState).not.toBe(state.userData.loginError);
-  expect(state.userData.loginError).toBe(null);
+  expect(previousState).not.toBe(state.loginError);
+  expect(state.loginError).toBe(null);
 });

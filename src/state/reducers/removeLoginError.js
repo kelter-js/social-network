@@ -1,6 +1,6 @@
-const removeLoginError = (state, action) => {
-  state.userData = {
-    ...state.userData,
+const removeLoginError = (state) => {
+  state = {
+    ...state,
     loginError: null,
   }
   return state;

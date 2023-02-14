@@ -1,7 +1,7 @@
 const setUserData = (state, action) => {
   if (action.data) {
-    state.userData = {
-      ...state.userData,
+    state = {
+      ...state,
       ...action.data,
       isAuthenticated: true,
       loginError: null,

@@ -1,8 +1,8 @@
 import addMessage from './addMessage';
-import initialState from '../initialState';
+import { chat } from '../initialState';
 import deepClone from '../../utils/deepClone';
 
-let state = { chat: { ...initialState.chat } }
+let state = { ...chat }
 
 const action = {
   user: 'testUser',
@@ -10,23 +10,23 @@ const action = {
 }
 
 afterEach(() => {
-  state = { chat: deepClone(initialState.chat) };
+  state = deepClone(chat);
 });
 
 it('Should create dialogue and add message in storage chat', () => {
-  const previousState = { ...state.chat.messages }
+  const previousState = { ...state.messages }
   addMessage(state, action);
-  expect(previousState).not.toStrictEqual(state.chat.messages);
+  expect(previousState).not.toStrictEqual(state.messages);
 });
 
 it('Should add message in already existing dialogue branch', () => {
-  const previousLength = state.chat.messages['Some Guy'].length;
+  const previousLength = state.messages['Some Guy'].length;
   addMessage(state, { ...action, user: 'Some Guy' });
-  expect(state.chat.messages['Some Guy'].length).toBe(previousLength + 1);
+  expect(state.messages['Some Guy'].length).toBe(previousLength + 1);
 });
 
 it('Shouldn`t add message in storage if action is empty', () => {
-  const previousState = { ...state.chat.messages }
+  const previousState = { ...state.messages }
   addMessage(state, {});
-  expect(previousState).toStrictEqual(state.chat.messages);
+  expect(previousState).toStrictEqual(state.messages);
 });

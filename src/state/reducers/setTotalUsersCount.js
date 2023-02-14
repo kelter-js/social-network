@@ -1,6 +1,6 @@
 const setTotalUsersCount = (state, action) => {
   if (action.pagesAmount) {
-    state.users.totalPagesAmount = action.pagesAmount;
+    state.totalPagesAmount = action.pagesAmount;
   }
 
   return state;

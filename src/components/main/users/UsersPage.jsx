@@ -18,7 +18,7 @@ const UsersPage = ({
     }
   }
 
-  const currentStyle = `users__select-page ${currentPageStyle ? currentPageStyle : ""}`;
+  const currentStyle = `users__select-page ${currentPageStyle ? currentPageStyle : ''}`;
 
   return (
     <li className='users__pagination-item'>

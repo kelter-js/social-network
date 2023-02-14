@@ -1,9 +1,11 @@
 import setAuthenticating from './setAuthenticating';
+import { loading } from '../../state/initialState';
+import deepClone from '../../utils/deepClone';
 
-let state = { isAuthenticating: false }
+let state = { ...loading }
 
 beforeEach(() => {
-  state = { isAuthenticating: false }
+  state = { users: deepClone(loading) };
 });
 
 const getAction = (state) => ({ state });

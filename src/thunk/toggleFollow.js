@@ -1,26 +1,24 @@
 import userAPI from '../API/api';
-import { switchFollow } from '../state/actions';
+import { switchFollow } from '../state/usersReducer';
 
 const toggleFollow = ({
   id,
   isFollowed,
 }) => {
-  return (dispatch) => {
-    (isFollowed) ? (
-      userAPI.unfollowUser(id)
-        .then((result) => {
-          if (result.data.resultCode === 0) {
-            dispatch(switchFollow(id, false));
-          }
-        })
-    ) : (
-      userAPI.followUser(id)
-        .then((result) => {
-          if (result.data.resultCode === 0) {
-            dispatch(switchFollow(id, true));
-          }
-        })
-    );
+  return async (dispatch) => {
+    const switcher = (response, state) => {
+      if (response.data.resultCode === 0) {
+        dispatch(switchFollow(id, state));
+      }
+    }
+
+    if (isFollowed) {
+      const response = await userAPI.unfollowUser(id);
+      switcher(response, false);
+    } else {
+      const response = await userAPI.followUser(id);
+      switcher(response, true);
+    }
   }
 };
 

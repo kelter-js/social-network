@@ -1,13 +1,11 @@
 const setUsers = (state, action) => {
-  if (action.mark < state.users.lastRequestFrame) {
-    state.isLoading = true;
+  if (action.mark < state.lastRequestFrame) {
     return state;
   }
 
   if (action.list) {
-    state.users = { ...state.users }
-    state.users.userList = action.list;
-    state.isLoading = false;
+    state = { ...state }
+    state.userList = action.list;
   }
 
   return state;

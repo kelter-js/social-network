@@ -1,5 +1,5 @@
 export const getMenuPaths = (state) => {
-  return state.defaultMenuPaths;
+  return state.initial.defaultMenuPaths;
 };
 
 export const getAuthenticationState = (state) => {
@@ -7,7 +7,7 @@ export const getAuthenticationState = (state) => {
 };
 
 export const getLoadingState = (state) => {
-  return state.isLoading;
+  return state.loading.isLoading;
 };
 
 export const getAuthenticatingState = (state) => {
