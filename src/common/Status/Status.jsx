@@ -62,20 +62,26 @@ const Status = ({
   };
 
   return showStatus ? (
-    <p ref={statusBar} className='profile__status-text' style={(userId === id) ? { cursor: 'pointer' } : { cursor: 'unset' }}>
+    <p
+      data-testid='profile-status'
+      ref={statusBar}
+      className='profile__status-text' style={(userId === id) ? { cursor: 'pointer' } : { cursor: 'unset' }}
+    >
       {status ?? ''}
     </p>
   ) : (
-    <div className='profile__status-change-container' onClick={e => e.stopPropagation()}>
+    <div data-testid='change-status-container' className='profile__status-change-container' onClick={e => e.stopPropagation()}>
       <div style={{ width: '100%' }}>
         <input type='text' onChange={onChange} autoFocus value={statusValue} />
-        <button type='button' onClick={onClick}>
+        <button data-testid='apply-status-changes' type='button' onClick={onClick}>
           Save changes
         </button>
       </div>
     </div>
   );
 };
+
+export const StatusComponent = Status;
 
 export default compose(connect(mapStateToProps, { getUserStatus, updateUserStatus }))(Status);
 
