@@ -7,8 +7,9 @@ const Loading = ({ title, shouldBeCentered }) => {
       className={shouldBeCentered ? 'loading-animation' : ''}
       justifyContent='center'
       alignItems='center'
+      data-testid='loading-container'
     >
-      <h2>{title}</h2>
+      <h2 data-testid='loading-text'>{title}</h2>
       <CircularProgress size={150} />
     </Stack>
   );

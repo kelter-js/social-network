@@ -4,12 +4,7 @@ import { render, screen } from '@testing-library/react';
 import Status, { StatusComponent } from './Status';
 import { Provider } from 'react-redux';
 import store from '../../state/reduxStore';
-import mockAxios from 'jest-mock-axios';
 import userEvent from "@testing-library/user-event";
-
-afterEach(() => {
-  mockAxios.reset();
-});
 
 test('should render component without crash', () => {
   render(

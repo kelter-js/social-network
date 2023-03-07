@@ -3,7 +3,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 const Fallback = () => {
   return (
-    <div className='error-container'>
+    <div data-testid='fallback' className='error-container'>
       <div style={{ fontSize: '150px' }}>
         <ErrorOutlineIcon color='error' fontSize='inherit' />
       </div>
