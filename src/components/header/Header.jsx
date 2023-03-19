@@ -7,15 +7,15 @@ const Header = ({ userData, onLogout }) => {
     <header className='page-header container'>
       {userData.isAuthenticated ? (
         <>
-          <p className='page-header__user-name'>
+          <p data-testid='login-name' className='page-header__user-name'>
             {userData.login}
           </p>
-          <Button onClick={onLogout} variant='contained' color='primary'>
+          <Button data-testid='logout-button' onClick={onLogout} variant='contained' color='primary'>
             Logout
           </Button>
         </>
       ) : (
-        <NavLink to='/login' className='page-header__login'>
+        <NavLink data-testid='login-button' to='/login' className='page-header__login'>
           Login
         </NavLink>
       )}
