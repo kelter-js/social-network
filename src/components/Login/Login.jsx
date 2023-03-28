@@ -26,11 +26,13 @@ const Login = ({
     (isAuthenticating) ? (
       <Loading title='Please wait, initialising...' />
     ) : (
-      <div className='container'>
+      <div className='container' data-testid='login-form-container'>
         <LoginForm isLoginFailed={isLoginFailed} handler={authorize} loading={isLoading} />
       </div >
     )
   );
 };
+
+export const LoginComponent = Login;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

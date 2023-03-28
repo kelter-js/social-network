@@ -44,22 +44,23 @@ const LoginForm = ({ isLoading, handler, isLoginFailed }) => {
       })}
       style={{ display: 'flex', flexDirection: 'column' }}
     >
-      <TextField {...register('email', { onChange })} style={{ marginBottom: 15 }} label='User login' type='email' id='login' />
+      <TextField {...register('email', { onChange })} style={{ marginBottom: 15 }} data-testid='login-email' label='User login' type='email' id='login' />
       <ErrorMessage errors={errors} name='email' />
 
-      <TextField {...register('password', { onChange })} label='User password' type='password' id='pass' />
+      <TextField {...register('password', { onChange })} data-testid='login-password' label='User password' type='password' id='pass' />
       <ErrorMessage errors={errors} name='password' />
 
       <FormGroup>
         <FormControlLabel control={<Checkbox {...register('rememberMe')} />} label='Remember me' />
       </FormGroup>
 
-      {error && <Alert severity='error'>{error}</Alert>}
+      {error && <Alert severity='error' data-testid='login-error-container'>{error}</Alert>}
 
       <LoadingButton
         style={{ backgroundColor: '#00308F', marginTop: 25 }}
         variant='contained'
         type='submit'
+        data-testid='login-button'
         loading={isLoading}>
         Log in
       </LoadingButton>
