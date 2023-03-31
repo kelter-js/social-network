@@ -42,6 +42,7 @@ const LoginForm = ({ isLoading, handler, isLoginFailed }) => {
         setError(null);
         handler(data);
       })}
+      data-testid='login-form'
       style={{ display: 'flex', flexDirection: 'column' }}
     >
       <TextField {...register('email', { onChange })} style={{ marginBottom: 15 }} data-testid='login-email' label='User login' type='email' id='login' />
@@ -51,7 +52,7 @@ const LoginForm = ({ isLoading, handler, isLoginFailed }) => {
       <ErrorMessage errors={errors} name='password' />
 
       <FormGroup>
-        <FormControlLabel control={<Checkbox {...register('rememberMe')} />} label='Remember me' />
+        <FormControlLabel control={<Checkbox {...register('rememberMe')} data-testid='login-remember-me'/>} label='Remember me' />
       </FormGroup>
 
       {error && <Alert severity='error' data-testid='login-error-container'>{error}</Alert>}

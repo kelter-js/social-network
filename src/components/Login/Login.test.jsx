@@ -67,7 +67,7 @@ test('should render error message', () => {
   expect(errorContainer).toBeInTheDocument();
 });
 
-test('should call prop callback on render', async () => {
+test('should call prop callback on login attempt', async () => {
   const authorize = jest.fn();
   render(
     <LoginComponent
