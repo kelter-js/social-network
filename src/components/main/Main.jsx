@@ -14,6 +14,8 @@ const Main = ({
   history.listen((location) => {
     const path = location.pathname.split('/');
 
+    console.log('path hjas been change')
+
     if (!location.state) {
       setDefaultProfile();
     }
@@ -23,13 +25,13 @@ const Main = ({
 
   return (
     <main className='page-main container'>
-      <h1 className='visually-hidden'>{pageContent.mainHeader}</h1>
+      <h1 className='visually-hidden' data-testid='main-header'>{pageContent.mainHeader}</h1>
       <nav className='page-main__navigation'>
         <NavigationList />
         <NavigationItem navItem={pageContent.settingsButton} />
       </nav>
       <section className='page-main__content-wrapper'>
-        <h2 className='visually-hidden'>{pageContent.currentHeader}</h2>
+        <h2 className='visually-hidden' data-testid='current-header'>{pageContent.currentHeader}</h2>
         {mainContent}
       </section>
     </main>
