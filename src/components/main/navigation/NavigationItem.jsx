@@ -6,6 +6,7 @@ const NavigationItem = ({ navItem }) => {
     <NavLink
       activeClassName='navigation__link--current'
       className='navigation__link'
+      data-testid={`navigation-item-${navItem}`}
       to={`/${navItem}`}
     >
       {navItem[0].toUpperCase() + navItem.slice(1)}
