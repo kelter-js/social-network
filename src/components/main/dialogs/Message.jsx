@@ -13,7 +13,7 @@ const Message = ({
 
   const messagesList = messages.map((message, index) => {
     return (
-      <div className='dialogs__chat' key={index}>
+      <div className='dialogs__chat' key={index} data-testid={`message-${message.text}`}>
         <p className={`dialogs__author ${message.style.author}`}>
           {message.author}
         </p>

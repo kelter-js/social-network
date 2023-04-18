@@ -14,8 +14,6 @@ const Main = ({
   history.listen((location) => {
     const path = location.pathname.split('/');
 
-    console.log('path hjas been change')
-
     if (!location.state) {
       setDefaultProfile();
     }

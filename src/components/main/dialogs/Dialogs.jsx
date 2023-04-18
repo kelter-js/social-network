@@ -1,5 +1,5 @@
-import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import DialogList from './DialogList';
 import Message from './MessageContainer';
 
@@ -24,6 +24,7 @@ const Dialogs = ({ chat }) => {
   return (
     <div className='page-main__dialogs-wrapper dialogs'>
       <DialogList dialogs={chat.dialogs} />
+
       <Switch>
         {messagesList}
       </Switch>
