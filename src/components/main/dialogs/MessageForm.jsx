@@ -24,12 +24,13 @@ const MessageForm = ({ placeholder, sendMessage }) => {
       onSubmit={handleSubmit((data) => onSubmit(data.messageText))}
       className='page-main__dialogs-form'
     >
-      <label className='page-main__dialogs-label'>
+      <label className='page-main__dialogs-label' data-testid='new-message-label'>
         {placeholder}
         <textarea
           {...register('messageText')}
           className='page-main__dialogs-text'
           name='messageText'
+          data-testid='new-message-text'
           placeholder='...type your message here.'
         />
         <ErrorMessage errors={errors} name='messageText' />
@@ -37,6 +38,7 @@ const MessageForm = ({ placeholder, sendMessage }) => {
       <button
         className='page-main__send-message'
         type='submit'
+        data-testid='send-new-message'
       />
     </form>
   );
