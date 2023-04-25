@@ -2,11 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import Message from './Message';
-import { MemoryRouter } from 'react-router-dom';
-import { chat } from '../../../state/initialState';
 import userEvent from "@testing-library/user-event";
-import { Provider } from 'react-redux';
-import store from '../../../state/reduxStore';
 import { waitFor } from '@testing-library/react';
 
 test('should render component without crash', () => {
@@ -53,7 +49,7 @@ test('text input should receive proper placeholder through props', () => {
   expect(screen.getByTestId(`new-message-label`)).toHaveTextContent('someKindOfPlaceholder');
 });
 
-test('text invoke prop-callback with correct arguments', async () => {
+test('should invoke prop-callback with correct arguments', async () => {
   const addMessage = jest.fn();
 
   render(
