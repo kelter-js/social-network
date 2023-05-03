@@ -22,13 +22,14 @@ const PostCreationForm = ({ defaultText, addPost }) => {
 
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data.postText))} className='page-main__news'>
-      <label className='news__label'>
+      <label className='news__label' data-testid='add-new-post-label'>
         {defaultText}
 
         <textarea
           {...register('postText')}
           className='news__message'
           placeholder='...start your message here.'
+          data-testid='new-post-textarea'
         />
         <ErrorMessage errors={errors} name='postText' />
       </label>
@@ -36,7 +37,9 @@ const PostCreationForm = ({ defaultText, addPost }) => {
       <Button
         variant='contained'
         color='success'
-        type='submit'>
+        type='submit'
+        data-testid='create-new-post'
+      >
         Send new post
       </Button>
     </form>
