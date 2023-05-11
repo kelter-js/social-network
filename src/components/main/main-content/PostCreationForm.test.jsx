@@ -14,7 +14,7 @@ test('should render component without crash', () => {
   );
 });
 
-test('should rendeer label with text provided through props', () => {
+test('should render label with text provided through props', () => {
   render(
     <PostCreationForm
       defaultText='some kind of test placeholder'
@@ -27,7 +27,7 @@ test('should rendeer label with text provided through props', () => {
   expect(spanWithPlaceholder).toHaveTextContent('some kind of test placeholder');
 });
 
-test('should invoke props callback, after type text and submit form', async () => {
+test('should invoke props callback, after type text in textarea and submit form', async () => {
   const createPost = jest.fn();
 
   render(
