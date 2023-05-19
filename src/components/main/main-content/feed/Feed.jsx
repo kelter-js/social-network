@@ -13,13 +13,15 @@ const Feed = ({
 
   return (
     <div className='feed__element'>
-      <p className='feed__text'>
+      <p className='feed__text' data-testid={`post-text-${postId}`}>
         {data.post}
       </p>
       <button
         type='button'
         className={buttonClass}
-        onClick={onClick}>
+        data-testid={`post-button-${postId}`}
+        onClick={onClick}
+      >
         {data.likes}
       </button>
     </div>
