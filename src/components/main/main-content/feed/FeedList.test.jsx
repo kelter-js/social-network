@@ -1,60 +1,69 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import Feed from './Feed';
+import FeedList from './FeedList';
 import { render, screen } from '@testing-library/react';
-import userEvent from "@testing-library/user-event";
+import { Provider } from 'react-redux';
+import store from '../../../../state/reduxStore';
 
 const contentProp = {
-  data: {
+  feed: [{
     post: "Hey, is there anybody?",
     likes: 15,
     liked: false
-  },
-  postId: 0,
-  changeLikeState: () => { },
+  }]
 }
 
 test('should render component without crash', () => {
-  render(<Feed {...contentProp} />);
+  render(
+    <Provider store={store}>
+      <FeedList {...contentProp} />
+    </Provider>
+  );
 });
 
 test('should render text of post, received through props', () => {
-  render(<Feed {...contentProp} />);
+  render(
+    <Provider store={store}>
+      <FeedList {...contentProp} />
+    </Provider>
+  );
 
   expect(screen.getByTestId('post-text-0')).toHaveTextContent("Hey, is there anybody?");
 });
 
 test('like button should receive specific css class depending on received props', () => {
-  render(<Feed {...contentProp} />);
+  render(
+    <Provider store={store}>
+      <FeedList {...contentProp} />
+    </Provider>
+  );
 
   expect(screen.getByTestId('post-button-0')).toHaveClass('feed__likes');
 });
 
 test('like button should get different css class depending on received props', () => {
   const newProps = { ...contentProp }
-  newProps.data.liked = true;
+  newProps.feed[0].liked = true;
 
-  render(<Feed {...newProps} />);
+  render(
+    <Provider store={store}>
+      <FeedList {...contentProp} />
+    </Provider>
+  );
 
   expect(screen.getByTestId('post-button-0')).toHaveClass('feed__likes feed__likes--pressed');
 });
 
 test('like button should render amount of likes as inner child element', () => {
-  render(<Feed {...contentProp} />);
+  render(
+    <Provider store={store}>
+      <FeedList {...contentProp} />
+    </Provider>
+  );
+
+
+  expect(screen.getByTestId('post-button-0')).toBeInTheDocument();
 
   expect(screen.getByTestId('post-button-0')).toHaveTextContent(15);
 });
 
-test('click on like button should invoke callback received through props', () => {
-  const newProps = { ...contentProp }
-  const handleLikeStateChange = jest.fn();
-  newProps.changeLikeState = handleLikeStateChange;
-
-  render(<Feed {...newProps} />);
-
-  const button = screen.getByTestId('post-button-0');
-  userEvent.click(button);
-
-  expect(handleLikeStateChange).toBeCalledTimes(1);
-  expect(handleLikeStateChange).toBeCalledWith(newProps.postId);
-});
