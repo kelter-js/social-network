@@ -26,6 +26,7 @@ const UsersPage = ({
         className={currentStyle}
         onClick={changePage}
         disabled={isLoading || disable}
+        data-testid={`user-page-button-${currentPage}`}
         variant='contained'>
         {currentPage}
       </Button>
