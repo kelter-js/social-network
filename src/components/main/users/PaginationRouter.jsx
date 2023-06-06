@@ -18,7 +18,7 @@ const PaginationRouter = ({
       <UsersPage currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
       <UsersPage currentPage={pages + 1} disable={isLoading} />
       <UsersPage currentPage={pages + 2} disable={isLoading} />
-      <li className='users__pagination-item'><p>...</p></li>
+      <li className='users__pagination-item' data-testid='pagination-start-ellipsis'><p>...</p></li>
     </>
   );
 
@@ -28,7 +28,7 @@ const PaginationRouter = ({
   const middleRoute = (
     <>
       {isSecondary && <UsersPage currentPage={firstPage} disable={isLoading} />}
-      {isSecondary && <li className='users__pagination-item'><p>...</p></li>}
+      {isSecondary && <li className='users__pagination-item' data-testid='pagination-middle-ellipsis'><p>...</p></li>}
       <UsersPage currentPage={pages - 1} disable={isLoading} />
       <UsersPage currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
       <UsersPage currentPage={pages + 1} disable={isLoading} />
@@ -39,7 +39,7 @@ const PaginationRouter = ({
 
   const endRoute = (
     <>
-      <li className='users__pagination-item'><p>...</p></li>
+      <li className='users__pagination-item' data-testid='pagination-end-ellipsis'><p>...</p></li>
       <UsersPage currentPage={pages - 2} disable={isLoading} />
       <UsersPage currentPage={pages - 1} disable={isLoading} />
       <UsersPage currentPage={pages} disable={true} currentPageStyle='users__select-page--current' />
