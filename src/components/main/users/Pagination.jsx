@@ -62,7 +62,7 @@ const Pagination = ({
 
   return (
     (shouldHide) ? (null) : (
-      <div className='users__pagination-wrapper'>
+      <div className='users__pagination-wrapper' data-testid='pagination-container'>
         <ul className='users__pagination-list'>
           <PaginationRouter
             totalPages={totalPages}
@@ -90,6 +90,7 @@ const Pagination = ({
                 onChange={onChange}
                 onKeyDown={onKeyDown(changePage, indexInput)}
                 ref={indexInput}
+                data-testid='page-jump-input'
                 name='pageIndex'
                 className='users__pagination-index-field'
               />
@@ -98,12 +99,13 @@ const Pagination = ({
               disabled={isLoading}
               type='submit'
               className='users__pagination-submit'
+              data-testid='submit-jump-to-page'
               variant='contained'>
               {jumpToPageText}
             </Button>
           </form>
           {!isLoading && (
-            <p className={getMaxLengthElemClass()}>
+            <p className={getMaxLengthElemClass()} data-testid='max-page-warning'>
               {maxJumpLengthText} {`${totalPages}`.length}
             </p>
           )}
