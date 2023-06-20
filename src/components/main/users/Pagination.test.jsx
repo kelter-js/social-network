@@ -278,7 +278,7 @@ test('should not render anything if shouldHide prop provided', async () => {
       isLoading={false}
       jumpToPageText='jumpToPageText'
       maxJumpLengthText={4}
-      onKeyDown={() => {}}
+      onKeyDown={() => { }}
       shouldHide
     />
   );
