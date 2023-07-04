@@ -1,578 +1,548 @@
-import { getCurrentHeader } from '../utils/service';
-import { InputHandlers } from '../utils/service';
+import { getCurrentHeader } from "../utils/service";
+import { InputHandlers } from "../utils/service";
 
 const headers = {
-  profile: 'Профиль пользователя',
-  messages: 'Диалоги пользователя',
-  news: 'Новостная лента',
-  music: 'Музыка пользователя',
-  users: 'Пользователи сети',
-  settings: 'Настройки профиля',
-}
+  profile: "Профиль пользователя",
+  messages: "Диалоги пользователя",
+  news: "Новостная лента",
+  music: "Музыка пользователя",
+  users: "Пользователи сети",
+  settings: "Настройки профиля",
+};
 
 const initialState = {
-  defaultMenu: [
-    'profile',
-    'messages',
-    'news',
-    'music',
-    'users',
-  ],
+  defaultMenu: ["profile", "messages", "news", "music", "users"],
   defaultMenuPaths: {
-    profile: '/profile/:userId?',
-    messages: '/messages',
-    news: '/news',
-    music: '/music',
-    users: '/users',
-    login: '/login',
+    profile: "/profile/:userId?",
+    messages: "/messages",
+    news: "/news",
+    music: "/music",
+    users: "/users",
+    login: "/login",
   },
   chat: {
     messages: {
-      'Kalashnikov Sergey': [
+      "Kalashnikov Sergey": [
         {
-          text: 'Hi, how are you?',
-          author: 'You',
+          text: "Hi, how are you?",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Hi, im fine, thank you, so what about you?',
-          author: 'Kalashnikov Sergey',
+          text: "Hi, im fine, thank you, so what about you?",
+          author: "Kalashnikov Sergey",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Me too, what do you think about to spend the rest of this evening together?',
-          author: 'You',
+          text: "Me too, what do you think about to spend the rest of this evening together?",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'That`s cool, lets meet each other 21:30 at my house',
-          author: 'Kalashnikov Sergey',
+          text: "That`s cool, lets meet each other 21:30 at my house",
+          author: "Kalashnikov Sergey",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'K, bye',
-          author: 'You',
+          text: "K, bye",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-      ],
-      'Predelnaya Visota': [
-        {
-          text: 'Template message example 1',
-          author: 'You',
-          style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-        {
-          text: 'Template message example 1',
-          author: 'Predelnaya Visota',
-          style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
-          },
-        },
-        {
-          text: 'Template message example 1',
-          author: 'You',
-          style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-        {
-          text: 'Template message example 1',
-          author: 'Predelnaya Visota',
-          style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
-          },
-        },
-        {
-          text: 'Template message example 1',
-          author: 'You',
-          style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-        {
-          text: 'Template message example 1',
-          author: 'Predelnaya Visota',
-          style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
       ],
-      'Some Guy': [
+      "Predelnaya Visota": [
         {
-          text: 'Template message example 2',
-          author: 'Some Guy',
+          text: "Template message example 1",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 2',
-          author: 'You',
+          text: "Template message example 1",
+          author: "Predelnaya Visota",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 2',
-          author: 'Some Guy',
+          text: "Template message example 1",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 2',
-          author: 'You',
+          text: "Template message example 1",
+          author: "Predelnaya Visota",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 2',
-          author: 'Some Guy',
+          text: "Template message example 1",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 2',
-          author: 'You',
+          text: "Template message example 1",
+          author: "Predelnaya Visota",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-        {
-          text: 'Template message example 2',
-          author: 'Some Guy',
-          style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
-          },
-        },
-        {
-          text: 'Template message example 2',
-          author: 'You',
-          style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-        {
-          text: 'Template message example 2',
-          author: 'You',
-          style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-        {
-          text: 'Template message example 2',
-          author: 'You',
-          style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-        {
-          text: 'Template message example 2',
-          author: 'Some Guy',
-          style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
-          },
-        },
-        {
-          text: 'Template message example 2',
-          author: 'You',
-          style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
-          },
-        },
-        {
-          text: 'Template message example 2',
-          author: 'Some Guy',
-          style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
-          },
-        },
-        {
-          text: 'Template message example 2',
-          author: 'You',
-          style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
       ],
-      'Another One': [
+      "Some Guy": [
         {
-          text: 'Template message example 3',
-          author: 'You',
+          text: "Template message example 2",
+          author: "Some Guy",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'Another One',
+          text: "Template message example 2",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'You',
+          text: "Template message example 2",
+          author: "Some Guy",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'Another One',
+          text: "Template message example 2",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'You',
+          text: "Template message example 2",
+          author: "Some Guy",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'Another One',
+          text: "Template message example 2",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'You',
+          text: "Template message example 2",
+          author: "Some Guy",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'Another One',
+          text: "Template message example 2",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'You',
+          text: "Template message example 2",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'Another One',
+          text: "Template message example 2",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'You',
+          text: "Template message example 2",
+          author: "Some Guy",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'Another One',
+          text: "Template message example 2",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'You',
+          text: "Template message example 2",
+          author: "Some Guy",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 3',
-          author: 'Another One',
+          text: "Template message example 2",
+          author: "You",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
       ],
-      'Russian Caliber': [
+      "Another One": [
         {
-          text: 'Template message example 4',
-          author: 'Russian Caliber',
+          text: "Template message example 3",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            'messtexage': 'dialogs__phrase--user',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'You',
+          text: "Template message example 3",
+          author: "Another One",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'Russian Caliber',
+          text: "Template message example 3",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'You',
+          text: "Template message example 3",
+          author: "Another One",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'Russian Caliber',
+          text: "Template message example 3",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'You',
+          text: "Template message example 3",
+          author: "Another One",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'Russian Caliber',
+          text: "Template message example 3",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'You',
+          text: "Template message example 3",
+          author: "Another One",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'Russian Caliber',
+          text: "Template message example 3",
+          author: "You",
           style: {
-            author: 'dialogs__author--user',
-            message: 'dialogs__phrase--user',
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
           },
         },
         {
-          text: 'Template message example 4',
-          author: 'You',
+          text: "Template message example 3",
+          author: "Another One",
           style: {
-            author: 'dialogs__author--responder',
-            message: 'dialogs__phrase--responder',
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
+          },
+        },
+        {
+          text: "Template message example 3",
+          author: "You",
+          style: {
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
+          },
+        },
+        {
+          text: "Template message example 3",
+          author: "Another One",
+          style: {
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
+          },
+        },
+        {
+          text: "Template message example 3",
+          author: "You",
+          style: {
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
+          },
+        },
+        {
+          text: "Template message example 3",
+          author: "Another One",
+          style: {
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
+          },
+        },
+      ],
+      "Russian Caliber": [
+        {
+          text: "Template message example 4",
+          author: "Russian Caliber",
+          style: {
+            author: "dialogs__author--user",
+            messtexage: "dialogs__phrase--user",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "You",
+          style: {
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "Russian Caliber",
+          style: {
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "You",
+          style: {
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "Russian Caliber",
+          style: {
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "You",
+          style: {
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "Russian Caliber",
+          style: {
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "You",
+          style: {
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "Russian Caliber",
+          style: {
+            author: "dialogs__author--user",
+            message: "dialogs__phrase--user",
+          },
+        },
+        {
+          text: "Template message example 4",
+          author: "You",
+          style: {
+            author: "dialogs__author--responder",
+            message: "dialogs__phrase--responder",
           },
         },
       ],
     },
     dialogs: [
-      'Kalashnikov Sergey',
-      'Predelnaya Visota',
-      'Some Guy',
-      'Another One',
-      'Russian Caliber',
+      "Kalashnikov Sergey",
+      "Predelnaya Visota",
+      "Some Guy",
+      "Another One",
+      "Russian Caliber",
     ],
-    messagePlaceholder: 'New message text...',
+    messagePlaceholder: "New message text...",
   },
   users: {
     userList: [],
-    header: 'Users',
+    header: "Users",
     allUsersDisplayed: false,
-    defaultStatus: 'This user didn`t set any status.',
-    defaultProfilePicture: 'https://source.unsplash.com/random',
+    defaultStatus: "This user didn`t set any status.",
+    defaultProfilePicture: "https://source.unsplash.com/random",
     pageSize: 10,
     totalPagesAmount: 0,
-    jumpToPageText: 'Jump!',
+    jumpToPageText: "Jump!",
     firstPage: 1,
     currentPage: 1,
-    jumpToPage: '',
+    jumpToPage: "",
     maxJumpWarning: false,
-    maxJumpLengthText: 'Max search input length is: ',
+    maxJumpLengthText: "Max search input length is: ",
     defaultLocations: [
       {
-        'countryName': 'Belarus',
-        'cityName': 'Minsk',
+        countryName: "Belarus",
+        cityName: "Minsk",
       },
       {
-        'countryName': 'Belarus',
-        'cityName': 'Minsk',
+        countryName: "Belarus",
+        cityName: "Minsk",
       },
       {
-        'countryName': 'Ukraine',
-        'cityName': 'Kiev',
+        countryName: "Ukraine",
+        cityName: "Kiev",
       },
       {
-        'countryName': 'United States',
-        'cityName': 'Philadelphia',
+        countryName: "United States",
+        cityName: "Philadelphia",
       },
       {
-        'countryName': 'Russia',
-        'cityName': 'Chelyabinsk',
+        countryName: "Russia",
+        cityName: "Chelyabinsk",
       },
       {
-        'countryName': 'United States',
-        'cityName': 'Texas',
+        countryName: "United States",
+        cityName: "Texas",
       },
       {
-        'countryName': 'Russia',
-        'cityName': 'Kransnoyarks',
+        countryName: "Russia",
+        cityName: "Kransnoyarks",
       },
       {
-        'countryName': 'Russia',
-        'cityName': 'Kirov',
+        countryName: "Russia",
+        cityName: "Kirov",
       },
     ],
-    follow: 'Follow',
-    unfollow: 'Unfollow',
+    follow: "Follow",
+    unfollow: "Unfollow",
     lastRequestFrame: null,
   },
   pageContent: {
-    settingsButton: 'settings',
-    mainHeader: 'Социальная сеть ВРеакте',
+    settingsButton: "settings",
+    mainHeader: "Социальная сеть ВРеакте",
     headers: headers,
     minPathLength: 2,
     lookingForJobTitle: {
-      yes: 'This user currently looking for some job.',
-      no: 'This user don`t look for any kind of job.',
+      yes: "This user currently looking for some job.",
+      no: "This user don`t look for any kind of job.",
     },
     defaultAnnotations: {
-      userInfo: 'Some information about user:',
-      skills: 'Current user skills:',
-      contacts: 'User profile external links:',
+      userInfo: "Some information about user:",
+      skills: "Current user skills:",
+      contacts: "User profile external links:",
     },
     defaultTemplates: {
-      skills: 'This user decided to not share his information abouts skills',
-      aboutMe: 'This user decided to not share any information',
-      contacts: 'This user decided to not share any kind of link',
+      skills: "This user decided to not share his information abouts skills",
+      aboutMe: "This user decided to not share any information",
+      contacts: "This user decided to not share any kind of link",
     },
-    feedDefaultText: 'Share news with your friends!',
-    sendPost: 'Send new post!',
+    feedDefaultText: "Share news with your friends!",
+    sendPost: "Send new post!",
     currentUser: {},
     jobIcons: {
-      lookingForJobIcon: '/img/lookingForJob.png',
-      dontLookForJobIcon: '/img/dontLookForJob.png',
+      lookingForJobIcon: "/img/lookingForJob.png",
+      dontLookForJobIcon: "/img/dontLookForJob.png",
     },
     defaultUser: {
       photos: {
-        small: '/img/default-profile.jpg',
-        large: '/img/default-background.jpg',
+        small: "/img/default-profile.jpg",
+        large: "/img/default-background.jpg",
       },
-      aboutMe: 'User information',
+      aboutMe: "User information",
       contacts: [
-        [
-          'facebook',
-          1
-        ],
-        [
-          'website',
-          1
-        ],
-        [
-          'vk',
-          1
-        ],
-        [
-          'twitter',
-          1
-        ],
-        [
-          'instagram',
-          1
-        ],
-        [
-          'youtube',
-          1
-        ],
-        [
-          'github',
-          1
-        ],
-        [
-          'mainLink',
-          1
-        ]
+        ["facebook", 1],
+        ["website", 1],
+        ["vk", 1],
+        ["twitter", 1],
+        ["instagram", 1],
+        ["youtube", 1],
+        ["github", 1],
+        ["mainLink", 1],
       ],
       lookingForAJob: false,
-      lookingForAJobDescription: 'About your skillz',
-      fullName: 'John Doe',
+      lookingForAJobDescription: "About your skillz",
+      fullName: "John Doe",
       feed: [
         {
-          post: 'Hey, is there anybody?',
+          post: "Hey, is there anybody?",
           likes: 15,
           liked: false,
         },
         {
-          post: 'Sup guize, is something really happening here?',
+          post: "Sup guize, is something really happening here?",
           likes: 20,
           liked: false,
         },
-      ]
+      ],
     },
     currentHeader: getCurrentHeader(headers),
   },
@@ -581,19 +551,19 @@ const initialState = {
     email: null,
     login: null,
     isAuthenticated: false,
-    status: '',
+    status: "",
     loginError: null,
   },
   loginData: {
-    password: '',
-    email: '',
+    password: "",
+    email: "",
   },
   loading: {
     isLoading: false,
     isAuthenticating: false,
   },
   handlers: InputHandlers,
-}
+};
 
 export const {
   defaultMenu,

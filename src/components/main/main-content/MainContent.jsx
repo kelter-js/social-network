@@ -1,14 +1,10 @@
-import React from 'react';
-import Profile from './profile/Profile';
-import FeedList from './feed/FeedList';
-import Loading from '../../../utils/Loading';
-import PostCreationForm from './PostCreationForm';
+import React from "react";
+import Profile from "./profile/Profile";
+import FeedList from "./feed/FeedList";
+import Loading from "../../../utils/Loading";
+import PostCreationForm from "./PostCreationForm";
 
-const MainPageContent = ({
-  pageContent,
-  addPost,
-  isLoading
-}) => {
+const MainPageContent = ({ pageContent, addPost, isLoading }) => {
   return (
     <div>
       {isLoading ? (
@@ -29,7 +25,7 @@ const MainPageContent = ({
           />
 
           {pageContent.currentUser.feed && (
-            <div className='page-feed'>
+            <div className="page-feed">
               <FeedList feed={pageContent.currentUser.feed} />
             </div>
           )}
@@ -37,6 +33,6 @@ const MainPageContent = ({
       )}
     </div>
   );
-}
+};
 
 export default MainPageContent;

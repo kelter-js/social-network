@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 export const getUsersSelector = (state) => {
   return state.users;
@@ -44,4 +44,12 @@ export const getCurrentUserStatus = (state) => {
 
 export const getUserId = (state) => {
   return state.userData.id;
+};
+
+export const getDefaultUserPhoto = (state) => {
+  return state.pageContent.defaultUser.photos.small;
+};
+
+export const getCurrentUserPhoto = (state) => {
+  return state.pageContent.currentUser.photos?.small;
 };
