@@ -7,6 +7,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import EditIcon from "@mui/icons-material/Edit";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
+import {
+  TextField,
+  Alert,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+  TextareaAutosize,
+} from "@mui/material";
 import * as yup from "yup";
 
 import {
@@ -25,7 +33,7 @@ const mapStateToProps = (state) => {
 
 const schema = yup
   .object({
-    userId: yup.number().required(),
+    aboutMe: yup.string().required(),
     lookingForAJob: yup.boolean().required(),
     lookingForAJobDescription: yup.string().required(),
     fullName: yup.string().required(),
@@ -42,6 +50,8 @@ const schema = yup
   })
   .required();
 
+//todo: create array with link name and create in .map multiple text inputs for links
+
 const Profile = ({
   user,
   annotations,
@@ -50,11 +60,14 @@ const Profile = ({
   titles,
   id,
   userId,
+  //handler,
 }) => {
   const [isEditMode, setEditMode] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleChangeMode = useCallback(() => {
+  const handleChangeMode = useCallback((e) => {
+    console.log("fires");
+    console.log(e.target);
     setEditMode((state) => !state);
   }, []);
 
@@ -62,8 +75,10 @@ const Profile = ({
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
+    reset,
   } = useForm({
-    mode: "onSubmit",
+    mode: "onChange",
     resolver: yupResolver(schema),
   });
 
@@ -108,8 +123,20 @@ const Profile = ({
     return "Edit profile";
   };
 
+  const handler = (data) => {
+    console.log(data);
+    reset();
+  };
+
   return (
-    <>
+    <form
+      onSubmit={handleSubmit((data) => {
+        console.log("submitted data:", data);
+        setError(null);
+        setEditMode(false);
+        handler(data);
+      })}
+    >
       <img
         alt="Main profile"
         className="profile__main-avatar"
@@ -123,7 +150,20 @@ const Profile = ({
 
         <div className="profile__info-wrapper">
           <div className="profile__name">
-            <h3>{user?.fullName}</h3>
+            {isEditMode ? (
+              <>
+                <TextField
+                  {...register("fullName")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="user-name"
+                  label="User full name"
+                  id="user-name"
+                />
+                <ErrorMessage errors={errors} name="fullName" />
+              </>
+            ) : (
+              <h3>{user?.fullName}</h3>
+            )}
 
             <Status />
 
@@ -131,7 +171,8 @@ const Profile = ({
               <Button
                 variant="contained"
                 className="profile__edit-button"
-                onClick={handleChangeMode}
+                onClick={isEditMode ? null : handleChangeMode}
+                type={isEditMode ? "submit" : "button"}
               >
                 {isEditMode ? (
                   <PublishedWithChangesIcon className="profile__edit-button-icon" />
@@ -151,47 +192,152 @@ const Profile = ({
               >
                 {annotations.userInfo}
               </p>
-              <p
-                className="profile__user-text"
-                data-testid="profile-template-aboutMe"
-              >
-                {user?.aboutMe || templates.aboutMe}
-              </p>
+              {isEditMode ? (
+                <>
+                  <TextField
+                    {...register("aboutMe")}
+                    style={{ marginBottom: 15 }}
+                    data-testid="about-me"
+                    label="About me"
+                    id="about-me"
+                  />
+                  <ErrorMessage errors={errors} name="aboutMe" />
+                </>
+              ) : (
+                <p
+                  className="profile__user-text"
+                  data-testid="profile-template-aboutMe"
+                >
+                  {user?.aboutMe || templates.aboutMe}
+                </p>
+              )}
             </div>
-            <img
-              alt="Job searching status"
-              className="profile__job-status"
-              src={
-                user?.lookingForAJob
-                  ? jobIcons.lookingForJobIcon
-                  : jobIcons.dontLookForJobIcon
-              }
-              title={user?.lookingForAJob ? titles.yes : titles.no}
-              data-testid="looking-for-jon-icon"
-            />
+
+            {isEditMode ? (
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...register("lookingForAJob")}
+                      data-testid="looking-for-a-job"
+                    />
+                  }
+                  label="Are you looking for job?"
+                />
+              </FormGroup>
+            ) : (
+              <img
+                alt="Job searching status"
+                className="profile__job-status"
+                src={
+                  user?.lookingForAJob
+                    ? jobIcons.lookingForJobIcon
+                    : jobIcons.dontLookForJobIcon
+                }
+                title={user?.lookingForAJob ? titles.yes : titles.no}
+                data-testid="looking-for-jon-icon"
+              />
+            )}
           </div>
 
           <div className="profile__text-wrapper">
             <p className="profile__user-text" data-testid="profile-skills">
               {annotations.skills}
             </p>
-            <p
-              className="profile__user-text"
-              data-testid="profile-template-lookingForJob"
-            >
-              {user?.lookingForAJobDescription || templates.skills}
-            </p>
+            {isEditMode ? (
+              <>
+                <TextareaAutosize
+                  {...register("lookingForAJobDescription")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="looking-for-a-job-description"
+                  label="Looking for a job description"
+                  id="looking-for-a-job-description"
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="lookingForAJobDescription"
+                />
+              </>
+            ) : (
+              <p
+                className="profile__user-text"
+                data-testid="profile-template-lookingForJob"
+              >
+                {user?.lookingForAJobDescription || templates.skills}
+              </p>
+            )}
           </div>
 
           <div className="profile__text-wrapper">
             <p className="profile__user-text" data-testid="profile-contacts">
               {annotations.contacts}
             </p>
-            {contacts}
+            {isEditMode ? (
+              <>
+                <TextField
+                  {...register("contacts.github")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="github"
+                  label="github"
+                  id="github"
+                />
+                <TextField
+                  {...register("contacts.vk")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="vk"
+                  label="vk"
+                  id="vk"
+                />
+                <TextField
+                  {...register("contacts.facebook")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="facebook"
+                  label="facebook"
+                  id="facebook"
+                />
+                <TextField
+                  {...register("contacts.instagram")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="instagram"
+                  label="instagram"
+                  id="instagram"
+                />
+                <TextField
+                  {...register("contacts.twitter")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="twitter"
+                  label="twitter"
+                  id="twitter"
+                />
+                <TextField
+                  {...register("contacts.website")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="website"
+                  label="website"
+                  id="website"
+                />
+                <TextField
+                  {...register("contacts.youtube")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="youtube"
+                  label="youtube"
+                  id="youtube"
+                />
+                <TextField
+                  {...register("contacts.mainLink")}
+                  style={{ marginBottom: 15 }}
+                  data-testid="mainLink"
+                  label="mainLink"
+                  id="mainLink"
+                />
+              </>
+            ) : (
+              contacts
+            )}
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 
