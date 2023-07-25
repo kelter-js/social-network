@@ -14,6 +14,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
+    "classnames": "^2.3.2",
     "jest-mock-axios": "^4.7.0-beta4",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",

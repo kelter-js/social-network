@@ -23,6 +23,9 @@
   margin-right: 15px
   border: 1px solid $black
 
+.profile__avatar-edit-mode
+  width: 100px
+
 .profile__user-links-list
   display: grid
   grid-template-columns: 400px 400px 400px
@@ -38,10 +41,10 @@
   margin-top: 15px
   border-bottom: 3px solid $blue
 
-button.profile__edit-button
+.profile__edit-controls-container
   position: absolute
   top: 0
-  right: 0px
+  right: 0
 
 .profile__name h3
   margin: 0
@@ -180,3 +183,31 @@ button.profile__edit-button
 
 .profile__edit-button-icon
   margin-right: 5px
+
+button.profile__edit-button
+  margin-right: 10px
+
+.profile__field
+  display: flex
+  flex-direction: column
+  width: 20%
+  margin-bottom: 5px
+
+.profile__field--about-me
+  width: 100%
+
+.profile__text-wrapper--edit-mode
+  margin-left: 0
+
+.profile__textarea
+  min-height: 50px
+  width: 223px
+  resize: none
+
+.profile__field--extended
+  width: 25%
+
+.profile__links-container
+  display: flex
+  flex-wrap: wrap
+  gap: 15px

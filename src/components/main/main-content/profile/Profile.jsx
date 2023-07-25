@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import EditIcon from "@mui/icons-material/Edit";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
+import CancelIcon from "@mui/icons-material/Cancel";
 import {
   TextField,
   Alert,
@@ -16,6 +17,7 @@ import {
   TextareaAutosize,
 } from "@mui/material";
 import * as yup from "yup";
+import cn from "classnames";
 
 import {
   getUserId,
@@ -50,7 +52,16 @@ const schema = yup
   })
   .required();
 
-//todo: create array with link name and create in .map multiple text inputs for links
+const links = [
+  "github",
+  "vk",
+  "facebook",
+  "instagram",
+  "twitter",
+  "website",
+  "mainLink",
+  "youtube",
+];
 
 const Profile = ({
   user,
@@ -66,8 +77,6 @@ const Profile = ({
   const [error, setError] = useState(false);
 
   const handleChangeMode = useCallback((e) => {
-    console.log("fires");
-    console.log(e.target);
     setEditMode((state) => !state);
   }, []);
 
@@ -78,7 +87,7 @@ const Profile = ({
     getValues,
     reset,
   } = useForm({
-    mode: "onChange",
+    mode: "onTouched",
     resolver: yupResolver(schema),
   });
 
@@ -128,6 +137,15 @@ const Profile = ({
     reset();
   };
 
+  const handleResetChanges = useCallback(
+    (e) => {
+      e.preventDefault();
+      handleChangeMode();
+      reset();
+    },
+    [reset]
+  );
+
   return (
     <form
       onSubmit={handleSubmit((data) => {
@@ -144,14 +162,16 @@ const Profile = ({
       />
 
       <div className="profile__wrapper">
-        <div className="profile__avatar-wrapper">
+        <div
+          className={cn("profile__avatar-wrapper", "profile__avatar-edit-mode")}
+        >
           <ProfilePhoto />
         </div>
 
         <div className="profile__info-wrapper">
           <div className="profile__name">
             {isEditMode ? (
-              <>
+              <div className="profile__field">
                 <TextField
                   {...register("fullName")}
                   style={{ marginBottom: 15 }}
@@ -159,32 +179,55 @@ const Profile = ({
                   label="User full name"
                   id="user-name"
                 />
-                <ErrorMessage errors={errors} name="fullName" />
-              </>
+                <ErrorMessage
+                  errors={errors}
+                  name="fullName"
+                  render={() => <span>Full name field is required</span>}
+                />
+              </div>
             ) : (
               <h3>{user?.fullName}</h3>
             )}
 
-            <Status />
+            {!isEditMode && <Status />}
 
             {isUserProfileOwner && (
-              <Button
-                variant="contained"
-                className="profile__edit-button"
-                onClick={isEditMode ? null : handleChangeMode}
-                type={isEditMode ? "submit" : "button"}
-              >
-                {isEditMode ? (
-                  <PublishedWithChangesIcon className="profile__edit-button-icon" />
-                ) : (
-                  <EditIcon className="profile__edit-button-icon" />
+              <div className="profile__edit-controls-container">
+                <Button
+                  variant="contained"
+                  className="profile__edit-button"
+                  onClick={isEditMode ? null : handleChangeMode}
+                  type={isEditMode ? "submit" : "button"}
+                >
+                  {isEditMode ? (
+                    <PublishedWithChangesIcon className="profile__edit-button-icon" />
+                  ) : (
+                    <EditIcon className="profile__edit-button-icon" />
+                  )}
+                  {getChangeModeButtonDescription()}
+                </Button>
+
+                {isEditMode && (
+                  <Button
+                    variant="contained"
+                    className="profile__edit-button"
+                    onClick={handleResetChanges}
+                    type={"button"}
+                  >
+                    <CancelIcon className="profile__edit-button-icon" />
+                    Cancel changes
+                  </Button>
                 )}
-                {getChangeModeButtonDescription()}
-              </Button>
+              </div>
             )}
           </div>
 
-          <div className="profile__text-wrapper profile__text-wrapper--job">
+          <div
+            className={cn(
+              "profile__text-wrapper profile__text-wrapper--job",
+              isEditMode && "profile__text-wrapper--edit-mode"
+            )}
+          >
             <div>
               <p
                 className="profile__user-text"
@@ -193,7 +236,7 @@ const Profile = ({
                 {annotations.userInfo}
               </p>
               {isEditMode ? (
-                <>
+                <div className="profile__field profile__field--about-me">
                   <TextField
                     {...register("aboutMe")}
                     style={{ marginBottom: 15 }}
@@ -201,8 +244,24 @@ const Profile = ({
                     label="About me"
                     id="about-me"
                   />
-                  <ErrorMessage errors={errors} name="aboutMe" />
-                </>
+                  <ErrorMessage
+                    errors={errors}
+                    name="aboutMe"
+                    render={() => <span>About me field is required</span>}
+                  />
+
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          {...register("lookingForAJob")}
+                          data-testid="looking-for-a-job"
+                        />
+                      }
+                      label="Are you looking for job?"
+                    />
+                  </FormGroup>
+                </div>
               ) : (
                 <p
                   className="profile__user-text"
@@ -213,19 +272,7 @@ const Profile = ({
               )}
             </div>
 
-            {isEditMode ? (
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      {...register("lookingForAJob")}
-                      data-testid="looking-for-a-job"
-                    />
-                  }
-                  label="Are you looking for job?"
-                />
-              </FormGroup>
-            ) : (
+            {!isEditMode && (
               <img
                 alt="Job searching status"
                 className="profile__job-status"
@@ -240,24 +287,33 @@ const Profile = ({
             )}
           </div>
 
-          <div className="profile__text-wrapper">
+          <div
+            className={cn(
+              "profile__text-wrapper",
+              isEditMode && "profile__text-wrapper--edit-mode"
+            )}
+          >
             <p className="profile__user-text" data-testid="profile-skills">
               {annotations.skills}
             </p>
             {isEditMode ? (
-              <>
+              <div className="profile__field profile__field--extended">
                 <TextareaAutosize
                   {...register("lookingForAJobDescription")}
                   style={{ marginBottom: 15 }}
                   data-testid="looking-for-a-job-description"
                   label="Looking for a job description"
                   id="looking-for-a-job-description"
+                  className="profile__textarea"
                 />
                 <ErrorMessage
                   errors={errors}
                   name="lookingForAJobDescription"
+                  render={() => (
+                    <span>Lookin for a job description is required!</span>
+                  )}
                 />
-              </>
+              </div>
             ) : (
               <p
                 className="profile__user-text"
@@ -268,69 +324,38 @@ const Profile = ({
             )}
           </div>
 
-          <div className="profile__text-wrapper">
+          <div
+            className={cn(
+              "profile__text-wrapper",
+              isEditMode && "profile__text-wrapper--edit-mode"
+            )}
+          >
             <p className="profile__user-text" data-testid="profile-contacts">
               {annotations.contacts}
             </p>
+
             {isEditMode ? (
-              <>
-                <TextField
-                  {...register("contacts.github")}
-                  style={{ marginBottom: 15 }}
-                  data-testid="github"
-                  label="github"
-                  id="github"
-                />
-                <TextField
-                  {...register("contacts.vk")}
-                  style={{ marginBottom: 15 }}
-                  data-testid="vk"
-                  label="vk"
-                  id="vk"
-                />
-                <TextField
-                  {...register("contacts.facebook")}
-                  style={{ marginBottom: 15 }}
-                  data-testid="facebook"
-                  label="facebook"
-                  id="facebook"
-                />
-                <TextField
-                  {...register("contacts.instagram")}
-                  style={{ marginBottom: 15 }}
-                  data-testid="instagram"
-                  label="instagram"
-                  id="instagram"
-                />
-                <TextField
-                  {...register("contacts.twitter")}
-                  style={{ marginBottom: 15 }}
-                  data-testid="twitter"
-                  label="twitter"
-                  id="twitter"
-                />
-                <TextField
-                  {...register("contacts.website")}
-                  style={{ marginBottom: 15 }}
-                  data-testid="website"
-                  label="website"
-                  id="website"
-                />
-                <TextField
-                  {...register("contacts.youtube")}
-                  style={{ marginBottom: 15 }}
-                  data-testid="youtube"
-                  label="youtube"
-                  id="youtube"
-                />
-                <TextField
-                  {...register("contacts.mainLink")}
-                  style={{ marginBottom: 15 }}
-                  data-testid="mainLink"
-                  label="mainLink"
-                  id="mainLink"
-                />
-              </>
+              <div className="profile__links-container">
+                {links.map((link, index) => {
+                  return (
+                    <div className="profile__field">
+                      <TextField
+                        {...register(`contacts.${link}`)}
+                        key={index}
+                        style={{ marginBottom: 15 }}
+                        data-testid={link}
+                        label={link}
+                        id={link}
+                      />
+                      <ErrorMessage
+                        errors={errors}
+                        name={`contacts.${link}`}
+                        render={() => <span>{link} link is required!</span>}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             ) : (
               contacts
             )}
