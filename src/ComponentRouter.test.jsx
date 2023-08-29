@@ -8,6 +8,12 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { defaultMenuPaths } from './state/initialState';
 
+jest.mock("react-query", () => ({
+  useQuery: jest
+    .fn()
+    .mockReturnValue({ data: {}, isLoading: false, error: {} }),
+}));
+
 test('should render component without crash', () => {
   render(
     <BrowserRouter>

@@ -5,6 +5,12 @@ import { LoginComponent } from './Login';
 import userEvent from "@testing-library/user-event";
 import { waitFor } from '@testing-library/react';
 
+jest.mock("react-query", () => ({
+  useQuery: jest
+    .fn()
+    .mockReturnValue({ data: {}, isLoading: false, error: {} }),
+}));
+
 test('should render component without crash', () => {
   render(
     <LoginComponent />

@@ -1,5 +1,5 @@
-import { profileAPI } from '../API/api';
-import { setUserPhoto } from '../state/profileReducer';
+import { profileAPI } from "../API/api";
+import { setUserPhoto } from "../state/profileReducer";
 
 const updateUserPhoto = (file) => {
   return async (dispatch) => {

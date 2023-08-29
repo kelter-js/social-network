@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Button } from "@mui/material";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -10,11 +10,13 @@ import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {
   TextField,
-  Alert,
+  Box,
   Checkbox,
   FormGroup,
   FormControlLabel,
   TextareaAutosize,
+  Modal,
+  Typography,
 } from "@mui/material";
 import * as yup from "yup";
 import cn from "classnames";
@@ -23,8 +25,11 @@ import {
   getUserId,
   getCurrentId,
 } from "../../../../state/selectors/userSelectors";
+import updateUserProfile from "../../../../thunk/updateUserProfile";
 import ProfilePhoto from "../../../../common/ProfilePhoto/ProfilePhoto";
 import Status from "../../../../common/Status/Status";
+import useProfile from "../../../../hooks/useProfile";
+import getUserProfileData from "../../../../thunk/getUserProfileData";
 
 const mapStateToProps = (state) => {
   return {
@@ -71,10 +76,17 @@ const Profile = ({
   titles,
   id,
   userId,
-  //handler,
+  updateUserProfile,
+  getUserProfileData,
 }) => {
   const [isEditMode, setEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [isModalOpened, setModalOpened] = useState(false);
+
+  const toggleModal = useCallback(() => {
+    setModalOpened((state) => !state);
+  }, []);
 
   const handleChangeMode = useCallback((e) => {
     setEditMode((state) => !state);
@@ -87,11 +99,34 @@ const Profile = ({
     getValues,
     reset,
   } = useForm({
-    mode: "onTouched",
+    mode: "onChange",
     resolver: yupResolver(schema),
   });
 
   const isUserProfileOwner = userId === id;
+
+  const getOwnProfile = useCallback(() => {
+    if (isUserProfileOwner) {
+      setIsLoading(true);
+      getUserProfileData(userId).finally(() => setIsLoading(false));
+    }
+
+    return null;
+  }, [isUserProfileOwner]);
+
+  const { refetch, isError } = useProfile(getOwnProfile);
+
+  useEffect(() => {
+    if (isUserProfileOwner) {
+      reset({
+        aboutMe: user.aboutMe,
+        lookingForAJob: user.lookingForAJob,
+        lookingForAJobDescription: user.lookingForAJobDescription,
+        fullName: user.fullName,
+        contacts: Object.fromEntries(user.contacts ?? []),
+      });
+    }
+  }, [user]);
 
   const contacts = useMemo(() => {
     if (user?.contacts?.length === 0) {
@@ -133,28 +168,47 @@ const Profile = ({
   };
 
   const handler = (data) => {
-    console.log(data);
-    reset();
+    setError(null);
+    setEditMode(false);
+    updateUserProfile({ ...data, userId: Number(userId) }).then(() => {
+      refetch();
+      toggleModal();
+    });
+    reset({});
+    setEditMode(false);
   };
 
   const handleResetChanges = useCallback(
     (e) => {
       e.preventDefault();
       handleChangeMode();
-      reset();
+      reset({});
     },
     [reset]
   );
 
   return (
-    <form
-      onSubmit={handleSubmit((data) => {
-        console.log("submitted data:", data);
-        setError(null);
-        setEditMode(false);
-        handler(data);
-      })}
-    >
+    <form onSubmit={handleSubmit(handler)}>
+      <Modal open={isModalOpened} onClose={toggleModal}>
+        <Box
+          sx={{ bgcolor: "background.paper", p: 5, boxShadow: 24 }}
+          className="profile__modal"
+        >
+          <Typography id="modal-modal-title" variant="h5" component="h2">
+            Profile data has been updated successfully!
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="success"
+            onClick={toggleModal}
+            className="profile__modal-button"
+          >
+            Success
+          </Button>
+        </Box>
+      </Modal>
+
       <img
         alt="Main profile"
         className="profile__main-avatar"
@@ -165,7 +219,7 @@ const Profile = ({
         <div
           className={cn("profile__avatar-wrapper", "profile__avatar-edit-mode")}
         >
-          <ProfilePhoto />
+          <ProfilePhoto isLoading={isLoading} />
         </div>
 
         <div className="profile__info-wrapper">
@@ -193,30 +247,39 @@ const Profile = ({
 
             {isUserProfileOwner && (
               <div className="profile__edit-controls-container">
-                <Button
-                  variant="contained"
-                  className="profile__edit-button"
-                  onClick={isEditMode ? null : handleChangeMode}
-                  type={isEditMode ? "submit" : "button"}
-                >
-                  {isEditMode ? (
-                    <PublishedWithChangesIcon className="profile__edit-button-icon" />
-                  ) : (
-                    <EditIcon className="profile__edit-button-icon" />
-                  )}
-                  {getChangeModeButtonDescription()}
-                </Button>
-
-                {isEditMode && (
+                {!isEditMode && (
                   <Button
                     variant="contained"
                     className="profile__edit-button"
-                    onClick={handleResetChanges}
-                    type={"button"}
+                    onClick={handleChangeMode}
+                    type="button"
                   >
-                    <CancelIcon className="profile__edit-button-icon" />
-                    Cancel changes
+                    <EditIcon className="profile__edit-button-icon" />
+                    {getChangeModeButtonDescription()}
                   </Button>
+                )}
+
+                {isEditMode && (
+                  <>
+                    <Button
+                      variant="contained"
+                      className="profile__edit-button"
+                      type="submit"
+                    >
+                      <PublishedWithChangesIcon className="profile__edit-button-icon" />
+                      {getChangeModeButtonDescription()}
+                    </Button>
+
+                    <Button
+                      variant="contained"
+                      className="profile__edit-button"
+                      onClick={handleResetChanges}
+                      type={"button"}
+                    >
+                      <CancelIcon className="profile__edit-button-icon" />
+                      Cancel changes
+                    </Button>
+                  </>
                 )}
               </div>
             )}
@@ -338,7 +401,7 @@ const Profile = ({
               <div className="profile__links-container">
                 {links.map((link, index) => {
                   return (
-                    <div className="profile__field">
+                    <div className="profile__field" key={index}>
                       <TextField
                         {...register(`contacts.${link}`)}
                         key={index}
@@ -368,4 +431,6 @@ const Profile = ({
 
 export const ProfileComponent = Profile;
 
-export default compose(connect(mapStateToProps))(Profile);
+export default compose(
+  connect(mapStateToProps, { getUserProfileData, updateUserProfile })
+)(Profile);

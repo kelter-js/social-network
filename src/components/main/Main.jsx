@@ -6,17 +6,12 @@ import NavigationItem from './navigation/NavigationItem';
 const Main = ({
   pageContent,
   mainContent,
-  updateHeader,
-  setDefaultProfile
+  updateHeader
 }) => {
   const history = useHistory();
 
   history.listen((location) => {
     const path = location.pathname.split('/');
-
-    if (!location.state) {
-      setDefaultProfile();
-    }
 
     updateHeader(path.includes('messages') ? 'messages' : path[1]);
   });

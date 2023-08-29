@@ -135,10 +135,12 @@
     background-image: url('../../icons/youtube.png')
 
 .profile__status-text
+  width: min-content
   margin: 0
   cursor: pointer
   min-height: 20px
   min-width: 20px
+  white-space: pre
 
 .profile__status-change-container
   display: flex
@@ -211,3 +213,18 @@ button.profile__edit-button
   display: flex
   flex-wrap: wrap
   gap: 15px
+
+.profile__modal
+  position: absolute
+  top: 50%
+  left: 50%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  height: 180px
+  transform: translate(-50%, -50%)
+  border: 2px solid #000
+  box-sizing: border-box
+
+.profile__modal-button
+  margin-top: 15

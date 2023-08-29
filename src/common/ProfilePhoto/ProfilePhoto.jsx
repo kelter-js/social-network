@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { CircularProgress } from "@mui/material";
 
-import getUserPhoto from "../../thunk/getUserPhoto";
 import updateUserPhoto from "../../thunk/updateUserPhoto";
 import {
   getCurrentId,
@@ -24,13 +23,12 @@ const mapStateToProps = (state) => {
 const ProfilePhoto = ({
   id,
   updateUserPhoto,
-  getUserPhoto,
   userId,
   currentPhoto,
   defaultPhoto,
+  isLoading,
 }) => {
   const [newUserPhoto, setNewUserPhoto] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const isUserProfileOwner = userId === id;
 
@@ -39,13 +37,6 @@ const ProfilePhoto = ({
       updateUserPhoto(newUserPhoto);
     }
   }, [newUserPhoto]);
-
-  useEffect(() => {
-    if (isUserProfileOwner) {
-      setIsLoading(true);
-      getUserPhoto(id).finally(() => setIsLoading(false));
-    }
-  }, []);
 
   const handleNewPhotoUpload = (e) => {
     const file = e.target.files[0];
@@ -81,6 +72,6 @@ const ProfilePhoto = ({
 
 export const ProfilePhotoComponent = ProfilePhoto;
 
-export default compose(
-  connect(mapStateToProps, { getUserPhoto, updateUserPhoto })
-)(ProfilePhoto);
+export default compose(connect(mapStateToProps, { updateUserPhoto }))(
+  ProfilePhoto
+);

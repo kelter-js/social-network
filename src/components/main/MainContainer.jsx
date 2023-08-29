@@ -17,7 +17,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...stateProps,
     ...ownProps,
     updateHeader: (header) => dispatch(changeHeader(header)),
-    setDefaultProfile: () => dispatch(setDefaultUserProfile(stateProps.pageContent.defaultUser)),
   };
 }
 

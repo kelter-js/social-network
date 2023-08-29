@@ -4,6 +4,12 @@ import { render, screen } from '@testing-library/react';
 import DialogItem from './DialogItem';
 import { MemoryRouter } from 'react-router-dom';
 
+jest.mock("react-query", () => ({
+  useQuery: jest
+    .fn()
+    .mockReturnValue({ data: {}, isLoading: false, error: {} }),
+}));
+
 test('should render component without crash', () => {
   render(
     <MemoryRouter>

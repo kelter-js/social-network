@@ -1,6 +1,10 @@
-import { authAPI } from '../API/api';
-import userAPI from '../API/api';
-import { removeLoginError, setUserData, setLoginError } from '../state/userDataReducer';
+import { authAPI } from "../API/api";
+import userAPI from "../API/api";
+import {
+  removeLoginError,
+  setUserData,
+  setLoginError,
+} from "../state/userDataReducer";
 
 const authorizeUser = (data) => {
   return async (dispatch) => {
@@ -13,11 +17,13 @@ const authorizeUser = (data) => {
         const id = response.data.data.userId;
         const userData = await userAPI.getProfile(id);
 
-        dispatch(setUserData({
-          id,
-          login: userData.data.fullName,
-          email: data.email,
-        }));
+        dispatch(
+          setUserData({
+            id,
+            login: userData.data.fullName,
+            email: data.email,
+          })
+        );
       } else {
         dispatch(setLoginError(response.data.messages[0]));
       }

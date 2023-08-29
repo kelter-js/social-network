@@ -38,6 +38,7 @@ export const profileAPI = {
   getProfile: (id) => network.get(`profile/${id}`),
   getStatus: (id) => network.get(`profile/status/${id}`),
   updateStatus: (status) => network.put("profile/status", { status: status }),
+  updateProfile: (data) => network.put("profile", data),
   savePhoto: (photo) => {
     const formData = new FormData();
     formData.append("image", photo);

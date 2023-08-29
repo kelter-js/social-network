@@ -60,6 +60,20 @@ const Status = ({ status, id, getUserStatus, updateUserStatus, userId }) => {
     setShowStatus(true);
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!showStatus && isUserProfileOwner && e.key === "Enter") {
+        e.stopPropagation();
+        e.preventDefault();
+        onClick();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [showStatus, statusValue]);
+
   return showStatus ? (
     <p
       data-testid="profile-status"
