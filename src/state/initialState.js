@@ -557,6 +557,7 @@ const initialState = {
   loginData: {
     password: "",
     email: "",
+    captchaUrl: null,
   },
   loading: {
     isLoading: false,

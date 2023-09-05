@@ -5,6 +5,7 @@ import {
   setUserData,
   setLoginError,
 } from "../state/userDataReducer";
+import { getCaptchaUrl } from "./getCaptchaUrl";
 
 const authorizeUser = (data) => {
   return async (dispatch) => {
@@ -25,6 +26,9 @@ const authorizeUser = (data) => {
           })
         );
       } else {
+        if (response.data.resultCode === 10) {
+          dispatch(await getCaptchaUrl());
+        }
         dispatch(setLoginError(response.data.messages[0]));
       }
     } catch (err) {

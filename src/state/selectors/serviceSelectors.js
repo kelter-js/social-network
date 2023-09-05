@@ -13,3 +13,7 @@ export const getLoadingState = (state) => {
 export const getAuthenticatingState = (state) => {
   return state.isAuthenticating;
 };
+
+export const getCaptchaUrlState = (state) => {
+  return state.userData.captchaUrl;
+};

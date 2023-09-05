@@ -96,7 +96,6 @@ const Profile = ({
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
     reset,
   } = useForm({
     mode: "onChange",

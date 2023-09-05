@@ -48,4 +48,8 @@ export const profileAPI = {
   },
 };
 
+export const securityAPI = {
+  getCaptchaUrl: () => network.get("security/get-captcha-url"),
+};
+
 export default userAPI;
