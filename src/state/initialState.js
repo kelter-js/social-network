@@ -19,6 +19,7 @@ const initialState = {
     music: "/music",
     users: "/users",
     login: "/login",
+    settings: "/settings",
   },
   chat: {
     messages: {
