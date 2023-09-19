@@ -20,63 +20,51 @@ const MainPageContent = lazy(() =>
 const ComponentRouter = ({ paths }) => {
   return (
     <Suspense fallback={<Loading />}>
-      <Switch>
-        <Redirect exact from="/" to={paths.profile} />
+      <Layout>
+        <Switch>
+          <Redirect exact from="/" to={paths.profile} />
 
-        <Route path={paths.profile}>
-          <Layout>
+          <Route path={paths.profile}>
             <Main mainContent={<MainPageContent />} />
-          </Layout>
-        </Route>
+          </Route>
 
-        <Route path={paths.messages}>
-          <Layout>
+          <Route path={paths.messages}>
             <Main mainContent={<Dialogs />} />
-          </Layout>
-        </Route>
+          </Route>
 
-        <Route path={paths.news}>
-          <Layout>
+          <Route path={paths.news}>
             <Main
               mainContent={
                 <DummyComponent title="Заглушка под страницу с новостями" />
               }
             />
-          </Layout>
-        </Route>
+          </Route>
 
-        <Route path={paths.music}>
-          <Layout>
+          <Route path={paths.music}>
             <Main
               mainContent={
                 <DummyComponent title="Заглушка под страницу с музыкой" />
               }
             />
-          </Layout>
-        </Route>
+          </Route>
 
-        <Route path={paths.users}>
-          <Layout>
+          <Route path={paths.users}>
             <Main mainContent={<UserList />} />
-          </Layout>
-        </Route>
+          </Route>
 
-        <Route path={paths.settings}>
-          <Layout>
+          <Route path={paths.settings}>
             <Main
               mainContent={
                 <DummyComponent title="Заглушка под страницу с настройками" />
               }
             />
-          </Layout>
-        </Route>
+          </Route>
 
-        <Route>
-          <Layout>
+          <Route>
             <NotFound />
-          </Layout>
-        </Route>
-      </Switch>
+          </Route>
+        </Switch>
+      </Layout>
     </Suspense>
   );
 };

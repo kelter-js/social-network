@@ -9,21 +9,19 @@ const NotFound = lazy(() => import("./components/NotFound/NotFound.jsx"));
 
 const UnauthorizedRoutes = () => (
   <Suspense fallback={<Loading />}>
-    <Switch>
-      <Redirect exact from="/" to="/login" />
+    <Layout>
+      <Switch>
+        <Redirect exact from="/" to="/login" />
 
-      <Route path="/login">
-        <Layout>
+        <Route path="/login">
           <Login />
-        </Layout>
-      </Route>
+        </Route>
 
-      <Route path="*">
-        <Layout>
+        <Route path="*">
           <NotFound />
-        </Layout>
-      </Route>
-    </Switch>
+        </Route>
+      </Switch>
+    </Layout>
   </Suspense>
 );
 
